@@ -1,23 +1,20 @@
 import React, { useState } from "react";
 import { Row, Col, Button } from "reactstrap";
-import Search from "./Search";
+import Search from "../components/Search";
 
-
-export default props => {
+export default (props) => {
   return (
-    <div>
+    <div className="main">
       <Row noGutters className="text-center align">
         <Col>
-          <Button
-            color="blue"
-            className="restaurantname-btn">
+          <Button color="blue" className="restaurantname-btn">
             Choisissez le restaurant
           </Button>
-          
+
           <Button
             color="none"
             className="book-table-btn"
-            onClick={_ => {
+            onClick={(_) => {
               props.setPage(1);
             }}
           >
@@ -26,18 +23,17 @@ export default props => {
         </Col>
       </Row>
       <Row>
-      <Search />
+        <Search />
       </Row>
       <Row noGutters className="text-center big-img-container">
         <Col>
           <img
-            src={require("../images/restaurant.jpg")}
+            src={require("../assets/img/restaurant.jpg")}
             alt="restaurant"
             className="big-img"
           />
         </Col>
       </Row>
-    
     </div>
   );
 };
