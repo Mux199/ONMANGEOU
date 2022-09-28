@@ -4,7 +4,7 @@ import { Navbar, NavbarBrand, Row, Col } from "reactstrap";
 
 export default (props) => {
   return (
-    <div className="navbar">
+    <div>
       <Navbar color="light" light expand="md">
         <NavbarBrand
           className="nav-brand"
