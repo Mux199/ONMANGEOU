@@ -1,4 +1,5 @@
 const mongoose = requite("moongoose");
+const { isEmail } = require("validator");
 
 const restaurantSchema = new mongoose.Schema({
   user: {
