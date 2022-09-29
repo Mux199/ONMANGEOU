@@ -4,7 +4,8 @@ const Table = ({ data }) => {
             <tbody>
             <tr>
                 <th>Name</th>
-                <th>Surname</th>
+                <th>Numéro de Téléphone</th>
+                <th>Adresse</th>
                 <th>Email</th>
             </tr>
             {data.map((item) => (
