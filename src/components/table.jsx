@@ -3,7 +3,7 @@ const Table = ({ data }) => {
         <table>
             <tbody>
             <tr>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>Numéro de Téléphone</th>
                 <th>Adresse</th>
                 <th>Email</th>

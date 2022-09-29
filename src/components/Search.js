@@ -28,7 +28,7 @@ function Srch(){
 
 ///////////////////// API SEARCH
 
-/*function App() {
+/*function Srch() {
     const [query, setQuery] = useState("");
     const [data, setData] = useState([]);
 
