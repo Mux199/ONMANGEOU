@@ -1,6 +1,6 @@
 import { type } from "@testing-library/user-event/dist/type";
 import React, {useState} from "react";
-import {Row, Col, Container, Table} from "reactstrap";
+import Table from "./table";
 import "./Search.css"
 import {Restaurant} from "./restaurant";
 
