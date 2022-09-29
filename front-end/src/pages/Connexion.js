@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import {Link} from "react-router-dom";
 export default function Connexion() {
   return (
     <div className="connexion">
@@ -22,7 +23,11 @@ export default function Connexion() {
             type="password"
           />
         </FormGroup>
-        <Button color="primary">Valider</Button>
+        <Link to={'/userProfil'}>
+        <Button color="primary">
+          Valider
+          </Button>
+        </Link>
       </Form>
     </div>
   );
