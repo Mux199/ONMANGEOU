@@ -1,4 +1,4 @@
-const mongoose = requite("moongoose");
+const mongoose = require("moongoose");
 const { isEmail } = require("validator");
 
 const userSchema = new mongoose.Schema({

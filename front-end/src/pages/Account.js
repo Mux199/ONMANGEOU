@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { useState } from "react";
+import {Link} from "react-router-dom";
 
 export default function Account() {
   const [active, setActive] = useState(false);
@@ -8,7 +9,9 @@ export default function Account() {
     <div className="account">
       <Form>
         <FormGroup>
-          <Label>Nom</Label>
+          <Label>
+            Nom
+          </Label>
           <Input
             id="Nom"
             name="Nom"
@@ -55,7 +58,8 @@ export default function Account() {
         <FormGroup>
           <Label>Êtes vous un restaurateur?</Label>
           {!active && (
-            <Button color="primary" onClick={() => setActive(true)}>
+            <Button color="primary" 
+            onClick={() => setActive(true)}>
               Oui
             </Button>
           )}
@@ -82,8 +86,13 @@ export default function Account() {
             </FormGroup>
           </>
         )}
-        <Button color="primary">Valider votre inscription</Button>
+        <div>
+          <Link to={'/userProfil'} >
+          <Button color="primary">Valider votre inscription</Button>
+          </Link>
+        </div>
       </Form>
     </div>
-  );
+ 
+ );
 }
