@@ -1,12 +1,10 @@
 const mongoose = require("moongoose");
-const { isEmail } = require("validator");
 
 const restaurantSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
     required: true,
-    unique: true,
   },
   name: {
     type: String,
@@ -58,7 +56,7 @@ const restaurantSchema = new mongoose.Schema({
     maxlength: 40,
     minlength: 2,
   },
-  place: {
+  places: {
     type: Array,
     required: true,
   },
