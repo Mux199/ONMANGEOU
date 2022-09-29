@@ -4,10 +4,10 @@ import {Row, Col, Container, Table} from "reactstrap";
 import "./Search.css"
 import {Restaurant} from "./restaurant";
 
-function Search(){
+function Srch(){
     ///////////////////////SEARCH ON A DATATABLE
    const [query, setQuery] = useState("");
-   const keys = ["first_name", "last_name", "email"];
+   const keys = ["name", "adresse", "tel"];
    const search = (data) => {
      return data.filter((item) =>
        keys.some((key) => item[key].toLowerCase().includes(query))
@@ -20,7 +20,7 @@ function Search(){
          placeholder="Trouvez votre Restaurant"
          onChange={(e) => setQuery(e.target.value.toLowerCase())}
        />
-     {<Table data={Search(Restaurant)} />}
+     {<Table data={search(Restaurant)} />}
    </div>
  );
 
@@ -51,4 +51,4 @@ function Search(){
         </div>
     );
 }*/
-export default Search;
+export default Srch;

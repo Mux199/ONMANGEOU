@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Row, Col, Button } from "reactstrap";
-import Search from "./Search";
+import Srch from "./Search";
 
 
-export default props => {
+export default srch => {
   return (
     <div>
       <Row noGutters className="text-center align">
@@ -13,12 +13,12 @@ export default props => {
             className="restaurantname-btn">
             Choisissez le restaurant
           </Button>
-          
+
           <Button
             color="none"
             className="book-table-btn"
             onClick={_ => {
-              props.setPage(1);
+              srch.setPage(1);
             }}
           >
             Réserver une table
@@ -26,7 +26,7 @@ export default props => {
         </Col>
       </Row>
       <Row>
-      <Search />
+      <Srch />
       </Row>
       <Row noGutters className="text-center big-img-container">
         <Col>
@@ -37,7 +37,7 @@ export default props => {
           />
         </Col>
       </Row>
-    
+
     </div>
   );
 };
