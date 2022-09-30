@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Table from "./table";
+import Table from "../components/table";
 export default props => {
   const [totalTables, setTotalTables] = useState([]);
 

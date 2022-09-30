@@ -1,8 +1,8 @@
 import { type } from "@testing-library/user-event/dist/type";
 import React, {useState} from "react";
-import Table from "./table";
-import "./Search.css"
-import {Restaurant} from "./restaurant";
+import Table_Restaurant from "./Table_Restaurant";
+import "./Search.scss"
+import {Restaurant} from "./Restaurant";
 
 function Srch(){
     ///////////////////////SEARCH ON A DATATABLE
@@ -20,7 +20,7 @@ function Srch(){
          placeholder="Trouvez votre Restaurant"
          onChange={(e) => setQuery(e.target.value.toLowerCase())}
        />
-     {<Table data={search(Restaurant)} />}
+     {<Table_Restaurant data={search(Restaurant)} />}
    </div>
  );
 
