@@ -1,4 +1,4 @@
-const mongoose = require("moongoose");
+const mongoose = require("mongoose");
 
 const restaurantSchema = new mongoose.Schema({
   user: {
@@ -49,12 +49,14 @@ const restaurantSchema = new mongoose.Schema({
     required: true,
     maxlength: 40,
     minlength: 2,
+    enum: ["rapide", "moyen", "long"],
   },
   priceRange: {
     type: String,
     required: true,
     maxlength: 40,
     minlength: 2,
+    enum: ["pas cher", "moyen", "cher"],
   },
   places: {
     type: Array,
@@ -71,6 +73,15 @@ const restaurantSchema = new mongoose.Schema({
     required: true,
     maxlength: 40,
     minlength: 2,
+    enum: [
+      "japonais",
+      "français",
+      "américain",
+      "italien",
+      "chinois",
+      "indien",
+      "ethiopien",
+    ],
   },
   note: {
     type: Number,

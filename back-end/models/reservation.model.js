@@ -1,4 +1,4 @@
-const mongoose = require("moongoose");
+const mongoose = require("mongoose");
 
 const reservationSchema = new mongoose.Schema({
   restaurant: {
@@ -24,6 +24,10 @@ const reservationSchema = new mongoose.Schema({
     required: true,
     max: 150,
     min: 1,
+  },
+  statut: {
+    type: String,
+    enum: ["confirmer", "en attente", "refus"],
   },
 });
 

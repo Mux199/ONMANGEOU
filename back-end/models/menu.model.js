@@ -1,4 +1,4 @@
-const mongoose = require("moongoose");
+const mongoose = require("mongoose");
 
 const menuSchema = new mongoose.Schema({
   restaurant: {
