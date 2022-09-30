@@ -1,12 +1,10 @@
-const mongoose = require("moongoose");
-const { isEmail } = require("validator");
+const mongoose = require("mongoose");
 
 const restaurantSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
     required: true,
-    unique: true,
   },
   name: {
     type: String,
@@ -51,14 +49,16 @@ const restaurantSchema = new mongoose.Schema({
     required: true,
     maxlength: 40,
     minlength: 2,
+    enum: ["rapide", "moyen", "long"],
   },
   priceRange: {
     type: String,
     required: true,
     maxlength: 40,
     minlength: 2,
+    enum: ["pas cher", "moyen", "cher"],
   },
-  place: {
+  places: {
     type: Array,
     required: true,
   },
@@ -73,6 +73,15 @@ const restaurantSchema = new mongoose.Schema({
     required: true,
     maxlength: 40,
     minlength: 2,
+    enum: [
+      "japonais",
+      "français",
+      "américain",
+      "italien",
+      "chinois",
+      "indien",
+      "ethiopien",
+    ],
   },
   note: {
     type: Number,

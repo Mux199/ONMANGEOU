@@ -1,4 +1,4 @@
-const mongoose = require("moongoose");
+const mongoose = require("mongoose");
 const { isEmail } = require("validator");
 
 const userSchema = new mongoose.Schema({
@@ -39,6 +39,7 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     required: true,
+    enum: ["user", "professionnal", "admin"],
   },
   blocked: {
     type: Boolean,
