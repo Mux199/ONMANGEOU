@@ -1,11 +1,43 @@
 const UserModel = require("../models/user.model");
-
-//signup user 
+const RestaurantModel = require("../models/restaurant.model");
 module.exports.signUp = async (req, res) => {
-    const{email, password} = req.body
+  const {
+    email,
+    password,
+    firstname,
+    lastname,
+    telephone,
+    professional,
+    RestaurantName,
+    adresse,
+    siret,
+    city,
+    postalCode,
+    type,
+    waitingTime,
+    place,
+    description,
+    restaurantTelephone,
+  } = req.body;
 
-    try {
-        const user = await UserModel.create({email, password});
-        res.status(201).json({user: user})
-    }
+  console.log(req.body);
+
+  try {
+    // create user
+    const user = await UserModel.create({
+      email,
+      password,
+      firstname,
+      lastname,
+      telephone,
+      role: professional ? "professional" : "user",
+    });
+    res.status(201).json({ user: user.email, role: user.role });
+    // create professional if exist
+    // if (professional) {
+    //   // const restaurant = await RestaurantModel.create({email, password, firstName, lastName, telephone, role: 'user'});
+    // }
+  } catch (err) {
+    res.status(200).send({ err });
+  }
 };
