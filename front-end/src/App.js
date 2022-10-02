@@ -6,6 +6,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import Account from "./pages/Account";
 import Connexion from "./pages/Connexion";
 import UserProfil from "./pages/UserProfil";
+import Logout from "./pages/Logout";
 export default (_) => {
   const [page, setPage] = useState(0);
 
@@ -17,6 +18,7 @@ export default (_) => {
         <Route path="account" element={<Account />} />
         <Route path="connexion" element={<Connexion />} />
         <Route path="userProfil" element={<UserProfil />} />
+        <Route path="logout" element={<Logout />} />
         <Route path="*" element={<Main />} />
       </Routes>
     </div>

@@ -1,7 +1,21 @@
 import React, { useState, useEffect } from "react";
+import Calendar from "react-calendar/dist/umd/Calendar";
 import Table from "./Table";
 export default (props) => {
   const [totalTables, setTotalTables] = useState([]);
+  const[date,setDate] = useState(new Date())
+  return (
+    <div className="app">
+        <h1 className="Entete">ONMANGEOU</h1>
+        <div className="calendrier-container">
+            <Calendar onChange={setDate} value={date} />
+        </div>
+
+        <div className="text-center">
+            Selected date: {date.toDateString()}
+        </div>
+    </div>
+)
 
   // User's selections
   const [selection, setSelection] = useState({
@@ -25,15 +39,14 @@ export default (props) => {
   // Liste d'endroit dispo
   const [locations] = useState(["Intérieur", "Terrasse"]);
   const [times] = useState([
-    "9AM",
-    "10AM",
-    "11AM",
-    "12PM",
-    "1PM",
-    "2PM",
-    "3PM",
-    "4PM",
-    "5PM",
+    "12H",
+    "13H",
+    "14H",
+    "18H",
+    "19H",
+    "20H",
+    "21H",
+    "22H",
   ]);
   // Validation
   const [reservationError, setReservationError] = useState(false);
@@ -60,7 +73,7 @@ export default (props) => {
       " " +
       selection.date.getFullYear();
     let time = selection.time.slice(0, -2);
-    time = selection.time > 12 ? time + 12 + ":00" : time + ":00";
+    time = selection.time > 24 ? time + 24 + ":00" : time + ":00";
     console.log(time);
     const datetime = new Date(date + " " + time);
     return datetime;
