@@ -55,4 +55,3 @@ Privacy Policy
 }
 
 export default UserProfil
-
