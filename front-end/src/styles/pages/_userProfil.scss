@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    height: 100vh;
+    border: 1px solid yellow;
+    padding: 0;
+}
+
+.userProfil{
+    background-color: brown;
+    border: 1px solid black;
+    padding: 15px;
+
+}
+
+.content-right {
+    border: 1px solid blue;
+    padding: 15px;
+    width: 100%;
+}
+
+.logoh{
+    background-color:grey;
+    width: 45px;
+    height: auto;
+}
