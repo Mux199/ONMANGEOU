@@ -27,4 +27,3 @@ const styles = {
 
 
 
-export default UserProfil
