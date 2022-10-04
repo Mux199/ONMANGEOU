@@ -37,9 +37,34 @@ module.exports.updateUser = async (req, res) => {
   }
 };
 
+module.exports.userBlock = async (req, res) => {
+  try {
+    await UserModel.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: {
+          blocked: req.body.blocked,
+        },
+      },
+      {
+        new: true,
+        upsert: true,
+        runValidators: true,
+        context: "query",
+      }
+    )
+      .then((docs) =>
+        res.status(200).send({ message: "user block : " + req.body.blocked })
+      )
+      .catch((err) => res.status(500).send({ message: err }));
+  } catch (err) {
+    return res.status(500).send({ message: err });
+  }
+};
+
 module.exports.deleteUser = async (req, res) => {
   try {
-    await UserModel.remove({ _id: req.params.id }).exec();
+    await UserModel.deleteOne({ _id: req.params.id }).exec();
     res.status(200).json({ message: "successfully deleted. " });
   } catch (err) {
     return res.status(500).send({ message: err });
