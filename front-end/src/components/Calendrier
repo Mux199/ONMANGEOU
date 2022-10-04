@@ -1,0 +1,27 @@
+import React, {useState, useEffect} from 'react'
+import {FormGroup, Label, FormText} from 'reactstrap'
+import {DatePicker} from 'reactstrap-date-picker'
+
+const Calendrier = () => {
+  const [value, setValue]= useState(new Date().toISOString())
+  const [fmtValue, setFmtValue]= useState(undefined)
+
+  handleChange(value, formattedValue) {
+    setValue(value)
+    setFmtValue(formattedValue)
+  }
+
+  useEffect(( )=> {
+    console.log(`Formatted value is ${fmtValue}`)
+  }, [fmtValue])
+
+  return (
+    <FormGroup>
+      <Label>Choisissez une date</Label>
+      <DatePicker id      = "daterdv" 
+                  value   = {value} 
+                  onChange= {(v,f) => handleChange(v, f)} />
+      <FormText>Help</FormText>
+    </FormGroup>
+  )
+}

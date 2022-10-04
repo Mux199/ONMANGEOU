@@ -3,7 +3,6 @@ import Calendar from "react-calendar/dist/umd/Calendar";
 import Table from "./Table";
 export default (props) => {
   const [totalTables, setTotalTables] = useState([]);
-  const[date,setDate] = useState(new Date())
   return (
     <div className="app">
         <h1 className="Entete">ONMANGEOU</h1>
