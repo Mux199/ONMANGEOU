@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { isEmail } = require("validator");
+var uniqueValidator = require("mongoose-unique-validator");
 const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema(
@@ -16,7 +17,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      maxlength: 1024, // 1024 car cryptage, verification taille max : 20 char en front
+      maxlength: 1024, // 1024 car chiffrement, verification taille max : 20 char en front
       minlength: 6,
     },
     firstname: {
@@ -34,9 +35,11 @@ const userSchema = new mongoose.Schema(
       trim: true,
     },
     telephone: {
-      type: Number,
-      maxlength: 15,
+      type: String,
       minlength: 10,
+      maxlength: 15,
+      trim: true,
+      match: /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/,
     },
     role: {
       type: String,
@@ -54,6 +57,7 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+userSchema.plugin(uniqueValidator);
 
 userSchema.pre("save", async function (next) {
   const salt = await bcrypt.genSalt();
