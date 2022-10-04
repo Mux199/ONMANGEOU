@@ -40,7 +40,7 @@ module.exports.updateUser = async (req, res) => {
 module.exports.deleteUser = async (req, res) => {
   try {
     await UserModel.remove({ _id: req.params.id }).exec();
-    res.status(200).catch((err) => res.status(500).send({ message: err }));
+    res.status(200).json({ message: "successfully deleted. " });
   } catch (err) {
     return res.status(500).send({ message: err });
   }
