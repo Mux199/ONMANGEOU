@@ -22,6 +22,9 @@ export default (props) => {
               <Link to={"/account"}>
                 <button>Créer un compte</button>
               </Link>
+              <Link to={"/faq"}>
+                <button>FAQ</button>
+              </Link>
             </Col>
           </Row>
         </NavbarBrand>
