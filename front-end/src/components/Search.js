@@ -4,7 +4,7 @@ import { Row, Col, Container } from "reactstrap";
 
 function Search() {
   return (
-    <div className="search">
+    <div className="search" style={{ width: '100%'}}>
       <Row
         style={{
           display: "flex",
@@ -12,7 +12,7 @@ function Search() {
           justifyContent: "center",
         }}
       >
-        <Col xs="3">
+        <Col xs="6">
           <div className="searchBar">
             <input
               type="text"
@@ -22,7 +22,7 @@ function Search() {
             />
           </div>
         </Col>
-        <Col xs="2">
+        <Col xs="6">
           <button>Valider</button>
         </Col>
       </Row>

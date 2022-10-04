@@ -59,7 +59,7 @@ export default function Account() {
         <FormGroup>
           <Label>Êtes vous un restaurateur?</Label>
           {!active && (
-            <Button color="primary" 
+            <Button className="restaurant-y" 
             onClick={() => setActive(true)}>
               Oui
             </Button>
@@ -89,7 +89,7 @@ export default function Account() {
         )}
         <div>
           <Link to={'/userProfil'} >
-          <Button color="primary">Valider votre inscription</Button>
+          <Button className="valid-btn">Valider votre inscription</Button>
           </Link>
         </div>
       </Form>
