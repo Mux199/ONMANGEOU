@@ -14,15 +14,34 @@ module.exports.userInfo = (req, res) => {
 };
 
 module.exports.updateUser = async (req, res) => {
-  await UserModel.findOneAndUpdate(
-    { _id: req.params.id },
-    {
-      $set: {
-        telephone: req.body.telephone,
+  try {
+    await UserModel.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: {
+          telephone: req.body.telephone,
+        },
       },
-    },
-    { upsert: true, runValidators: true, context: "query" }
-  )
-    .then((res) => res.status(200))
-    .catch((err) => res.status(500).send({ message: err }));
+      {
+        new: true,
+        upsert: true,
+        runValidators: true,
+        context: "query",
+      }
+    )
+      .select("-password")
+      .then((docs) => res.status(200).send(docs))
+      .catch((err) => res.status(500).send({ message: err }));
+  } catch (err) {
+    return res.status(500).send({ message: err });
+  }
+};
+
+module.exports.deleteUser = async (req, res) => {
+  try {
+    await UserModel.remove({ _id: req.params.id }).exec();
+    res.status(200).catch((err) => res.status(500).send({ message: err }));
+  } catch (err) {
+    return res.status(500).send({ message: err });
+  }
 };
