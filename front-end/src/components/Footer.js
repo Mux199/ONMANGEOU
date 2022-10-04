@@ -1,12 +1,13 @@
-import React from "react";
+import {React , useState }from "react";
 import { Link } from "react-router-dom";
-import { Navbar, NavbarBrand, Row, Col } from "reactstrap";
 
 export default (props) => {
-        const Footer = ()=> (
+    const [moreText, setMoreText] = useState(false);
             <div className="footer">
-                <p></p>
+               <footer className="footer--pin">
+               <p>{moreText ? "FOOTER STILL PINNED" : "FOOTER"}</p>
+                </footer>
             </div>
 
-        )
+        
     }
