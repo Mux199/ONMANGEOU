@@ -13,30 +13,19 @@ module.exports.userInfo = (req, res) => {
   }).select("-password");
 };
 
-module.exports.updateUser = async (req, res) => {
-  await UserModel.findById(req.params.id, (err) => {
-    if (!err) {
-      try {
-        UserModel.findOneAndUpdate(
-          { _id: req.params.id },
-          {
-            $set: {
-              blocked: res.body.blocked,
-            },
-          },
-          { new: true, upsert: true, setDefaultsOnInsert: true },
-          (err, docs) => {
-            if (!err) return res.send(docs);
-            if (err) return res.status(500).send({ message: err + "pb" });
-          }
-        );
-      } catch (err) {
-        return res.status(500).send({ message: err });
-      }
-    } else return res.status(400).send("id unknown : " + req.params.id);
-  })
-    .clone()
-    .catch(function (err) {
-      console.log(err);
-    });
+module.exports.updateUser = (req, res) => {
+  const block = req.body.blocked;
+  console.log(req.body.blocked);
+  UserModel.updateOne(
+    { _id: req.params.id },
+    {
+      $set: {
+        blocked: block,
+      },
+    },
+    (err, docs) => {
+      if (!err) return res.send(docs);
+      if (err) return res.status(500).send({ message: err });
+    }
+  );
 };
