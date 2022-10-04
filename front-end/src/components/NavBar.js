@@ -5,7 +5,7 @@ import { Navbar, NavbarBrand, Row, Col } from "reactstrap";
 export default (props) => {
   return (
     <div className="navbar">
-      <Navbar color="light" light expand="md">
+      <Navbar light expand="md">
         <NavbarBrand
           className="nav-brand"
           onClick={(_) => {
@@ -13,7 +13,8 @@ export default (props) => {
           }}
         >
           <Row>
-            <Col>Bienvenue sur ONMANGEOU</Col>
+            <Col color="primary"> <a href="/">Bienvenue sur ONMANGEOU</a>
+            </Col>
             <Col style={{ marginLeft: "800px" }}>
               <Link to={"/connexion"}>
                 <button>Se connecter</button>

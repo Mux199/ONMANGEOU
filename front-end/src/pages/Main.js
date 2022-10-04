@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Row, Col, Button } from "reactstrap";
 import Search from "../components/Search";
 
@@ -7,32 +7,20 @@ export default (props) => {
     <div className="main">
       <Row noGutters className="text-center align">
         <Col>
-          <Button color="blue" className="restaurantname-btn">
+          <Button 
+            className="restaurantname-btn">
             Choisissez le restaurant
           </Button>
-
           <Button
-            color="none"
-            className="book-table-btn"
-            onClick={(_) => {
-              props.setPage(1);
-            }}
-          >
+            className="book-table-btn">
+            <a href="/Calendrier">
             Réserver une table
+            </a>
           </Button>
         </Col>
       </Row>
       <Row>
         <Search />
-      </Row>
-      <Row noGutters className="text-center big-img-container">
-        <Col>
-          <img
-            src={require("../assets/img/restaurant.jpg")}
-            alt="restaurant"
-            className="big-img"
-          />
-        </Col>
       </Row>
     </div>
   );
