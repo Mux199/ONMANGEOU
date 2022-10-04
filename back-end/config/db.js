@@ -4,7 +4,7 @@ mongoose
   .connect(
     "mongodb+srv://" +
       process.env.DB_USER_PASS +
-      "@cluster0.4jz2stv.mongodb.net/test",
+      "@cluster0.4jz2stv.mongodb.net/projet-aos",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
