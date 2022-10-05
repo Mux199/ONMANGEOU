@@ -51,6 +51,12 @@ const userSchema = new mongoose.Schema(
       type: [mongoose.Schema.Types.ObjectId],
       ref: "restaurant",
     },
+    loginAttempt: {
+      type: Number,
+      min: 0,
+      max: 5,
+      default: 5,
+    },
   },
   { timestamps: true }
 );
