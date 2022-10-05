@@ -77,10 +77,28 @@ export default function Account() {
               />
             </FormGroup>
             <FormGroup>
+              <Label>Spécialité</Label>
+             <Input
+                id="specialite"
+                name="Spécialité"
+                placeholder="Veuillez insérer votre spécialité"
+                type="text"
+              />
+             </FormGroup>
+            <FormGroup>
+              <Label>Ville</Label>
+              <Input
+                id="city"
+                name="Ville"
+                placeholder="Veuillez insérer la ville dans laquelle vous vous situez"
+                type="text"
+              />
+            </FormGroup>
+            <FormGroup>
               <Label>Adresse du restaurant</Label>
               <Input
-                id="Email"
-                name="Email"
+                id="Adresse"
+                name="Adresse"
                 placeholder="Veuillez insérer l'adresse du restaurant"
                 type="text"
               />

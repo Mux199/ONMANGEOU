@@ -1,13 +1,12 @@
-import {React , useState }from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default (props) => {
-    const [moreText, setMoreText] = useState(false);
-            <div className="footer">
-               <footer className="footer--pin">
-               <p>{moreText ? "FOOTER STILL PINNED" : "FOOTER"}</p>
-                </footer>
-            </div>
-
-        
-    }
+const Footer = () => (
+  <footer className="footer">
+    <Link to={"/faq"}>
+         <button>FAQ</button>
+    </Link>
+  </footer>
+);
+  
+export default Footer;

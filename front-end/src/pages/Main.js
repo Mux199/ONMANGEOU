@@ -7,16 +7,17 @@ export default (props) => {
       <div className="main">
         <Row noGutters className="text-center align">
           <Col>
-            <Button 
+            <div className="titre">
+             <h1>Choisissez le restaurant</h1> 
+            </div>
+            {/* <Button 
               className="restaurantname-btn">
               Choisissez le restaurant
-            </Button>
-            <Button
+            </Button> */}
+            {/* <Button
               className="book-table-btn">
-              {/* <a href="/Calendrier"> */}
               Réserver une table
-              {/* </a> */}
-            </Button>
+            </Button> */}
           </Col>
         </Row>
         {/* <Row>
