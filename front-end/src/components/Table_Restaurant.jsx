@@ -7,6 +7,7 @@ const Table_Restaurant = ({ data }) => {
                 <th>Numéro de Téléphone</th>
                 <th>Adresse</th>
                 <th>Spécialités</th>
+                <th>Prix</th>
             </tr>
             {data.map((item) => (
                 <tr key={item.id}>
@@ -14,6 +15,7 @@ const Table_Restaurant = ({ data }) => {
                     <td>{item.phone}</td>
                     <td>{item.adresse}</td>
                     <td>{item.Spécialité}</td>
+                    <td>{item.prix}</td>
                 </tr>
             ))}
             </tbody>

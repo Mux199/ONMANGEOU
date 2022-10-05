@@ -9,7 +9,6 @@ function Srch(){
     ///////////////////////SEARCH ON A DATATABLE
     const [query, setQuery] = useState("Tous");
     const [queryPrix, setQueryPrix] = useState("");
-    const [filteredData, setFilteredData] = useState(Restaurant)
     const keys = ["name", "adresse", "phone", "Spécialité", "prix"];
     const search = (data) => {
         return data.filter((item) =>
@@ -60,7 +59,7 @@ function Srch(){
                 ))}
             </select>
 
-            {<Table_Restaurant data={filteredData} />}
+            {<Table_Restaurant data={search(Restaurant)} />}
         </div>
     );
 
