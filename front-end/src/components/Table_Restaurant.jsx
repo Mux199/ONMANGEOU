@@ -6,14 +6,14 @@ const Table_Restaurant = ({ data }) => {
                 <th>Nom</th>
                 <th>Numéro de Téléphone</th>
                 <th>Adresse</th>
-                <th>Email</th>
+                <th>Spécialités</th>
             </tr>
             {data.map((item) => (
                 <tr key={item.id}>
                     <td>{item.name}</td>
                     <td>{item.phone}</td>
                     <td>{item.adresse}</td>
-                    <td>{item.email}</td>
+                    <td>{item.Spécialité}</td>
                 </tr>
             ))}
             </tbody>

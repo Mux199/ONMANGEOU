@@ -4,7 +4,7 @@ export const Restaurant = [
         "name": "Yuli",
         "email": "accumsan.sed.facilisis@icloud.net",
         "phone": "02 53 24 84 95",
-        "city": "Béziers",
+        "adresse": "Béziers",
         "Spécialité": "Japonais"
     },
     {
@@ -12,7 +12,7 @@ export const Restaurant = [
         "name": "Tanek",
         "email": "tincidunt.congue@outlook.couk",
         "phone": "08 02 89 54 27",
-        "city": "Talence",
+        "adresse": "Talence",
         "Spécialité": "Japonais"
     },
     {
@@ -20,7 +20,7 @@ export const Restaurant = [
         "name": "Merritt",
         "email": "pellentesque.ut@yahoo.org",
         "phone": "07 61 79 75 23",
-        "city": "Châteauroux",
+        "adresse": "Châteauroux",
         "Spécialité": "Japonais"
     },
     {
@@ -28,7 +28,7 @@ export const Restaurant = [
         "name": "Clementine",
         "email": "fermentum.vel@yahoo.couk",
         "phone": "05 14 96 43 34",
-        "city": "Toulouse",
+        "adresse": "Toulouse",
         "Spécialité": "Japonais"
     },
     {
@@ -36,7 +36,7 @@ export const Restaurant = [
         "name": "Sonia",
         "email": "nunc.ac@hotmail.net",
         "phone": "07 47 27 55 55",
-        "city": "Évreux",
+        "adresse": "Évreux",
         "Spécialité": "Thailandais"
     },
     {
@@ -44,7 +44,7 @@ export const Restaurant = [
         "name": "Beau",
         "email": "lorem@hotmail.ca",
         "phone": "03 65 67 83 73",
-        "city": "La Rochelle",
+        "adresse": "La Rochelle",
         "Spécialité": "Thailandais"
     },
     {
@@ -52,7 +52,7 @@ export const Restaurant = [
         "name": "Sawyer",
         "email": "amet.ultricies@protonmail.ca",
         "phone": "03 72 46 39 74",
-        "city": "Lorient",
+        "adresse": "Lorient",
         "Spécialité": "Thailandais"
     },
     {
@@ -60,7 +60,7 @@ export const Restaurant = [
         "name": "Camden",
         "email": "felis.orci@hotmail.com",
         "phone": "03 76 65 42 93",
-        "city": "Nanterre",
+        "adresse": "Nanterre",
         "Spécialité": "Thailandais"
     },
     {
@@ -68,7 +68,7 @@ export const Restaurant = [
         "name": "Francesca",
         "email": "mauris.integer@icloud.com",
         "phone": "07 97 55 45 37",
-        "city": "Sens",
+        "adresse": "Sens",
         "Spécialité": "Français"
     },
     {
@@ -76,7 +76,7 @@ export const Restaurant = [
         "name": "Kathleen",
         "email": "mauris@yahoo.org",
         "phone": "03 46 86 34 52",
-        "city": "Mulhouse",
+        "adresse": "Mulhouse",
         "Spécialité": "Français"
     },
     {
@@ -84,7 +84,7 @@ export const Restaurant = [
         "name": "Emerald",
         "email": "a.auctor@outlook.edu",
         "phone": "09 78 25 11 12",
-        "city": "Charleville-Mézières",
+        "adresse": "Charleville-Mézières",
         "Spécialité": "Français"
     },
     {
@@ -92,7 +92,7 @@ export const Restaurant = [
         "name": "Edward",
         "email": "justo.sit@aol.net",
         "phone": "04 85 24 01 82",
-        "city": "Dole",
+        "adresse": "Dole",
         "Spécialité": "Français"
     },
     {
@@ -100,7 +100,7 @@ export const Restaurant = [
         "name": "Whilemina",
         "email": "malesuada.ut@outlook.ca",
         "phone": "05 34 30 59 23",
-        "city": "Amiens",
+        "adresse": "Amiens",
         "Spécialité": "Italien"
     },
     {
@@ -108,7 +108,7 @@ export const Restaurant = [
         "name": "Dillon",
         "email": "curabitur.sed@yahoo.com",
         "phone": "03 39 82 32 36",
-        "city": "Nîmes",
+        "adresse": "Nîmes",
         "Spécialité": "Italien"
     },
     {
@@ -116,7 +116,7 @@ export const Restaurant = [
         "name": "Bo",
         "email": "suspendisse.non@icloud.org",
         "phone": "04 51 54 07 42",
-        "city": "Limoges",
+        "adresse": "Limoges",
         "Spécialité": "Italien"
     },
     {
@@ -124,7 +124,7 @@ export const Restaurant = [
         "name": "Armando",
         "email": "fusce.mollis@protonmail.edu",
         "phone": "06 95 71 24 11",
-        "city": "Brive-la-Gaillarde",
+        "adresse": "Brive-la-Gaillarde",
         "Spécialité": "Italien"
     },
     {
@@ -132,7 +132,7 @@ export const Restaurant = [
         "name": "Josiah",
         "email": "mauris.vestibulum@outlook.ca",
         "phone": "09 21 94 47 36",
-        "city": "Angoulême",
+        "adresse": "Angoulême",
         "Spécialité": "Indien"
     },
     {
@@ -140,7 +140,7 @@ export const Restaurant = [
         "name": "Noelle",
         "email": "ridiculus@aol.org",
         "phone": "07 30 72 58 55",
-        "city": "Saintes",
+        "adresse": "Saintes",
         "Spécialité": "Indien"
     },
     {
@@ -148,7 +148,7 @@ export const Restaurant = [
         "name": "Garrison",
         "email": "et.libero.proin@hotmail.ca",
         "phone": "03 24 18 18 82",
-        "city": "Dreux",
+        "adresse": "Dreux",
         "Spécialité": "Indien"
     },
     {
@@ -156,7 +156,7 @@ export const Restaurant = [
         "name": "Ivan",
         "email": "ante.dictum@aol.ca",
         "phone": "01 68 77 25 58",
-        "city": "Mulhouse",
+        "adresse": "Mulhouse",
         "Spécialité": "Indien"
     },
     {
@@ -164,7 +164,7 @@ export const Restaurant = [
         "name": "Fallon",
         "email": "feugiat.lorem@google.net",
         "phone": "08 47 20 26 22",
-        "city": "Grasse",
+        "adresse": "Grasse",
         "Spécialité": "Chinois"
     },
     {
@@ -172,7 +172,7 @@ export const Restaurant = [
         "name": "Justin",
         "email": "ac.risus.morbi@aol.org",
         "phone": "04 14 76 56 82",
-        "city": "Créteil",
+        "adresse": "Créteil",
         "Spécialité": "Chinois"
     },
     {
@@ -180,7 +180,7 @@ export const Restaurant = [
         "name": "Olympia",
         "email": "arcu.iaculis@yahoo.org",
         "phone": "02 38 16 49 01",
-        "city": "Beauvais",
+        "adresse": "Beauvais",
         "Spécialité": "Chinois"
     },
     {
@@ -188,7 +188,7 @@ export const Restaurant = [
         "name": "Darius",
         "email": "montes.nascetur.ridiculus@hotmail.com",
         "phone": "07 21 31 79 47",
-        "city": "Lanester",
+        "adresse": "Lanester",
         "Spécialité": "Chinois"
     },
     {
@@ -196,7 +196,7 @@ export const Restaurant = [
         "name": "Hu",
         "email": "tempor.augue@outlook.net",
         "phone": "04 30 69 17 84",
-        "city": "Mulhouse",
+        "adresse": "Mulhouse",
         "Spécialité": "Japonais"
     },
     {
@@ -204,7 +204,7 @@ export const Restaurant = [
         "name": "Hiroko",
         "email": "commodo@hotmail.edu",
         "phone": "02 09 43 53 35",
-        "city": "Pau",
+        "adresse": "Pau",
         "Spécialité": "Japonais"
     },
     {
@@ -212,7 +212,7 @@ export const Restaurant = [
         "name": "Kirsten",
         "email": "congue@icloud.org",
         "phone": "04 09 81 23 42",
-        "city": "Mérignac",
+        "adresse": "Mérignac",
         "Spécialité": "Japonais"
     },
     {
@@ -220,7 +220,7 @@ export const Restaurant = [
         "name": "Irene",
         "email": "mus.donec@yahoo.edu",
         "phone": "09 57 37 58 82",
-        "city": "Argenteuil",
+        "adresse": "Argenteuil",
         "Spécialité": "Japonais"
     },
     {
@@ -228,7 +228,7 @@ export const Restaurant = [
         "name": "Uma",
         "email": "consectetuer@aol.edu",
         "phone": "06 17 62 51 22",
-        "city": "Sens",
+        "adresse": "Sens",
         "Spécialité": "Thailandais"
     },
     {
@@ -236,7 +236,7 @@ export const Restaurant = [
         "name": "Kamal",
         "email": "sit@protonmail.couk",
         "phone": "02 45 28 33 59",
-        "city": "Marseille",
+        "adresse": "Marseille",
         "Spécialité": "Thailandais"
     }
 ]
