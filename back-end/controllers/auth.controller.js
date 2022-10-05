@@ -47,7 +47,7 @@ module.exports.signUp = async (req, res) => {
     //   // const restaurant = await RestaurantModel.create({email, password, firstName, lastName, telephone, role: 'user'});
     // }
   } catch (err) {
-    res.status(200).send({ err });
+    res.status(200).send(err);
   }
 };
 
@@ -56,6 +56,11 @@ module.exports.signIn = async (req, res) => {
 
   try {
     const user = await UserModel.login(email, password);
+    if (user.blocked) {
+      return res
+        .status(401)
+        .send({ message: "user is blocked contact info@lafourchette.com" });
+    }
     const token = createToken(user._id);
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge });
     res.status(200).json({ user: user._id, role: user.role });
