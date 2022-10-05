@@ -24,7 +24,7 @@ export default function Connexion() {
           />
         </FormGroup>
         <Link to={'/userProfil'}>
-        <Button color="primary">
+        <Button className="valid-btn">
           Valider
           </Button>
         </Link>
