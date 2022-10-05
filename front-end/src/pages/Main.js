@@ -1,8 +1,6 @@
 import React from "react";
 import { Row, Col, Button } from "reactstrap";
 import Search from "../components/Search";
-import Cover from "../assets/img/Cover.jpg";
-import { Image } from "@material-ui/icons";
 export default (props) => {
   return (
     <div >
@@ -15,9 +13,9 @@ export default (props) => {
             </Button>
             <Button
               className="book-table-btn">
-              <a href="/Calendrier">
+              {/* <a href="/Calendrier"> */}
               Réserver une table
-              </a>
+              {/* </a> */}
             </Button>
           </Col>
         </Row>

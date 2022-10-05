@@ -13,7 +13,7 @@ const styles = {
  export default function UserProfil(){
     return (
         <div className="user-profil" style={styles}>
-            
+            <SideBar/>
             <div className="user-profil-content">
             </div>
         </div>
