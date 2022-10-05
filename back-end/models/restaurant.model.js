@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+var uniqueValidator = require("mongoose-unique-validator");
 
 const restaurantSchema = new mongoose.Schema({
   user: {
@@ -91,6 +92,8 @@ const restaurantSchema = new mongoose.Schema({
     default: 5,
   },
 });
+
+restaurantSchema.plugin(uniqueValidator);
 
 const RestaurantModel = mongoose.model("restaurant", restaurantSchema);
 module.exports = RestaurantModel;

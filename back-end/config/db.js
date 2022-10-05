@@ -1,5 +1,16 @@
 const mongoose = require("mongoose");
 
+mongoose.plugin((schema) => {
+  schema.pre("findOneAndUpdate", setRunValidators);
+  schema.pre("updateMany", setRunValidators);
+  schema.pre("updateOne", setRunValidators);
+  schema.pre("update", setRunValidators);
+});
+
+function setRunValidators() {
+  this.setOptions({ runValidators: true });
+}
+
 mongoose
   .connect(
     "mongodb+srv://" +

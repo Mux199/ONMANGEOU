@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+var uniqueValidator = require("mongoose-unique-validator");
 
 const reservationSchema = new mongoose.Schema(
   {
@@ -33,6 +34,8 @@ const reservationSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+reservationSchema.plugin(uniqueValidator);
 
 const ReservationModel = mongoose.model("reservation", reservationSchema);
 module.exports = ReservationModel;

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+var uniqueValidator = require("mongoose-unique-validator");
 
 const planningSchema = new mongoose.Schema({
   restaurant: {
@@ -29,6 +30,8 @@ const planningSchema = new mongoose.Schema({
     required: true,
   },
 });
+
+planningSchema.plugin(uniqueValidator);
 
 const PlanningModel = mongoose.model("planning", planningSchema);
 module.exports = PlanningModel;

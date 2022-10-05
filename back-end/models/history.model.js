@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+var uniqueValidator = require("mongoose-unique-validator");
 
 const historySchema = new mongoose.Schema(
   {
@@ -33,6 +34,8 @@ const historySchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+historySchema.plugin(uniqueValidator);
 
 const HistorynModel = mongoose.model("history", historySchema);
 module.exports = HistorynModel;
