@@ -8,8 +8,10 @@ router.post("/register", authController.signUp);
 // user
 router.get("/", userController.getAllUsers);
 router.get("/:id", userController.userInfo);
-router.put("/userBlock/:id", userController.userBlock);
+router.put("/blockUser/:id", userController.blockUser);
 router.put("/:id", userController.updateUser);
+router.put("likeRestaurant/:id", userController.likeRestaurant);
+router.put("unlikeRestaurant/:id", userController.unlikeRestaurant);
 router.delete("/:id", userController.deleteUser);
 
 module.exports = router;
