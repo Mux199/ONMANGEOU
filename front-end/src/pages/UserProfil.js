@@ -1,7 +1,4 @@
-import {React, useEffect,useRef,useState} from "react";
-import { AiOutlineUser } from "react-icons/ai";
-import { ProSidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
-import Footer from "../components/Footer";
+import {React} from "react";
 import SideBar from "../components/SideBar"
 
 
@@ -13,7 +10,7 @@ const styles = {
  export default function UserProfil(){
     return (
         <div className="user-profil" style={styles}>
-            <SideBar/>
+             <SideBar/> 
             <div className="user-profil-content">
             </div>
         </div>

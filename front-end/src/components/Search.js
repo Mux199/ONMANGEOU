@@ -1,6 +1,7 @@
 import { type } from "@testing-library/user-event/dist/type";
 import React from "react";
-import { Row, Col, Container } from "reactstrap";
+import { Row, Col, Container,Button } from "reactstrap";
+import { Link } from "react-router-dom";
 
 function Search() {
   return (
@@ -23,7 +24,9 @@ function Search() {
           </div>
         </Col>
         <Col xs="6">
+        <Link to={'/Book'}>
           <button>Valider</button>
+          </Link>
         </Col>
       </Row>
     </div>
