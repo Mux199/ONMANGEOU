@@ -23,8 +23,9 @@ module.exports.signUp = async (req, res) => {
     city,
     postalCode,
     type,
-    waitingTime,
-    place,
+    waiting,
+    priceRange,
+    places,
     description,
     restaurantTelephone,
   } = req.body;
@@ -41,11 +42,25 @@ module.exports.signUp = async (req, res) => {
       telephone,
       role: professional ? "professional" : "user",
     });
+    //create professional if exist
+    if (professional) {
+      const restaurant = await RestaurantModel.create({
+        user: user,
+        name: RestaurantName,
+        adresse,
+        telephone,
+        siret,
+        city,
+        type,
+        waiting,
+        priceRange,
+        places,
+        description,
+        postalCode,
+        telephone: restaurantTelephone,
+      });
+    }
     res.status(201).json({ user: user.email, role: user.role });
-    // create professional if exist
-    // if (professional) {
-    //   // const restaurant = await RestaurantModel.create({email, password, firstName, lastName, telephone, role: 'user'});
-    // }
   } catch (err) {
     res.status(200).send(err);
   }
