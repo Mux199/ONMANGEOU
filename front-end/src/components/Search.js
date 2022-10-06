@@ -8,11 +8,11 @@ const Restaurant = require("../assets/Data-example/restaurants.json");
 function Srch(){
     ///////////////////////SEARCH ON A DATATABLE
     const [query, setQuery] = useState("Tous");
-    const [queryPrix, setQueryPrix] = useState("");
+   // const [queryPrix, setQueryPrix] = useState("");
     const keys = ["name", "adresse", "phone", "Spécialité", "prix"];
     const search = (data) => {
         return data.filter((item) =>
-            keys.some((key) => item[key].toLowerCase().includes(query) && item[key].toLowerCase().includes(queryPrix))
+            keys.some((key) => item[key].toLowerCase().includes(query) && item[key].toLowerCase().includes(query))
         );
     };
     const specialites = Restaurant.map(rest => rest.Spécialité);
@@ -26,14 +26,11 @@ function Srch(){
                 placeholder="Trouvez votre Restaurant"
                 onChange={(e) => {
                     setQuery(e.target.value.toLowerCase())
-                    setQueryPrix(e.target.value.toLowerCase())
-
                 }}
             />
             <select
-                onChange={(e1, e2) => {
-                    setQuery(e1.target.value.toLowerCase())
-                    setQueryPrix(e2.target.value.toLowerCase())
+                onChange={(e) => {
+                    setQuery(e.target.value.toLowerCase())
 
                 }}
             >
@@ -47,7 +44,8 @@ function Srch(){
                 ))}
             </select>
             <select
-                onChange={(e) => setQuery(e.target.value.toLowerCase())}
+                onChange={(e) =>
+                    setQuery(e.target.value.toLowerCase())}
             >
                 <option value="Tous">
                     Tous
