@@ -18,9 +18,9 @@ const Table_Restaurant = ({ data }) => {
                     <td>{item.Spécialité}</td>
                     <td>{item.prix}</td>
                     <td>
-                        {/*<img src={`${process.env.PUBLIC_URL}/assets/img/resto/${item.img}`}
-                              alt={`/asset/img/resto/${item.img}`}/>*/}
-                        <img src={`../assets/img/resto/${item.img}`} alt={`/asset/img/resto/${item.img}`}/>
+                        <img src={`${process.env.PUBLIC_URL}/assets/img/resto/${item.img}`}
+                              alt={`/asset/img/resto/${item.img}`}/>
+                        {/*<img src={`../assets/img/resto/${item.img}`} alt={`/assets/img/resto/${item.img}`}/>*/}
                     </td>
                 </tr>
             ))}
