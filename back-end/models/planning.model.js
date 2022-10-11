@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+var uniqueValidator = require("mongoose-unique-validator");
 
 const planningSchema = new mongoose.Schema({
   restaurant: {
@@ -8,6 +9,7 @@ const planningSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
+    unique: true,
   },
   hours: {
     type: String,
@@ -25,10 +27,16 @@ const planningSchema = new mongoose.Schema({
     ],
   },
   places: {
-    type: Array,
-    required: true,
+    type: Map,
+    of: [Schema.Types.Mixed],
+  },
+  reservations: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "reservation",
   },
 });
+
+planningSchema.plugin(uniqueValidator);
 
 const PlanningModel = mongoose.model("planning", planningSchema);
 module.exports = PlanningModel;

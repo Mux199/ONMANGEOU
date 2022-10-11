@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+var uniqueValidator = require("mongoose-unique-validator");
 
 const menuSchema = new mongoose.Schema({
   restaurant: {
@@ -11,6 +12,8 @@ const menuSchema = new mongoose.Schema({
     required: true,
   },
 });
+
+menuSchema.plugin(uniqueValidator);
 
 const MenuModel = mongoose.model("menu", menuSchema);
 module.exports = MenuModel;

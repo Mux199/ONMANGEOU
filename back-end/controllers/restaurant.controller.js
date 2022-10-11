@@ -1,31 +1,64 @@
 const RestaurantModel = require("../models/restaurant.model");
 
-module.exports.getAllRestaurants = async (req, res) => {
-  const restaurant = await RestaurantModel.find();
-  res.status(200).json(restaurant);
+module.exports.getAllRestaurant = async (req, res) => {
+  const restaurants = await RestaurantModel.find();
+  return res.status(200).json(restaurants);
 };
 
 module.exports.restaurantInfo = (req, res) => {
   console.log(req.params);
   RestaurantModel.findById(req.params.id, (err, docs) => {
-    if (!err) res.send(docs);
-    else return res.status(400).send("restaurant unknown : " + req.params.id);
+    if (!err) res.status(200).send(docs);
+    else return res.status(404).send("id unknown : " + req.params.id);
   });
 };
 
-module.exports.updateRestaurant = async (req, res) => {
-  RestaurantModel.updateOne(
-    { _id: req.body.id },
-    { $set: req.body },
-    (err, docs) => {
-      if (!err) return res.send(docs);
-      if (err) return res.status(400).send({ message: err });
-    }
-  );
+module.exports.blockRestaurant = async (req, res) => {
+  try {
+    await RestaurantModel.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: {
+          blocked: req.body.blocked,
+        },
+      },
+      {
+        new: true,
+        upsert: true,
+        runValidators: true,
+        context: "query",
+      }
+    )
+      .then((docs) =>
+        res.status(200).send({ message: "user block : " + req.body.blocked })
+      )
+      .catch((err) => res.status(500).send({ message: err }));
+  } catch (err) {
+    return res.status(500).send({ message: err });
+  }
 };
 
 module.exports.addRestaurant = async (req, res) => {
-  RestaurantModel.create({
-    
-  });
+  try {
+    await RestaurantModel.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: {
+          blocked: req.body.blocked,
+        },
+      },
+      {
+        new: true,
+        upsert: true,
+        runValidators: true,
+        context: "query",
+      }
+    )
+      .then((docs) =>
+        res.status(200).send({ message: "user block : " + req.body.blocked })
+      )
+      .catch((err) => res.status(500).send({ message: err }));
+  } catch (err) {
+    return res.status(500).send({ message: err });
+  }
 };
