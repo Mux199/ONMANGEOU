@@ -9,6 +9,7 @@ const planningSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
+    unique: true,
   },
   hours: {
     type: String,
@@ -26,8 +27,12 @@ const planningSchema = new mongoose.Schema({
     ],
   },
   places: {
-    type: Array,
-    required: true,
+    type: Map,
+    of: [Schema.Types.Mixed],
+  },
+  reservations: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "reservation",
   },
 });
 
