@@ -1,5 +1,14 @@
 const UserModel = require("../models/user.model");
 const RestaurantModel = require("../models/restaurant.model");
+const jwt = require("jsonwebtoken");
+
+const maxAge = 3 * 24 * 24 * 60 * 1000; // 1 day
+const createToken = (id) => {
+  return jwt.sign({ id }, process.env.TOKEN_SECRET, {
+    expiresIn: maxAge,
+  });
+};
+
 module.exports.signUp = async (req, res) => {
   const {
     email,
@@ -14,8 +23,9 @@ module.exports.signUp = async (req, res) => {
     city,
     postalCode,
     type,
-    waitingTime,
-    place,
+    waiting,
+    priceRange,
+    places,
     description,
     restaurantTelephone,
   } = req.body;
@@ -32,12 +42,49 @@ module.exports.signUp = async (req, res) => {
       telephone,
       role: professional ? "professional" : "user",
     });
+    //create professional if exist
+    if (professional) {
+      const restaurant = await RestaurantModel.create({
+        user: user,
+        name: RestaurantName,
+        adresse,
+        telephone,
+        siret,
+        city,
+        type,
+        waiting,
+        priceRange,
+        places,
+        description,
+        postalCode,
+        telephone: restaurantTelephone,
+      });
+    }
     res.status(201).json({ user: user.email, role: user.role });
-    // create professional if exist
-    // if (professional) {
-    //   // const restaurant = await RestaurantModel.create({email, password, firstName, lastName, telephone, role: 'user'});
-    // }
   } catch (err) {
-    res.status(200).send({ err });
+    res.status(200).send(err);
   }
+};
+
+module.exports.signIn = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await UserModel.login(email, password);
+    if (user.blocked) {
+      return res
+        .status(401)
+        .send({ message: "user is blocked contact info@lafourchette.com" });
+    }
+    const token = createToken(user._id);
+    res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge });
+    res.status(200).json({ user: user._id, role: user.role });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+module.exports.logout = (req, res) => {
+  res.cookie("jwt", "", { maxAge: 1 });
+  res.status(302).redirect("/");
 };
