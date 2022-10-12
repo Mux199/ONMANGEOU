@@ -1,7 +1,7 @@
 const UserModel = require("../models/user.model");
 const RestaurantModel = require("../models/restaurant.model");
 const jwt = require("jsonwebtoken");
-const { signInErrors } = require("../utils/errors.utils");
+const { signUpErrors, signInErrors } = require("../utils/errors.utils");
 
 const maxAge = 3 * 24 * 24 * 60 * 1000; // 1 day
 const createToken = (id) => {
