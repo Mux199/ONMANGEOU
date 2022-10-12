@@ -7,20 +7,47 @@ const Restaurant = require("../assets/Data-example/restaurants.json");
 
 function Srch(){
     ///////////////////////SEARCH ON A DATATABLE
-    const [queryPrix, setQueryPrix] = useState("Tous");
+    const [queryPrix, setQueryPrix] = useState("");
     const [querySpecialite, setQuerySpecialite] = useState("Tous");
-    const [queryBarre, setQueryBarre] = useState("Tous");
+    const [query, setQuery] = useState("Tous");
 
-   // const [queryPrix, setQueryPrix] = useState("");
+
+
+    // const [queryPrix, setQueryPrix] = useState("");
     const keys = ["name", "adresse", "phone", "Spécialité", "prix"];
     const search = (data) => {
-        return data.filter((item) =>
-            keys.some((key) =>
-                item[key].toLowerCase().includes(queryBarre) ||
-                item[key].toLowerCase().includes(querySpecialite) ||
-                item[key].toLowerCase().includes(queryPrix))
-        );
-    };
+        if (querySpecialite && queryPrix){
+            return data.filter(item => item.Spécialité.toLowerCase() === querySpecialite.toLowerCase() && item.prix.toLowerCase() === queryPrix.toLowerCase())
+        }
+        return [];
+    }
+        /* if (query) {
+            if(querySpecialite && query) {
+                if (querySpecialite && queryPrix && query) {
+                    return data.filter(item => item.Spécialité.toLowerCase() === querySpecialite.toLowerCase() && item.prix.toLowerCase() === queryPrix.toLowerCase() && item.name.toLowerCase().includes(query))
+                }
+                return data.filter(item => item.Spécialité.toLowerCase() === querySpecialite.toLowerCase() && item.name.toLowerCase().includes(query))
+            }
+            if (query && queryPrix){
+                return data.filter(item => item.name.toLowerCase().includes(query) && item.prix.toLowerCase() === queryPrix.toLowerCase())
+            }
+            return data.filter(item => item.name.toLowerCase().includes(query))
+        }
+        if (querySpecialite) {
+            if (querySpecialite && queryPrix){
+                return data.filter(item => item.Spécialité.toLowerCase() === querySpecialite.toLowerCase() && item.prix.toLowerCase() === queryPrix.toLowerCase())
+            }
+            return data.filter(item => item.Spécialité.toLowerCase() === querySpecialite.toLowerCase())
+    }
+        if (queryPrix) {
+            return data.filter(item => item.prix.toLowerCase() === queryPrix.toLowerCase())
+        }
+        return [];
+        //data.filter((item) =>
+            //keys.some((key) =>
+                //item[key].toLowerCase().includes(query)))
+
+    };*/
     const specialites = Restaurant.map(rest => rest.Spécialité);
     const uniqueSpecialites = [...new Set(specialites)];
     const prix = Restaurant.map(rest => rest.prix);
@@ -31,13 +58,12 @@ function Srch(){
                 className="search"
                 placeholder="Trouvez votre Restaurant"
                 onChange={(e) => {
-                    setQueryBarre(e.target.value.toLowerCase())
+                    setQuery(e.target.value.toLowerCase())
                 }}
             />
             <select
                 onChange={(e) => {
                     setQuerySpecialite(e.target.value.toLowerCase())
-
                 }}
             >
                 <option value="Tous">

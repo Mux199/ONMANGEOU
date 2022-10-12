@@ -28,7 +28,7 @@ export default (props) => {
       <Row noGutters className="text-center big-img-container">
         <Col>
           <img
-            src={require("../assets/img/restaurant.jpg")}
+            src={require("../assets/restaurant.jpg")}
             alt="restaurant"
             className="big-img"
           />
