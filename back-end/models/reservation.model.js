@@ -21,6 +21,11 @@ const reservationSchema = new mongoose.Schema(
       maxlength: 20,
       minlength: 2,
     },
+    time: {
+      type: String,
+      enum: ["midi", "soir"],
+      required: true,
+    },
     nbClients: {
       type: Integer,
       required: true,
