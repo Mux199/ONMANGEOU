@@ -14,7 +14,7 @@ export default (props) => {
           }}
         >
           <Row>
-            <Col color="primary"> <a href="/">Bienvenue sur ONMANGEOU</a>
+            <Col color="primary"> <a href="/">Bienvenue sur ONMANGEOÙ</a>
             </Col>
             <Col style={{ marginLeft: "800px" }}>
               <Link to={"/connexion"}>

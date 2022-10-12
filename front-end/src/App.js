@@ -12,6 +12,7 @@ import RestaurateurProfil from "./pages/RestaurateurProfil";
 import Footer from "./components/Footer";
 import Book from "./pages/Book";
 
+import axios from "./api/axios"
 
 export default (_) => {
   const [page, setPage] = useState(0);
