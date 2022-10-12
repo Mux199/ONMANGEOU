@@ -35,8 +35,6 @@ module.exports.updateUser = async (req, res) => {
   } catch (err) {
     return res.status(500).send({ message: err });
   }
-<<<<<<< HEAD
-=======
 };
 
 module.exports.blockUser = async (req, res) => {
@@ -115,7 +113,6 @@ module.exports.unlikeRestaurant = async (req, res) => {
   } catch (err) {
     return res.status(500).send({ message: err });
   }
->>>>>>> main
 };
 
 module.exports.blockUser = async (req, res) => {
