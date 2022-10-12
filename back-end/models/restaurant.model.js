@@ -91,6 +91,12 @@ const restaurantSchema = new mongoose.Schema({
     max: 5,
     default: 5,
   },
+  col: {
+    type: Number,
+  },
+  row: {
+    type: Number,
+  },
 });
 
 restaurantSchema.plugin(uniqueValidator);
