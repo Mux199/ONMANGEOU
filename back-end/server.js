@@ -11,7 +11,7 @@ const cors = require("cors");
 const app = express();
 
 const corsOptions = {
-  origin: '*',
+  origin: 'http://localhost:3000',
   credentials: true,
   allowedHeaders: [
     "sessionId",
@@ -19,6 +19,7 @@ const corsOptions = {
     "origin",
     "X-Requested-With",
     "Accept",
+    'Access-Control-Allow-Origin'
   ],
   exposedHeaders: ["sessionId"],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
