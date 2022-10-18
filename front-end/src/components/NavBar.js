@@ -7,7 +7,7 @@ export default (props) => {
   return (
     <div className="navbar">
       <Navbar light expand="md">
-        <NavbarBrand
+        <div
           className="nav-brand"
           onClick={(_) => {
             props.setPage(0);
@@ -26,7 +26,7 @@ export default (props) => {
               
             </Col>
           </Row>
-        </NavbarBrand>
+        </div>
       </Navbar>
      
     </div>

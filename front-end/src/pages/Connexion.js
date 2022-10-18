@@ -11,6 +11,7 @@ export default function Connexion() {
     e.preventDefault();
     const emailError = document.querySelector(".email.error");
     const passwordError = document.querySelector(".password.error");
+    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
     axios({
       method: "post",
       url: `${process.env.REACT_APP_API_URL}api/user/login`,
