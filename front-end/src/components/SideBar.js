@@ -17,7 +17,6 @@ import { FiHome, FiLogOut, FiArrowLeftCircle, FiArrowRightCircle } from "react-i
 import { BiCog } from "react-icons/bi";
 
 
-//import sidebar css from react-pro-sidebar module and our custom css 
 import "react-pro-sidebar/dist/css/styles.css";
 import "../styles/pages/SideBar.css";
 
@@ -31,7 +30,7 @@ const Sidebar = () => {
   };
 
   const handleClick = e => {
-    e.stopPropagation();  //  <------ Here is the magic
+    e.stopPropagation();  
   }
 
   return (

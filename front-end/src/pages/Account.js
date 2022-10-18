@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import axios from "axios";
 
 export default function Account() {
@@ -13,47 +13,52 @@ export default function Account() {
   const [prenom, setPrenom] = useState("");
   const [telephone, setTelephone] = useState("");
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    const emailError = document.querySelector(".email.error");
-    const passwordError = document.querySelector(".password.error");
-    const nomError = document.querySelector(".nom.error");
-    const prenomError = document.querySelector(".prenom.error");
-    const telephoneError = document.querySelector(".telephone.error");
-    const passewordConfirm = document.querySelector(".passewordConfirm.error");
-    axios({
-      method: "post",
-      url: `${process.env.REACT_APP_API_URL}api/user/login`,
-      withCredentials: true,
-      data: {
-        email,
-        password,
-        nom,
-        prenom,
-        telephone,
-      },
-    })
-      .then((res) => {
-        console.log(res);
-        if (res.data.errors) {
-          emailError.innerHTML = res.data.errors.email;
-          passwordError.innerHTML = res.data.errors.password;
-          nomError.innerHTML = res.data.errors.nom;
-          prenomError.innerHTML = res.data.errors.prenom;
-          telephoneError.innerHTML = res.data.errors.telephone;
-        } else {
-          window.location = "/Connexion";
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+const handleRegister= (e) => {
+  e.preventDefault();
+  const emailError = document.querySelector(".email.error");
+  const passwordError = document.querySelector(".password.error");
+  const nomError = document.querySelector(".nom.error");
+  const prenomError = document.querySelector(".prenom.error");
+  const telephoneError = document.querySelector(".telephone.error");
+  const passewordConfirm = document.querySelector(".passewordConfirm.error");
+  axios( {
+    method: "post",
+    url:`${process.env.REACT_APP_API_URL}api/user/register`,
+    withCredentials: true,
+    data: {
+      email,
+      password,
+      nom,
+      prenom,
+      telephone
+
+    }
+
+  })
+  .then((res) => {
+    console.log(res);
+    if (res.data.errors) {
+      emailError.innerHTML = res.data.errors.email;
+      passwordError.innerHTML = res.data.errors.password;
+      nomError.innerHTML = res.data.errors.nom;
+      prenomError.innerHTML = res.data.errors.prenom;
+      telephoneError.innerHTML= res.data.errors.telephone;
+
+    } else {
+      window.location = "/Connexion";
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+};
   return (
     <div className="account">
-      <Form onSubmit={handleLogin}>
+      <Form onSubmit={handleRegister}>
         <FormGroup>
-          <Label htmlFor="nom">Nom</Label>
+          <Label htmlFor="nom">
+            Nom
+          </Label>
           <Input
             id="nom"
             name="nom"
@@ -113,10 +118,7 @@ export default function Account() {
         </FormGroup>
         <div className="password error"></div>
         <FormGroup>
-          <Label htmlFor="passewordConfirm">
-            {" "}
-            Confirmation du mot de passe
-          </Label>
+          <Label htmlFor="passewordConfirm"> Confirmation du mot de passe</Label>
           <Input
             id="passewordConfirm"
             name="passewordConfirm"
@@ -124,13 +126,14 @@ export default function Account() {
             type="password"
             onChange={(e) => setPasswordConfirm(e.target.value)}
             value={passwordConfirm}
-          />
+         />
         </FormGroup>
         <div className="passwordConfirm error"></div>
         <FormGroup>
           <Label>Êtes vous un restaurateur?</Label>
           {!active && (
-            <Button className="restaurant-y" onClick={() => setActive(true)}>
+            <Button className="restaurant-y" 
+            onClick={() => setActive(true)}>
               Oui
             </Button>
           )}
@@ -148,13 +151,13 @@ export default function Account() {
             </FormGroup>
             <FormGroup>
               <Label>Spécialité</Label>
-              <Input
+             <Input
                 id="specialite"
                 name="Spécialité"
                 placeholder="Veuillez insérer votre spécialité"
                 type="text"
               />
-            </FormGroup>
+             </FormGroup>
             <FormGroup>
               <Label>Ville</Label>
               <Input
@@ -177,10 +180,13 @@ export default function Account() {
         )}
         <div>
           {/* <Link to={'/Connexion'} > */}
-          <Button className="valid-btn">Valider votre inscription</Button>
+          <Button className="valid-btn" type="submit">
+            Valider votre inscription
+          </Button>
           {/* </Link> */}
         </div>
       </Form>
     </div>
-  );
+ 
+ );
 }

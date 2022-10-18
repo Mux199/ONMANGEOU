@@ -11,8 +11,8 @@ import Faq from "./pages/Faq";
 import RestaurateurProfil from "./pages/RestaurateurProfil";
 import Footer from "./components/Footer";
 import Book from "./pages/Book";
-
 import axios from "./api/axios"
+import Choice from "./pages/Choice";
 
 export default (_) => {
   const [page, setPage] = useState(0);
@@ -30,6 +30,7 @@ export default (_) => {
         <Route path="restaurateurProfil" element={<RestaurateurProfil />} />
         <Route path="book" element={<Book />} />
         <Route path="*" element={<Main />} />
+        <Route path="choice" element={<Choice />} />
       </Routes>
       <Footer />
     </div>
