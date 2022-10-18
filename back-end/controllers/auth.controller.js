@@ -61,11 +61,11 @@ module.exports.signUp = async (req, res) => {
         telephone: restaurantTelephone,
       });
     }
+    console.log(res);
     res.status(201).json({ user: user.email, role: user.role });
-    console.log(err);
   } catch (err) {
-    res.status(200).send(err);
     console.log(err);
+    res.status(200).send(err);
   }
 };
 
@@ -92,6 +92,3 @@ module.exports.logout = (req, res) => {
   res.cookie("jwt", "", { maxAge: 1 });
   res.status(302).redirect("/");
 };
-
-
-
