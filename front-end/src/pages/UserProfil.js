@@ -1,28 +1,19 @@
-/*import {React, useEffect,useRef,useState} from "react";
-import { AiOutlineUser } from "react-icons/ai";
-import { ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-export default function UserProfil() {
-    
+import {React} from "react";
+import SideBar from "../components/SideBar"
 
-    return(
-        <div className="container">
-            <div  className="userProfil"> 
-                <div>
-                    Mon profil
-                </div> 
-                    <div >
-                < AiOutlineUser className="logoh"/> 
-                    </div>
-            </div >
 
-            <div className="content-right">
-                <p>Hello the test</p>
+const styles = {
+    display: 'flex',
+    justifyContent: 'space-between'
+}
+
+ export default function UserProfil(){
+    return (
+        <div className="user-profil" style={styles}>
+             <SideBar/> 
+            <div className="user-profil-content">
             </div>
         </div>
-        
-
-       
     )
+}
 
-
-}*/

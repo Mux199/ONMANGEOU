@@ -2,63 +2,137 @@ import React from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { useState } from "react";
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 export default function Account() {
   const [active, setActive] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [nom, setNom] = useState("");
+  const [prenom, setPrenom] = useState("");
+  const [telephone, setTelephone] = useState("");
+
+const handleLogin= (e) => {
+  e.preventDefault();
+  const emailError = document.querySelector(".email.error");
+  const passwordError = document.querySelector(".password.error");
+  const nomError = document.querySelector(".nom.error");
+  const prenomError = document.querySelector(".prenom.error");
+  const telephoneError = document.querySelector(".telephone.error");
+  const passewordConfirm = document.querySelector(".passewordConfirm.error");
+  axios( {
+    method: "post",
+    url:`${process.env.REACT_APP_API_URL}api/user/login`,
+    withCredentials: true,
+    data: {
+      email,
+      password,
+      nom,
+      prenom,
+      telephone
+
+    }
+
+  })
+  .then((res) => {
+    console.log(res);
+    if (res.data.errors) {
+      emailError.innerHTML = res.data.errors.email;
+      passwordError.innerHTML = res.data.errors.password;
+      nomError.innerHTML = res.data.errors.nom;
+      prenomError.innerHTML = res.data.errors.prenom;
+      telephoneError.innerHTML= res.data.errors.telephone;
+
+    } else {
+      window.location = "/Connexion";
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+};
   return (
     <div className="account">
-      <Form>
+      <Form onSubmit={handleLogin}>
         <FormGroup>
-          <Label>
+          <Label htmlFor="nom">
             Nom
           </Label>
           <Input
-            id="Nom"
-            name="Nom"
+            id="nom"
+            name="nom"
             placeholder="Insérez votre nom"
             type="text"
+            onChange={(e) => setNom(e.target.value)}
+            value={nom}
           />
         </FormGroup>
+        <div className="nom error"></div>
         <FormGroup>
-          <Label>Prénom</Label>
+          <Label htmlFor="prenom">Prénom</Label>
           <Input
-            id="Prénom"
-            name="Prénom"
+            id="prenom"
+            name="prenom"
             placeholder="Insérez votre prénom"
             type="text"
+            onChange={(e) => setPrenom(e.target.value)}
+            value={prenom}
           />
         </FormGroup>
+        <div className="prenom error"></div>
         <FormGroup>
-          <Label>Téléphone</Label>
+          <Label htmlFor="telephone">Téléphone</Label>
           <Input
-            id="Télephone"
-            name="Télephone"
-            placeholder="Num Télephone"
+            id="telephone"
+            name="telephone"
+            placeholder="Indiquez votre téléphone"
             type="number"
+            onChange={(e) => setTelephone(e.target.value)}
+            value={telephone}
           />
         </FormGroup>
+        <div className="telephone error"></div>
         <FormGroup>
-          <Label>Email</Label>
+          <Label htmlFor="email">Email</Label>
           <Input
-            id="Email"
-            name="Email"
+            id="email"
+            name="email"
             placeholder="Insérez votre mail"
             type="email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
           />
         </FormGroup>
+        <div className="email error"></div>
         <FormGroup>
-          <Label for="Mot de passe">Mot de Passe</Label>
+          <Label htmlFor="passeword">Mot de Passe</Label>
           <Input
-            id="Password"
-            name="Mot de passe"
+            id="passeword"
+            name="passeword"
             placeholder="Insérez votre mot de passe"
             type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
           />
         </FormGroup>
+        <div className="password error"></div>
+        <FormGroup>
+          <Label htmlFor="passewordConfirm"> Confirmation du mot de passe</Label>
+          <Input
+            id="passewordConfirm"
+            name="passewordConfirm"
+            placeholder="Veuillez confirmer le mot de passe"
+            type="password"
+            onChange={(e) => setPasswordConfirm(e.target.value)}
+            value={passwordConfirm}
+         />
+        </FormGroup>
+        <div className="passwordConfirm error"></div>
         <FormGroup>
           <Label>Êtes vous un restaurateur?</Label>
           {!active && (
-            <Button color="primary" 
+            <Button className="restaurant-y" 
             onClick={() => setActive(true)}>
               Oui
             </Button>
@@ -76,10 +150,28 @@ export default function Account() {
               />
             </FormGroup>
             <FormGroup>
+              <Label>Spécialité</Label>
+             <Input
+                id="specialite"
+                name="Spécialité"
+                placeholder="Veuillez insérer votre spécialité"
+                type="text"
+              />
+             </FormGroup>
+            <FormGroup>
+              <Label>Ville</Label>
+              <Input
+                id="city"
+                name="Ville"
+                placeholder="Veuillez insérer la ville dans laquelle vous vous situez"
+                type="text"
+              />
+            </FormGroup>
+            <FormGroup>
               <Label>Adresse du restaurant</Label>
               <Input
-                id="Email"
-                name="Email"
+                id="Adresse"
+                name="Adresse"
                 placeholder="Veuillez insérer l'adresse du restaurant"
                 type="text"
               />
@@ -87,9 +179,11 @@ export default function Account() {
           </>
         )}
         <div>
-          <Link to={'/userProfil'} >
-          <Button color="primary">Valider votre inscription</Button>
-          </Link>
+          {/* <Link to={'/Connexion'} > */}
+          <Button className="valid-btn">
+            Valider votre inscription
+          </Button>
+          {/* </Link> */}
         </div>
       </Form>
     </div>

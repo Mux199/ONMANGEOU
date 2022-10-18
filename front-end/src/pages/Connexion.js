@@ -1,33 +1,72 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import axios from "axios";
+
 export default function Connexion() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const emailError = document.querySelector(".email.error");
+    const passwordError = document.querySelector(".password.error");
+    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+    axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_URL}api/user/login`,
+      withCredentials: true,
+      data: {
+        email,
+        password,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data.errors) {
+          emailError.innerHTML = res.data.errors.email;
+          passwordError.innerHTML = res.data.errors.password;
+          
+        } else {
+          window.location = "/userProfil";
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className="connexion">
-      <Form>
+      <Form onSubmit={handleLogin}>
         <FormGroup>
-          <Label>Email</Label>
+          <Label htmlFor="email">Email</Label>
           <Input
-            id="Email"
+            id="email"
             name="Email"
             placeholder="Insérez votre mail"
             type="email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
           />
         </FormGroup>
+        <div className="email error"></div>
         <FormGroup>
-          <Label for="Mot de passe">Mot de Passe</Label>
+          <Label htmlFor="password">Mot de Passe</Label>
           <Input
-            id="Password"
+            id="password"
             name="Mot de passe"
             placeholder="Insérez votre mot de passe"
             type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
           />
         </FormGroup>
-        <Link to={'/userProfil'}>
-        <Button color="primary">
+        <div className="password error"></div>
+        {/* <Link to={"/userProfil"}> */}
+        <Button className="valid-btn" type="submit">
           Valider
-          </Button>
-        </Link>
+        </Button>
+        {/* </Link> */}
       </Form>
     </div>
   );

@@ -1,12 +1,11 @@
-const mongoose = require("moongoose");
-const { isEmail } = require("validator");
+const mongoose = require("mongoose");
+var uniqueValidator = require("mongoose-unique-validator");
 
 const restaurantSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
     required: true,
-    unique: true,
   },
   name: {
     type: String,
@@ -51,14 +50,16 @@ const restaurantSchema = new mongoose.Schema({
     required: true,
     maxlength: 40,
     minlength: 2,
+    enum: ["rapide", "moyen", "long"],
   },
   priceRange: {
     type: String,
     required: true,
     maxlength: 40,
     minlength: 2,
+    enum: ["pas cher", "moyen", "cher"],
   },
-  place: {
+  places: {
     type: Array,
     required: true,
   },
@@ -73,6 +74,15 @@ const restaurantSchema = new mongoose.Schema({
     required: true,
     maxlength: 40,
     minlength: 2,
+    enum: [
+      "japonais",
+      "français",
+      "américain",
+      "italien",
+      "chinois",
+      "indien",
+      "ethiopien",
+    ],
   },
   note: {
     type: Number,
@@ -81,7 +91,15 @@ const restaurantSchema = new mongoose.Schema({
     max: 5,
     default: 5,
   },
+  col: {
+    type: Number,
+  },
+  row: {
+    type: Number,
+  },
 });
+
+restaurantSchema.plugin(uniqueValidator);
 
 const RestaurantModel = mongoose.model("restaurant", restaurantSchema);
 module.exports = RestaurantModel;
