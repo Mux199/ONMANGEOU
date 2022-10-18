@@ -123,7 +123,7 @@ const handleLogin= (e) => {
             id="passewordConfirm"
             name="passewordConfirm"
             placeholder="Veuillez confirmer le mot de passe"
-            type="passeword"
+            type="password"
             onChange={(e) => setPasswordConfirm(e.target.value)}
             value={passwordConfirm}
          />
