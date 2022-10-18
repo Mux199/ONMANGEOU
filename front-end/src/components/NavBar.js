@@ -6,14 +6,16 @@ export default (props) => {
   return (
     <div className="navbar">
       <Navbar light expand="md">
-        <NavbarBrand
+        <div
           className="nav-brand"
           onClick={(_) => {
             props.setPage(0);
           }}
         >
           <Row>
-            <Col color="primary"> <a href="/">Bienvenue sur ONMANGEOU</a>
+            <Col color="primary">
+              {" "}
+              <a href="/">Bienvenue sur ONMANGEOU</a>
             </Col>
             <Col style={{ marginLeft: "800px" }}>
               <Link to={"/connexion"}>
@@ -27,7 +29,7 @@ export default (props) => {
               </Link>
             </Col>
           </Row>
-        </NavbarBrand>
+        </div>
       </Navbar>
     </div>
   );

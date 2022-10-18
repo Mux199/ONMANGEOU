@@ -9,7 +9,10 @@ module.exports.addReservation = (req, res) => {
   // on cherche soit l'utilisateur choisit sa place soit il laisse choisir
   // on ajoute dans reservation
   ReservationModel.find(req.params.id, (err, docs) => {
-    if (!err) res.status(200).send(docs);
-    else return res.status(404).send("id unknown : " + req.params.id);
+    if (!err) {
+      res.status(200).send(docs);
+    } else {
+      return res.status(404).send("id unknown : " + req.params.id);
+    }
   });
 };

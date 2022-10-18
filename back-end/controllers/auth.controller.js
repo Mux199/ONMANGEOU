@@ -62,8 +62,10 @@ module.exports.signUp = async (req, res) => {
       });
     }
     res.status(201).json({ user: user.email, role: user.role });
+    console.log(err);
   } catch (err) {
     res.status(200).send(err);
+    console.log(err);
   }
 };
 
