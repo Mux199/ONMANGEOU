@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Navbar, NavbarBrand, Row, Col } from "reactstrap";
-import Footer from "./Footer"
+import Footer from "./Footer";
 
 export default (props) => {
   return (
@@ -14,7 +14,9 @@ export default (props) => {
           }}
         >
           <Row>
-            <Col color="primary"> <a href="/">Bienvenue sur ONMANGEOÙ</a>
+            <Col color="primary">
+              {" "}
+              <a href="/">Bienvenue sur ONMANGEOÙ</a>
             </Col>
             <Col style={{ marginLeft: "800px" }}>
               <Link to={"/connexion"}>
@@ -23,12 +25,10 @@ export default (props) => {
               <Link to={"/account"}>
                 <button className="account">Créer un compte</button>
               </Link>
-              
             </Col>
           </Row>
         </div>
       </Navbar>
-     
     </div>
   );
 };
