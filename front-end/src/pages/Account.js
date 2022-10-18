@@ -51,50 +51,64 @@ export default function Account() {
   };
   return (
     <div className="account">
-      <Form>
+      <Form onSubmit={handleLogin}>
         <FormGroup>
           <Label htmlFor="nom">Nom</Label>
           <Input
-            id="Nom"
-            name="Nom"
+            id="nom"
+            name="nom"
             placeholder="Insérez votre nom"
             type="text"
+            onChange={(e) => setNom(e.target.value)}
+            value={nom}
           />
         </FormGroup>
+        <div className="nom error"></div>
         <FormGroup>
-          <Label>Prénom</Label>
+          <Label htmlFor="prenom">Prénom</Label>
           <Input
-            id="Prénom"
-            name="Prénom"
+            id="prenom"
+            name="prenom"
             placeholder="Insérez votre prénom"
             type="text"
+            onChange={(e) => setPrenom(e.target.value)}
+            value={prenom}
           />
         </FormGroup>
+        <div className="prenom error"></div>
         <FormGroup>
-          <Label>Téléphone</Label>
+          <Label htmlFor="telephone">Téléphone</Label>
           <Input
-            id="Télephone"
-            name="Télephone"
-            placeholder="Num Télephone"
+            id="telephone"
+            name="telephone"
+            placeholder="Indiquez votre téléphone"
             type="number"
+            onChange={(e) => setTelephone(e.target.value)}
+            value={telephone}
           />
         </FormGroup>
+        <div className="telephone error"></div>
         <FormGroup>
-          <Label>Email</Label>
+          <Label htmlFor="email">Email</Label>
           <Input
-            id="Email"
-            name="Email"
+            id="email"
+            name="email"
             placeholder="Insérez votre mail"
             type="email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
           />
         </FormGroup>
+        <div className="email error"></div>
         <FormGroup>
-          <Label for="Mot de passe">Mot de Passe</Label>
+          <Label htmlFor="passeword">Mot de Passe</Label>
           <Input
-            id="Password"
-            name="Mot de passe"
+            id="passeword"
+            name="passeword"
             placeholder="Insérez votre mot de passe"
             type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
           />
         </FormGroup>
         <div className="password error"></div>
@@ -107,7 +121,7 @@ export default function Account() {
             id="passewordConfirm"
             name="passewordConfirm"
             placeholder="Veuillez confirmer le mot de passe"
-            type="passeword"
+            type="password"
             onChange={(e) => setPasswordConfirm(e.target.value)}
             value={passwordConfirm}
           />
@@ -153,8 +167,8 @@ export default function Account() {
             <FormGroup>
               <Label>Adresse du restaurant</Label>
               <Input
-                id="Email"
-                name="Email"
+                id="Adresse"
+                name="Adresse"
                 placeholder="Veuillez insérer l'adresse du restaurant"
                 type="text"
               />

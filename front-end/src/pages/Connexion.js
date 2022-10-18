@@ -11,6 +11,7 @@ export default function Connexion() {
     e.preventDefault();
     const emailError = document.querySelector(".email.error");
     const passwordError = document.querySelector(".password.error");
+    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
     axios({
       method: "post",
       url: `${process.env.REACT_APP_API_URL}api/user/login`,
@@ -25,6 +26,7 @@ export default function Connexion() {
         if (res.data.errors) {
           emailError.innerHTML = res.data.errors.email;
           passwordError.innerHTML = res.data.errors.password;
+          
         } else {
           window.location = "/userProfil";
         }
