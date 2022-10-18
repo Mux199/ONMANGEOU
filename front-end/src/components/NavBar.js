@@ -20,7 +20,7 @@ export default (props) => {
               <Link to={"/connexion"}>
                 <button className="connexion">Se connecter</button>
               </Link>
-              <Link to={"/account"}>
+              <Link to={"/choice"}>
                 <button className="account">Créer un compte</button>
               </Link>
               

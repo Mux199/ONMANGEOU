@@ -13,7 +13,7 @@ export default function Account() {
   const [prenom, setPrenom] = useState("");
   const [telephone, setTelephone] = useState("");
 
-const handleLogin= (e) => {
+const handleRegister= (e) => {
   e.preventDefault();
   const emailError = document.querySelector(".email.error");
   const passwordError = document.querySelector(".password.error");
@@ -23,7 +23,7 @@ const handleLogin= (e) => {
   const passewordConfirm = document.querySelector(".passewordConfirm.error");
   axios( {
     method: "post",
-    url:`${process.env.REACT_APP_API_URL}api/user/login`,
+    url:`${process.env.REACT_APP_API_URL}api/user/register`,
     withCredentials: true,
     data: {
       email,
@@ -54,7 +54,7 @@ const handleLogin= (e) => {
 };
   return (
     <div className="account">
-      <Form onSubmit={handleLogin}>
+      <Form onSubmit={handleRegister}>
         <FormGroup>
           <Label htmlFor="nom">
             Nom
@@ -180,7 +180,7 @@ const handleLogin= (e) => {
         )}
         <div>
           {/* <Link to={'/Connexion'} > */}
-          <Button className="valid-btn">
+          <Button className="valid-btn" type="submit">
             Valider votre inscription
           </Button>
           {/* </Link> */}
