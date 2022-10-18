@@ -9,7 +9,7 @@ module.exports.signUpErrors = (err) => {
 
   if (err.message.includes("lastname")) errors.prenom = "Erreur prenom";
 
-  if (err.message.includes("telephone")) errors.telephone = "Erreur telephone";
+  if (err.message.includes("telephone")) errors.telephone = "Erreur tel";
 
   return errors;
 };
