@@ -1,7 +1,7 @@
 module.exports.signUpErrors = (err) => {
   let errors = { email: "", password: "", nom: "", prenom: "", telephone: "" };
 
-  if (err.message.includes("email")) errors.email = "Email inconnu";
+  if (err.message.includes("email")) errors.email = "error email";
 
   if (err.message.includes("password")) errors.password = "Erreur password";
 
