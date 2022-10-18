@@ -1,3 +1,4 @@
 /node_modules
 /config/.env
-.DS_Store
+front-end/.DS_Store
+back-end/.DS_Store
