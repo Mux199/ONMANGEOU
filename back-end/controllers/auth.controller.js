@@ -65,7 +65,8 @@ module.exports.signUp = async (req, res) => {
     res.status(201).json({ user: user.email, role: user.role });
   } catch (err) {
     console.log(err);
-    res.status(200).send(err);
+    const errors = signUpErrors(err);
+    res.status(200).send(errors);
   }
 };
 
