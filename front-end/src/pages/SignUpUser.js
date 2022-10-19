@@ -4,7 +4,7 @@ import { useState } from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
 
-export default function Account() {
+export default function SignUpUser() {
   const [active, setActive] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -53,7 +53,7 @@ const handleRegister= (e) => {
   });
 };
   return (
-    <div className="account">
+    <div className="signUpUser">
       <Form onSubmit={handleRegister}>
         <FormGroup>
           <Label htmlFor="nom">

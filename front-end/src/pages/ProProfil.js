@@ -8,21 +8,16 @@ const styles = {
     justifyContent: 'space-between'
 }
 
- export default function UserProfil(){
+ export default function ProProfil(){
     const ChooseDate = () => {
         const [startDate, setStartDate] = useState(new Date());
     }
     return (
-        <div className="user-profil" style={styles}>
-             <SideBar/> 
-             {/* <DatePicker 
-                selected={startDate} 
-                onChange={(e) => setStartDate(date)} />
-         */}
-           
-            
+        <div className="pro-profil" style={styles}>
+             <SideBar/>                
  
         </div>
     )
 }
+
 

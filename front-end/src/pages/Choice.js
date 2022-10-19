@@ -9,12 +9,12 @@ export default function Choice() {
         <div className="choice">
             <Menu iconShape="square" >
                 <MenuItem icon={<AiOutlineUser/>}>
-                    <Link to={'/account'} style={{ color: 'black', fontWeight:'bold'}}>
+                    <Link to={'/signUpUser'} style={{ color: 'black', fontWeight:'bold'}}>
                         Vous êtes client
                     </Link>
                     </MenuItem>
                 <MenuItem icon= {<SiCodechef/>}>
-                    <Link to={'/restaurateurProfil'} style={{ color: 'black', fontWeight:'bold'}} >
+                    <Link to={'/signUpPro'} style={{ color: 'black', fontWeight:'bold'}} >
                         Vous êtes restaurateur
                     </Link>
                 </MenuItem>
