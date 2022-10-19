@@ -128,65 +128,15 @@ const handleRegister= (e) => {
             value={passwordConfirm}
          />
         </FormGroup>
-        <div className="passwordConfirm error"></div>
-        <FormGroup>
-          <Label>Êtes vous un restaurateur?</Label>
-          {!active && (
-            <Button className="restaurant-y" 
-            onClick={() => setActive(true)}>
-              Oui
-            </Button>
-          )}
-        </FormGroup>
-        {active && (
-          <>
-            <FormGroup>
-              <Label>Numéro de Siret</Label>
-              <Input
-                id="SIRET"
-                name="SIRET"
-                placeholder="Indiquez le numéro de SIRET"
-                type="number"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Spécialité</Label>
-             <Input
-                id="specialite"
-                name="Spécialité"
-                placeholder="Veuillez insérer votre spécialité"
-                type="text"
-              />
-             </FormGroup>
-            <FormGroup>
-              <Label>Ville</Label>
-              <Input
-                id="city"
-                name="Ville"
-                placeholder="Veuillez insérer la ville dans laquelle vous vous situez"
-                type="text"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label>Adresse du restaurant</Label>
-              <Input
-                id="Adresse"
-                name="Adresse"
-                placeholder="Veuillez insérer l'adresse du restaurant"
-                type="text"
-              />
-            </FormGroup>
-          </>
-        )}
+        <div className="passwordConfirm error"/>
         <div>
-          {/* <Link to={'/Connexion'} > */}
+          <Link to={'/userProfil'} >
           <Button className="valid-btn" type="submit">
             Valider votre inscription
           </Button>
-          {/* </Link> */}
+          </Link>
         </div>
       </Form>
     </div>
- 
  );
 }
