@@ -1,4 +1,4 @@
-module.exports.signUpErrors = (err) => {
+module.exports.signUpUserErrors = (err) => {
   let errors = { email: "", password: "", nom: "", prenom: "", telephone: "" };
 
   if (err.message.includes("email")) errors.email = "Error email";

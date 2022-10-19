@@ -8,7 +8,7 @@ const styles = {
     justifyContent: 'space-between'
 }
 
-export default function RestaurateurProfil(){
+export default function SignUpPro(){
     const [active, setActive] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -133,15 +133,6 @@ export default function RestaurateurProfil(){
         </FormGroup>
         <div className="passwordConfirm error"></div>
         <FormGroup>
-              <Label>Numéro de Siret</Label>
-              <Input
-                id="SIRET"
-                name="SIRET"
-                placeholder="Indiquez le numéro de SIRET"
-                type="number"
-              />
-        </FormGroup>
-        <FormGroup>
             <Label>Spécialité</Label>
             <Input
                 id="specialite"
@@ -168,8 +159,22 @@ export default function RestaurateurProfil(){
                 type="text"
               />
         </FormGroup>
+        <FormGroup>
+              <Label>Numéro de Siret</Label>
+              <Input
+                id="SIRET"
+                name="SIRET"
+                placeholder="Indiquez le numéro de SIRET"
+                type="number"
+              />
+        </FormGroup>
+        <FormGroup>
+            <Label>Fourchette de prix</Label>
+            <Input 
+            />
+        </FormGroup>
         <div>
-         <Link to={"/userProfil"}>
+         <Link to={"/ProProfil"}>
             <Button className="valid-btn" type="submit">
             Valider votre inscription
             </Button>
