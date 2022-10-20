@@ -1,7 +1,7 @@
 import React from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { useState } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function SignUpUser() {
@@ -13,52 +13,48 @@ export default function SignUpUser() {
   const [prenom, setPrenom] = useState("");
   const [telephone, setTelephone] = useState("");
 
-const handleRegister= (e) => {
-  e.preventDefault();
-  const emailError = document.querySelector(".email.error");
-  const passwordError = document.querySelector(".password.error");
-  const nomError = document.querySelector(".nom.error");
-  const prenomError = document.querySelector(".prenom.error");
-  const telephoneError = document.querySelector(".telephone.error");
-  const passewordConfirm = document.querySelector(".passewordConfirm.error");
-  axios( {
-    method: "post",
-    url:`${process.env.REACT_APP_API_URL}api/user/register`,
-    withCredentials: true,
-    data: {
-      email,
-      password,
-      nom,
-      prenom,
-      telephone
-
-    }
-
-  })
-  .then((res) => {
-    console.log(res);
-    if (res.data.errors) {
-      emailError.innerHTML = res.data.errors.email;
-      passwordError.innerHTML = res.data.errors.password;
-      nomError.innerHTML = res.data.errors.nom;
-      prenomError.innerHTML = res.data.errors.prenom;
-      telephoneError.innerHTML= res.data.errors.telephone;
-
-    } else {
-      window.location = "/Connexion";
-    }
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-};
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const emailError = document.querySelector(".email.error");
+    const passwordError = document.querySelector(".password.error");
+    const nomError = document.querySelector(".nom.error");
+    const prenomError = document.querySelector(".prenom.error");
+    const telephoneError = document.querySelector(".telephone.error");
+    const passwordConfirm = document.querySelector(".passwordConfirm.error");
+    axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_URL}api/user/register`,
+      withCredentials: true,
+      data: {
+        email,
+        password,
+        passwordConfirm,
+        nom,
+        prenom,
+        telephone,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data.errors) {
+          emailError.innerHTML = res.data.errors.email;
+          passwordError.innerHTML = res.data.errors.password;
+          nomError.innerHTML = res.data.errors.nom;
+          prenomError.innerHTML = res.data.errors.prenom;
+          telephoneError.innerHTML = res.data.errors.telephone;
+        } else {
+          window.location = "/userProfil";
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className="signUpUser">
       <Form onSubmit={handleRegister}>
         <FormGroup>
-          <Label htmlFor="nom">
-            Nom
-          </Label>
+          <Label htmlFor="nom">Nom</Label>
           <Input
             id="nom"
             name="nom"
@@ -106,10 +102,10 @@ const handleRegister= (e) => {
         </FormGroup>
         <div className="email error"></div>
         <FormGroup>
-          <Label htmlFor="passeword">Mot de Passe</Label>
+          <Label htmlFor="password">Mot de Passe</Label>
           <Input
-            id="passeword"
-            name="passeword"
+            id="password"
+            name="password"
             placeholder="Insérez votre mot de passe"
             type="password"
             onChange={(e) => setPassword(e.target.value)}
@@ -118,25 +114,23 @@ const handleRegister= (e) => {
         </FormGroup>
         <div className="password error"></div>
         <FormGroup>
-          <Label htmlFor="passewordConfirm"> Confirmation du mot de passe</Label>
+          <Label htmlFor="passwordConfirm"> Confirmation du mot de passe</Label>
           <Input
-            id="passewordConfirm"
-            name="passewordConfirm"
+            id="passwordConfirm"
+            name="passwordConfirm"
             placeholder="Veuillez confirmer le mot de passe"
             type="password"
             onChange={(e) => setPasswordConfirm(e.target.value)}
             value={passwordConfirm}
-         />
+          />
         </FormGroup>
-        <div className="passwordConfirm error"/>
+        <div className="passwordConfirm error" />
         <div>
-          <Link to={'/userProfil'} >
           <Button className="valid-btn" type="submit">
             Valider votre inscription
           </Button>
-          </Link>
         </div>
       </Form>
     </div>
- );
+  );
 }
