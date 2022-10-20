@@ -1,7 +1,7 @@
 import {React, useEffect,useRef,useState} from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { ProSidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
-import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import { Form, FormGroup, Label, Input, Button, Dropdown, DropdownMenu, DropdownItem } from "reactstrap";
 import {Link} from "react-router-dom";
 import axios from "axios";
 const styles = {
@@ -10,13 +10,27 @@ const styles = {
 
 export default function SignUpPro(){
     const [active, setActive] = useState(false);
+    const [activeW, setActiveW] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [nom, setNom] = useState("");
     const [prenom, setPrenom] = useState("");
     const [telephone, setTelephone] = useState("");
-    
+    const showPrice =() =>{
+      setActive(true);
+    }
+    const hidePrice=() =>{
+      setActive(false);
+    }
+    const showWaiting =() =>{
+      setActiveW(true);
+    }
+    const hideWaiting=() =>{
+      setActiveW(false);
+    }
+
+
     const handleRegister= (e) => {
         e.preventDefault();
         const emailError = document.querySelector(".email.error");
@@ -168,10 +182,40 @@ export default function SignUpPro(){
                 type="number"
               />
         </FormGroup>
+
+        <div className="dropdown">
+            <div className="dropdown-btn" onClick={e =>setActive(!active)}>
+              Fourchette de Prix
+              <span className="fast"></span>
+            </div>
+            {active && (
+              <div className="dropdown-content">
+                <div className="dropdown-item">Pas cher</div>
+                <div className="dropdown-item">Moyen</div>
+                <div className="dropdown-item">Cher</div>
+              </div>
+            
+            )
+          }
+          </div>
+     
+
+           
+            
+             
+            {/* <Dropdown.Item>Pas cher</Dropdown.Item>
+            <Dropdown.Item>Moyen</Dropdown.Item>
+            <Dropdown.Item>Cher</Dropdown.Item> */}
+          
+      
         <FormGroup>
-            <Label>Fourchette de prix</Label>
-            <Input 
-            />
+       
+            <Label>Temps d'attente</Label>
+            
+            {/* <Dropdown.Item>Rapide</Dropdown.Item>
+            <Dropdown.Item>Moyen</Dropdown.Item>
+            <Dropdown.Item>Lent</Dropdown.Item> */}
+          
         </FormGroup>
         <div>
          <Link to={"/ProProfil"}>
