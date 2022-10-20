@@ -2,8 +2,14 @@ import { type } from "@testing-library/user-event/dist/type";
 import React from "react";
 import { Row, Col, Container,Button } from "reactstrap";
 import { Link } from "react-router-dom";
+import Restaurant from "../assets/data/restaurants.json"
 
 function Search() {
+  const[Data, SetData] = React.useState([]);
+  React.useEffect(()=>{
+      const data = [Restaurant]
+  })
+
   return (
     <div className="search" style={{ width: '100%'}}>
       <Row
@@ -20,7 +26,7 @@ function Search() {
               name="searchBar"
               id="searchBar"
               placeholder="Trouver votre restaurant"
-            />
+            //*>
           </div>
         </Col>
         <Col xs="6">
