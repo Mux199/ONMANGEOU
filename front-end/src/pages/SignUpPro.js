@@ -1,6 +1,4 @@
 import {React, useEffect,useRef,useState} from "react";
-import { AiOutlineUser } from "react-icons/ai";
-import { ProSidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { Form, FormGroup, Label, Input, Button, Dropdown, DropdownMenu, DropdownItem } from "reactstrap";
 import {Link} from "react-router-dom";
 import axios from "axios";
