@@ -15,10 +15,7 @@ const styles = {
     return (
         <div className="user-profil" style={styles}>
              <SideBar/> 
-             {/* <DatePicker 
-                selected={startDate} 
-                onChange={(e) => setStartDate(date)} />
-         */}
+             
            
             
  
