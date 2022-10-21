@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Main from "./pages/Main";
 import NavBar from "./components/NavBar";
 import { Routes, Route } from "react-router-dom";
-import Account from "./pages/Account";
 import Connexion from "./pages/Connexion";
 import UserProfil from "./pages/UserProfil";
 import Logout from "./pages/Logout";
