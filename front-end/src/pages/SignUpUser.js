@@ -21,34 +21,41 @@ export default function SignUpUser() {
     const prenomError = document.querySelector(".prenom.error");
     const telephoneError = document.querySelector(".telephone.error");
     const passwordConfirm = document.querySelector(".passwordConfirm.error");
-    axios({
-      method: "post",
-      url: `${process.env.REACT_APP_API_URL}api/user/register`,
-      withCredentials: true,
-      data: {
-        email,
-        password,
-        passwordConfirm,
-        nom,
-        prenom,
-        telephone,
-      },
-    })
-      .then((res) => {
-        console.log(res);
-        if (res.data.errors) {
-          emailError.innerHTML = res.data.errors.email;
-          passwordError.innerHTML = res.data.errors.password;
-          nomError.innerHTML = res.data.errors.nom;
-          prenomError.innerHTML = res.data.errors.prenom;
-          telephoneError.innerHTML = res.data.errors.telephone;
-        } else {
-          window.location = "/userProfil";
-        }
+    axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
+
+    if (password != passwordConfirm) {
+      passwordError.innerHTML = "les deux mots de passe ne correspondent pas";
+    } else {
+      passwordError.innerHTML = "";
+      axios({
+        method: "post",
+        url: `${process.env.REACT_APP_API_URL}api/user/register`,
+        withCredentials: true,
+        data: {
+          email,
+          password,
+          firstname: nom,
+          lastname: prenom,
+          telephone,
+          role: "user",
+        },
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => {
+          console.log(res);
+          if (res.data.errors) {
+            emailError.innerHTML = res.data.errors.email;
+            passwordError.innerHTML = res.data.errors.password;
+            nomError.innerHTML = res.data.errors.nom;
+            prenomError.innerHTML = res.data.errors.prenom;
+            telephoneError.innerHTML = res.data.errors.telephone;
+          } else {
+            window.location = "/userProfil";
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
   return (
     <div className="signUpUser">
