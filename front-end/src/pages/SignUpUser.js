@@ -27,13 +27,13 @@ export default function SignUpUser() {
       data: {
         email,
         password,
-        passwordConfirm,
         nom,
         prenom,
         telephone,
       },
     })
       .then((res) => {
+        console.log("res");
         console.log(res);
         if (res.data.errors) {
           emailError.innerHTML = res.data.errors.email;

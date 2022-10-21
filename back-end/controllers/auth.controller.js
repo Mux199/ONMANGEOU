@@ -66,7 +66,7 @@ module.exports.signUp = async (req, res) => {
   } catch (err) {
     console.log(err);
     const errors = signUpErrors(err);
-    res.status(200).send(errors);
+    res.status(200).json({ errors });
   }
 };
 

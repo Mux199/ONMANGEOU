@@ -36,23 +36,23 @@ export default (_) => {
 
   return (
     <div>
-      <UidContext.Provider value={uid}>
-        <NavBar setPage={setPage} />
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="signUpUser" element={<SignUpUser />} />
-          <Route path="connexion" element={<Connexion />} />
-          <Route path="userProfil" element={<UserProfil />} />
-          <Route path="logout" element={<Logout />} />
-          <Route path="faq" element={<Faq />} />
-          <Route path="signUpPro" element={<SignUpPro />} />
-          <Route path="book" element={<Book />} />
-          <Route path="*" element={<Main />} />
-          <Route path="choice" element={<Choice />} />
-          <Route path="proProfil" element={<ProProfil />} />
-        </Routes>
-        <Footer />
-      </UidContext.Provider>
+      {/* <UidContext.Provider value={uid}> */}
+      <NavBar setPage={setPage} />
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="signUpUser" element={<SignUpUser />} />
+        <Route path="connexion" element={<Connexion />} />
+        <Route path="userProfil" element={<UserProfil />} />
+        <Route path="logout" element={<Logout />} />
+        <Route path="faq" element={<Faq />} />
+        <Route path="signUpPro" element={<SignUpPro />} />
+        <Route path="book" element={<Book />} />
+        <Route path="*" element={<Main />} />
+        <Route path="choice" element={<Choice />} />
+        <Route path="proProfil" element={<ProProfil />} />
+      </Routes>
+      <Footer />
+      {/* </UidContext.Provider> */}
     </div>
   );
 };
