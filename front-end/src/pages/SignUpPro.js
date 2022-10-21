@@ -191,13 +191,6 @@ export default function SignUpPro(){
         </FormGroup>
         <FormGroup>
             <Label>Temps d'attente</Label>
-<<<<<<< Updated upstream
-            
-            {/* <Dropdown.Item>Rapide</Dropdown.Item>
-            <Dropdown.Item>Moyen</Dropdown.Item>
-            <Dropdown.Item>Lent</Dropdown.Item> */}
-          
-=======
             <Input type="select" name="select-T">
               <option></option>
               <option>Rapide</option>
@@ -222,7 +215,6 @@ export default function SignUpPro(){
             <Input type="number" name="number-place">
           
             </Input>
->>>>>>> Stashed changes
         </FormGroup>
         <div>
          <Link to={"/ProProfil"}>
