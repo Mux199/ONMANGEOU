@@ -209,11 +209,38 @@ export default function SignUpPro(){
         <FormGroup>
        
             <Label>Temps d'attente</Label>
+<<<<<<< Updated upstream
             
             {/* <Dropdown.Item>Rapide</Dropdown.Item>
             <Dropdown.Item>Moyen</Dropdown.Item>
             <Dropdown.Item>Lent</Dropdown.Item> */}
           
+=======
+            <Input type="select" name="select-T">
+              <option></option>
+              <option>Rapide</option>
+              <option>Moyen</option>
+              <option>Lent</option>
+            </Input>
+        </FormGroup>
+        <FormGroup>
+            <Label>Nombre de place</Label>
+            <Input type="number" name="number-place">
+          
+            </Input>
+        </FormGroup>
+        <FormGroup>
+            <Label>Nombre de rangée(lignes)</Label>
+            <Input type="number" name="number-place">
+          
+            </Input>
+        </FormGroup>
+        <FormGroup>
+            <Label>Nombre de rangée(colonne)</Label>
+            <Input type="number" name="number-place">
+          
+            </Input>
+>>>>>>> Stashed changes
         </FormGroup>
         <div>
          <Link to={"/ProProfil"}>
