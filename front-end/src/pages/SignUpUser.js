@@ -23,9 +23,11 @@ export default function SignUpUser() {
     const passwordConfirm = document.querySelector(".passwordConfirm.error");
     axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 
-    if (password != passwordConfirm) {
+    if (password == passwordConfirm) {
       passwordError.innerHTML = "les deux mots de passe ne correspondent pas";
+      console.log("IF");
     } else {
+      console.log("Else");
       passwordError.innerHTML = "";
       axios({
         method: "post",
