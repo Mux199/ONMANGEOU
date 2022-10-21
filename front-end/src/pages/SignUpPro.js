@@ -180,34 +180,16 @@ export default function SignUpPro(){
                 type="number"
               />
         </FormGroup>
-
-        <div className="dropdown">
-            <div className="dropdown-btn" onClick={e =>setActive(!active)}>
-              Fourchette de Prix
-              <span className="fast"></span>
-            </div>
-            {active && (
-              <div className="dropdown-content">
-                <div className="dropdown-item">Pas cher</div>
-                <div className="dropdown-item">Moyen</div>
-                <div className="dropdown-item">Cher</div>
-              </div>
-            
-            )
-          }
-          </div>
-     
-
-           
-            
-             
-            {/* <Dropdown.Item>Pas cher</Dropdown.Item>
-            <Dropdown.Item>Moyen</Dropdown.Item>
-            <Dropdown.Item>Cher</Dropdown.Item> */}
-          
-      
         <FormGroup>
-       
+          <Label> Fourchette de Prix</Label>
+          <Input type="select" name="select-F">
+              <option></option>
+              <option>Pas cher</option>
+              <option>Moyen</option>
+              <option>Cher</option>
+          </Input>
+        </FormGroup>
+        <FormGroup>
             <Label>Temps d'attente</Label>
 <<<<<<< Updated upstream
             
