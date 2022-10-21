@@ -201,7 +201,19 @@ export default function SignUpPro(){
         <FormGroup>
             <Label>Nombre de place</Label>
             <Input type="number" name="number-place">
-              
+          
+            </Input>
+        </FormGroup>
+        <FormGroup>
+            <Label>Nombre de rangée(lignes)</Label>
+            <Input type="number" name="number-place">
+          
+            </Input>
+        </FormGroup>
+        <FormGroup>
+            <Label>Nombre de rangée(colonne)</Label>
+            <Input type="number" name="number-place">
+          
             </Input>
         </FormGroup>
         <div>
