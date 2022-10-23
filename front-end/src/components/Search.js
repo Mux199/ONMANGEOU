@@ -43,21 +43,18 @@ return [];
         //item[key].toLowerCase().includes(query)))
 
 };*/
+
 const specialites = Restaurant.map(rest => rest.Spécialité);
 const uniqueSpecialites = [...new Set(specialites)];
 const prix = Restaurant.map(rest => rest.prix);
 const uniquePrix = [...new Set(prix)];
-    useEffect((data) => {
-
+    useEffect(() => {
+        let data = [...query];
         if(querySpecialite) {
             data = data.filter(item => item.Spécialité === querySpecialite);
-        }
-
-        if(queryPrix) {
+        } else if(queryPrix) {
             data = data.filter(item => item.prix === queryPrix);
-        }
-
-        if(query) {
+        } else if(query) {
             data = data.filter(item => item.name.toLowerCase().includes(query))
         }
 
