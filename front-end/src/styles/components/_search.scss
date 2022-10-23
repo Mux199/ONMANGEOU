@@ -1,23 +1,12 @@
-.search {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
-.search_panelList-wrap,
-.search_panel-wrap,
-.search_list-wrap {
-    overflow-y: auto;
-}
 
-.search_panelList-wrap {
-    flex: 1;
-    display: flex;
-}
-.search_panel-wrap {
-    flex-basis: 280px;
-    padding: 1rem;
-}
-.search_list-wrap {
-    flex: 1;
-    padding: 1rem;
+.search {
+    .searchBar {
+        padding:2rem 1rem;
+
+    }
+
+    .searchBar input {
+        font: size 1.2rem;
+        
+    }
 }
