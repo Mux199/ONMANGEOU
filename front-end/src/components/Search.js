@@ -52,9 +52,11 @@ const uniquePrix = [...new Set(prix)];
         let data = [...query];
         if(querySpecialite) {
             data = data.filter(item => item.Spécialité === querySpecialite);
-        } else if(queryPrix) {
+        }
+        if(queryPrix) {
             data = data.filter(item => item.prix === queryPrix);
-        } else if(query) {
+        }
+        if(query) {
             data = data.filter(item => item.name.toLowerCase().includes(query))
         }
 
