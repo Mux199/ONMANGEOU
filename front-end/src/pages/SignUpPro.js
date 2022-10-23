@@ -1,5 +1,5 @@
 import {React, useEffect,useRef,useState} from "react";
-import { Form, FormGroup, Label, Input, Button, Dropdown, DropdownMenu, DropdownItem } from "reactstrap";
+import { Form, FormGroup, Label, Input, Button,Container,Row,Col } from "reactstrap";
 import {Link} from "react-router-dom";
 import axios from "axios";
 const styles = {
@@ -216,6 +216,17 @@ export default function SignUpPro(){
           
             </Input>
         </FormGroup>
+
+        <Container>
+          <Row>
+            <Col>
+            </Col>
+
+          </Row>
+
+        </Container>
+
+
         <div>
          <Link to={"/ProProfil"}>
             <Button className="valid-btn" type="submit">
