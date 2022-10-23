@@ -421,7 +421,7 @@ const getSizes = _ => {
               color="none"
               className="book-table-btn"
               onClick={_ => {
-                reserve();
+                reserver();
               }}
             >
               Réserver
