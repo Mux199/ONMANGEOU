@@ -13,20 +13,33 @@ module.exports.signUpErrors = (err) => {
   let errors = { email: "", password: "", nom: "", prenom: "", telephone: "" };
 
   if (err.message.includes("email"))
-    errors.email = err.errors.email.properties.message;
+    errors.email = err.errors.email.properties.message.replace("Path ", "");
 
-  if (err.message.includes("password"))
-    errors.password = err.errors.password.properties.message;
-
-  if (err.message.includes("firstname")) {
-    errors.nom = err.errors.firstname.properties.message;
+  if (err.message.includes("password")) {
+    if (err.errors.password.properties.message.includes("shorter"))
+      errors.password = "`password` is to short";
+    else {
+      errors.password = err.errors.password.properties.message.replace(
+        "Path ",
+        ""
+      );
+    }
   }
 
+  errors.password = errors.password.replace(new RegExp(`.*[(?)]+.*`), "");
+  console.log(errors.password);
+
+  if (err.message.includes("firstname"))
+    errors.nom = err.errors.firstname.properties.message.replace("Path ", "");
+
   if (err.message.includes("lastname"))
-    errors.prenom = err.errors.lastname.properties.message;
+    errors.prenom = err.errors.lastname.properties.message.replace("Path ", "");
 
   if (err.message.includes("telephone"))
-    errors.telephone = err.errors.telephone.properties.message;
+    errors.telephone = err.errors.telephone.properties.message.replace(
+      "Path ",
+      ""
+    );
 
   return errors;
 };
