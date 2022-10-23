@@ -27,7 +27,7 @@ export default function Connexion() {
           emailError.innerHTML = res.data.errors.email;
           passwordError.innerHTML = res.data.errors.password;
         } else {
-          window.location = "/userProfil";
+          window.location = "/Book";
         }
       })
       .catch((err) => {
