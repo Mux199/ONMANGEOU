@@ -28,8 +28,6 @@ export default function SignUpUser() {
     if (password != passwordConfirm) {
       passwordConfirmError.innerHTML =
         "les deux mots de passe ne correspondent pas";
-      console.log(password);
-      console.log(passwordConfirm);
     } else {
       passwordConfirmError.innerHTML = "";
       axios({
