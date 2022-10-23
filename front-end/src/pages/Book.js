@@ -430,6 +430,7 @@ const getSizes = _ => {
         </Row>
       </div>
     )}
+    
   </div>
 )
 
