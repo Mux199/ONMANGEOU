@@ -1,9 +1,11 @@
 import React from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function SignUpUser() {
+  const [active, setActive] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -18,36 +20,45 @@ export default function SignUpUser() {
     const nomError = document.querySelector(".nom.error");
     const prenomError = document.querySelector(".prenom.error");
     const telephoneError = document.querySelector(".telephone.error");
-    const passwordConfirm = document.querySelector(".passwordConfirm.error");
+    const passwordConfirmError = document.querySelector(
+      ".passwordConfirm.error"
+    );
     axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
-    axios({
-      method: "post",
-      url: `${process.env.REACT_APP_API_URL}api/user/register`,
-      withCredentials: true,
-      data: {
-        email,
-        password,
-        nom,
-        prenom,
-        telephone,
-      },
-    })
-      .then((res) => {
-        console.log("res");
-        console.log(res);
-        if (res.data.errors) {
-          emailError.innerHTML = res.data.errors.email;
-          passwordError.innerHTML = res.data.errors.password;
-          nomError.innerHTML = res.data.errors.nom;
-          prenomError.innerHTML = res.data.errors.prenom;
-          telephoneError.innerHTML = res.data.errors.telephone;
-        } else {
-          window.location = "/userProfil";
-        }
+
+    if (password != passwordConfirm) {
+      passwordConfirmError.innerHTML =
+        "les deux mots de passe ne correspondent pas";
+    } else {
+      passwordConfirmError.innerHTML = "";
+      axios({
+        method: "post",
+        url: `${process.env.REACT_APP_API_URL}api/user/register`,
+        withCredentials: true,
+        data: {
+          email,
+          password,
+          firstname: nom,
+          lastname: prenom,
+          telephone,
+          role: "user",
+        },
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => {
+          console.log(res);
+          if (res.data.errors) {
+            emailError.innerHTML = res.data.errors.email;
+            passwordError.innerHTML = res.data.errors.password;
+            nomError.innerHTML = res.data.errors.nom;
+            prenomError.innerHTML = res.data.errors.prenom;
+            telephoneError.innerHTML = res.data.errors.telephone;
+          } else {
+            window.location = "/userProfil";
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
   return (
     <div className="signUpUser">

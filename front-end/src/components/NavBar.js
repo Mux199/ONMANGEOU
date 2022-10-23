@@ -23,7 +23,7 @@ export default (props) => {
                 <button className="connexion">Se connecter</button>
               </Link>
               <Link to={"/choice"}>
-                <button className="account">Créer un compte</button>
+                <button className="signUpUser">Créer un compte</button>
               </Link>
             </Col>
           </Row>

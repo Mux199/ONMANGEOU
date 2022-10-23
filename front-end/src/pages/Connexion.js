@@ -11,7 +11,7 @@ export default function Connexion() {
     e.preventDefault();
     const emailError = document.querySelector(".email.error");
     const passwordError = document.querySelector(".password.error");
-    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+    axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
     axios({
       method: "post",
       url: `${process.env.REACT_APP_API_URL}api/user/login`,
@@ -26,7 +26,6 @@ export default function Connexion() {
         if (res.data.errors) {
           emailError.innerHTML = res.data.errors.email;
           passwordError.innerHTML = res.data.errors.password;
-          
         } else {
           window.location = "/userProfil";
         }
@@ -62,11 +61,9 @@ export default function Connexion() {
           />
         </FormGroup>
         <div className="password error"></div>
-        {/* <Link to={"/userProfil"}> */}
         <Button className="valid-btn" type="submit">
           Valider
         </Button>
-        {/* </Link> */}
       </Form>
     </div>
   );
