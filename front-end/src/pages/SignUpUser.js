@@ -93,7 +93,7 @@ export default function SignUpUser() {
             id="telephone"
             name="telephone"
             placeholder="Indiquez votre téléphone"
-            type="number"
+            type="text"
             onChange={(e) => setTelephone(e.target.value)}
             value={telephone}
           />

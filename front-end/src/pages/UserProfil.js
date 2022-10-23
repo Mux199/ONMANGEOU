@@ -6,6 +6,9 @@ import { Label } from "reactstrap";
 import { UidContext } from "../AppContext";
 import { Navigate } from "react-router-dom";
 
+/* <DatePicker 
+                selected={startDate} 
+                onChange={(e) => setStartDate(date)} />*/
 
 const styles = {
   display: "flex",
