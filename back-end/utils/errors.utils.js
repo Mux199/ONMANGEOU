@@ -1,14 +1,7 @@
 module.exports.signUpErrors = (err) => {
-  console.log("error utils");
-  console.log(err);
-  console.log("err.errors");
-  console.log(err.errors);
-  console.log("err.errors.email");
-  console.log(err.errors.email);
-  console.log(err.errors.email.properties.message);
-  console.log("err.message");
-
-  console.log(err.message);
+  // console.log(err.errors);
+  // console.log(err.errors.email);
+  // console.log(err.errors.email.properties.message);
 
   let errors = { email: "", password: "", nom: "", prenom: "", telephone: "" };
 

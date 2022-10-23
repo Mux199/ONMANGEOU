@@ -62,3 +62,5 @@ module.exports.addRestaurant = async (req, res) => {
     return res.status(500).send({ message: err });
   }
 };
+
+// delete restaurant / update restaurant

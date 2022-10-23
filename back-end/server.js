@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const userRoutes = require("./routes/user.routes");
 const restaurantRoutes = require("./routes/restaurant.routes");
+const planningRoutes = require("./routes/planning.routes");
+const reservationRoutes = require("./routes/reservation.routes");
 require("dotenv").config({ path: "./config/.env" });
 require("./config/db");
 const { checkUser, requireAuth } = require("./middleware/auth.middleware");
@@ -11,7 +13,7 @@ const cors = require("cors");
 const app = express();
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: "http://localhost:3000",
   credentials: true,
   allowedHeaders: [
     "sessionId",
@@ -19,7 +21,7 @@ const corsOptions = {
     "origin",
     "X-Requested-With",
     "Accept",
-    'Access-Control-Allow-Origin'
+    "Access-Control-Allow-Origin",
   ],
   exposedHeaders: ["sessionId"],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
@@ -40,6 +42,8 @@ app.get("/jwtid", requireAuth, (req, res) => {
 // routes
 app.use("/api/user", userRoutes);
 // app.use("/api/restaurant", restaurantRoutes);
+app.use("/api/planning", planningRoutes);
+app.use("/api/reservation", reservationRoutes);
 
 // server
 app.listen(process.env.PORT, () => {

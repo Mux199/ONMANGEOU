@@ -13,8 +13,8 @@ const planningSchema = new mongoose.Schema({
   },
   hours: {
     type: String,
-    maxlength: 20,
-    minlength: 2,
+    maxlength: 5,
+    minlength: 5,
     enum: [
       "12H00",
       "13H00",
@@ -28,7 +28,8 @@ const planningSchema = new mongoose.Schema({
   },
   places: {
     type: Map,
-    of: [Schema.Types.Mixed],
+    of: { String },
+    default: null,
   },
   reservations: {
     type: [mongoose.Schema.Types.ObjectId],
