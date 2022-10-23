@@ -1,7 +1,7 @@
 const UserModel = require("../models/user.model");
 const RestaurantModel = require("../models/restaurant.model");
 const jwt = require("jsonwebtoken");
-const { signUpUserErrors, signInErrors } = require("../utils/errors.utils");
+const { signUpErrors, signInErrors } = require("../utils/errors.utils");
 
 const maxAge = 3 * 24 * 24 * 60 * 1000; // 1 day
 const createToken = (id) => {
@@ -32,7 +32,9 @@ module.exports.signUpUser = async (req, res) => {
   } = req.body;
 
   console.log(req.body);
+  console.log("firstname");
 
+  console.log(firstname);
   try {
     // create user
     const user = await UserModel.create({
@@ -61,6 +63,7 @@ module.exports.signUpUser = async (req, res) => {
         telephone: restaurantTelephone,
       });
     }
+
     console.log(res);
     res.status(201).json({ user: user.email, role: user.role });
   } catch (err) {

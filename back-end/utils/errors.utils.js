@@ -1,15 +1,32 @@
-module.exports.signUpUserErrors = (err) => {
+module.exports.signUpErrors = (err) => {
+  console.log("error utils");
+  console.log(err);
+  console.log("err.errors");
+  console.log(err.errors);
+  console.log("err.errors.email");
+  console.log(err.errors.email);
+  console.log(err.errors.email.properties.message);
+  console.log("err.message");
+
+  console.log(err.message);
+
   let errors = { email: "", password: "", nom: "", prenom: "", telephone: "" };
 
-  if (err.message.includes("email")) errors.email = "Error email";
+  if (err.message.includes("email"))
+    errors.email = err.errors.email.properties.message;
 
-  if (err.message.includes("password")) errors.password = "Erreur password";
+  if (err.message.includes("password"))
+    errors.password = err.errors.password.properties.message;
 
-  if (err.message.includes("firstname")) errors.nom = "Erreur nom";
+  if (err.message.includes("firstname")) {
+    errors.nom = err.errors.firstname.properties.message;
+  }
 
-  if (err.message.includes("lastname")) errors.prenom = "Erreur prenom";
+  if (err.message.includes("lastname"))
+    errors.prenom = err.errors.lastname.properties.message;
 
-  if (err.message.includes("telephone")) errors.telephone = "Erreur telephone";
+  if (err.message.includes("telephone"))
+    errors.telephone = err.errors.telephone.properties.message;
 
   return errors;
 };
