@@ -6,33 +6,28 @@ import Restaurant from "../assets/restaurants.json";
 function Search() {
     ///////////////////////SEARCH ON A DATATABLE
     const [queryPrix, setQueryPrix] = useState(null);
-    const [querySpecialite, setQuerySpecialite] = useState(null);
+    const [querySpeciality, setQuerySpeciality] = useState(null);
     const [query, setQuery] = useState("");
 
     const search = (data) => {
-    /*if (querySpecialite && queryPrix) {
-        return data.filter(item => item.Spécialité.toLowerCase() === querySpecialite.toLowerCase() && item.prix.toLowerCase() === queryPrix.toLowerCase())
-    }
-    return [];
-}*/
 
         if (query) {
-            if (querySpecialite && query) {
-                if (querySpecialite && queryPrix && query) {
-                    return data.filter(item => item.Spécialité.toLowerCase() === querySpecialite.toLowerCase() && item.prix.toLowerCase() === queryPrix.toLowerCase() && item.name.toLowerCase().includes(query))
+            if (querySpeciality && query) {
+                if (querySpeciality && queryPrix && query) {
+                    return data.filter(item => item.speciality === querySpeciality && item.prix === queryPrix && item.name.toLowerCase().includes(query))
                 }
-                return data.filter(item => item.Spécialité.toLowerCase() === querySpecialite.toLowerCase() && item.name.toLowerCase().includes(query))
+                return data.filter(item => item.speciality === querySpeciality && item.name.toLowerCase().includes(query))
             }
             if (query && queryPrix) {
-                return data.filter(item => item.name.toLowerCase().includes(query) && item.prix.toLowerCase() === queryPrix.toLowerCase())
+                return data.filter(item => item.name.toLowerCase().includes(query) && item.prix === queryPrix)
             }
             return data.filter(item => item.name.toLowerCase().includes(query))
         }
-        if (querySpecialite) {
-            if (querySpecialite && queryPrix) {
-                return data.filter(item => item.Spécialité.toLowerCase() === querySpecialite.toLowerCase() && item.prix.toLowerCase() === queryPrix.toLowerCase())
+        if (querySpeciality) {
+            if (querySpeciality && queryPrix) {
+                return data.filter(item => item.speciality.toLowerCase() === querySpeciality.toLowerCase() && item.prix.toLowerCase() === queryPrix.toLowerCase())
             }
-            return data.filter(item => item.Spécialité.toLowerCase() === querySpecialite.toLowerCase())
+            return data.filter(item => item.speciality.toLowerCase() === querySpeciality.toLowerCase())
         }
         if (queryPrix) {
             return data.filter(item => item.prix.toLowerCase() === queryPrix.toLowerCase())
@@ -42,14 +37,14 @@ function Search() {
 
     };
 
-const specialites = Restaurant.map(rest => rest.Spécialité);
-const uniqueSpecialites = [...new Set(specialites)];
+const Specialitys = Restaurant.map(rest => rest.speciality);
+const uniqueSpecialitys = [...new Set(Specialitys)];
 const prix = Restaurant.map(rest => rest.prix);
 const uniquePrix = [...new Set(prix)];
    /* useEffect(() => {
         let data = [...Restaurant];
-        if(querySpecialite) {
-            data = Restaurant.filter(item => item.Spécialité === querySpecialite);
+        if(querySpeciality) {
+            data = Restaurant.filter(item => item.Speciality === querySpeciality);
         }
         if(queryPrix) {
             data = Restaurant.filter(item => item.prix === queryPrix);
@@ -58,7 +53,7 @@ const uniquePrix = [...new Set(prix)];
             data = Restaurant.filter(item => item.name.toLowerCase().includes(query))
         }
 
-    }, [queryPrix, query, querySpecialite]);*/
+    }, [queryPrix, query, querySpeciality]);*/
 
     return (
     <div className="app">
@@ -71,16 +66,15 @@ const uniquePrix = [...new Set(prix)];
         />
         <select
             onChange={(e) => {
-                setQuerySpecialite(e.target.value.toLowerCase())
-
+                setQuerySpeciality(e.target.value.toLowerCase())
             }}
         >
-            <option value="Tous">
+            <option value={"Tous"}>
                 Tous
             </option>
-            {uniqueSpecialites.map(specialite => (
-                <option value={specialite}>
-                    {specialite}
+            {uniqueSpecialitys.map(speciality => (
+                <option value={speciality}>
+                    {speciality}
                 </option>
             ))}
         </select>
@@ -88,8 +82,8 @@ const uniquePrix = [...new Set(prix)];
             onChange={(e) =>
                 setQueryPrix(e.target.value.toLowerCase())}
         >
-            <option value="Tous">
-                Tous
+            <option value={"Tous"}>
+            Tous
             </option>
             {uniquePrix.map(prix => (
                 <option value={prix}>
@@ -98,13 +92,10 @@ const uniquePrix = [...new Set(prix)];
             ))}
         </select>
 
+
         {<Table_Restaurant data={search(Restaurant)}/>}
     </div>
-)
-
-
-}
-
+)}
 ///////////////////// API SEARCH
 
 /*function Srch() {
