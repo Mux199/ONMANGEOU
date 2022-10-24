@@ -227,9 +227,6 @@ export default function SignUpPro(){
             </Input>
         </FormGroup>
 
-
-        
-
         <div>
          <Link to={"/ProProfil"}>
             <Button className="valid-btn" type="submit">
