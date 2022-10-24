@@ -72,9 +72,9 @@ const uniquePrix = [...new Set(prix)];
             <option value={"Tous"}>
                 Tous
             </option>
-            {uniqueSpecialitys.map(speciality => (
-                <option value={speciality}>
-                    {speciality}
+            {uniqueSpecialitys.map(specialitys => (
+                <option value={specialitys}>
+                    {specialitys}
                 </option>
             ))}
         </select>
