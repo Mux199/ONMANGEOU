@@ -20,15 +20,16 @@ export default function SignUpUser() {
     const nomError = document.querySelector(".nom.error");
     const prenomError = document.querySelector(".prenom.error");
     const telephoneError = document.querySelector(".telephone.error");
-    const passwordConfirm = document.querySelector(".passwordConfirm.error");
+    const passwordConfirmError = document.querySelector(
+      ".passwordConfirm.error"
+    );
     axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 
-    if (password == passwordConfirm) {
-      passwordError.innerHTML = "les deux mots de passe ne correspondent pas";
-      console.log("IF");
+    if (password != passwordConfirm) {
+      passwordConfirmError.innerHTML =
+        "les deux mots de passe ne correspondent pas";
     } else {
-      console.log("Else");
-      passwordError.innerHTML = "";
+      passwordConfirmError.innerHTML = "";
       axios({
         method: "post",
         url: `${process.env.REACT_APP_API_URL}api/user/register`,
@@ -92,7 +93,7 @@ export default function SignUpUser() {
             id="telephone"
             name="telephone"
             placeholder="Indiquez votre téléphone"
-            type="number"
+            type="text"
             onChange={(e) => setTelephone(e.target.value)}
             value={telephone}
           />
