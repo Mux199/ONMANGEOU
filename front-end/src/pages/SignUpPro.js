@@ -9,6 +9,8 @@ const styles = {
 export default function SignUpPro(){
     const [active, setActive] = useState(false);
     const [activeW, setActiveW] = useState(false);
+    const [lcol, setCol] = useState();
+    const [lrow, setRow] = useState();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -26,6 +28,14 @@ export default function SignUpPro(){
     }
     const hideWaiting=() =>{
       setActiveW(false);
+    }
+
+    const handleColChange = (e) => {
+      setCol(e.target.value)
+    }
+
+    const handleRowChange = (e) => {
+      setRow(e.target.value)
     }
 
 
@@ -206,26 +216,19 @@ export default function SignUpPro(){
         </FormGroup>
         <FormGroup>
             <Label>Nombre de rangée(lignes)</Label>
-            <Input type="number" name="number-place">
+            <Input type="number" name="numberLigne" value={lrow} onChange={handleRowChange}>
           
             </Input>
         </FormGroup>
         <FormGroup>
             <Label>Nombre de rangée(colonne)</Label>
-            <Input type="number" name="number-place">
+            <Input type="number" name="numberColonne" value={lcol} onChange={handleColChange}>
           
             </Input>
         </FormGroup>
 
-        <Container>
-          <Row>
-            <Col>
-            </Col>
 
-          </Row>
-
-        </Container>
-
+        
 
         <div>
          <Link to={"/ProProfil"}>

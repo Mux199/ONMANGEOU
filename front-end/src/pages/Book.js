@@ -118,7 +118,7 @@ const getTimes = _ => {
   return newTimes;
 };
 
-const reserve = async _ => {
+const reserver = async _ => {
   if (
     (booking.name.length === 0) |
     (booking.phone.length === 0) |
@@ -421,7 +421,7 @@ const getSizes = _ => {
               color="none"
               className="book-table-btn"
               onClick={_ => {
-                reserve();
+                reserver();
               }}
             >
               Réserver
