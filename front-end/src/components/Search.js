@@ -5,62 +5,60 @@ import Restaurant from "../assets/restaurants.json";
 
 function Search() {
     ///////////////////////SEARCH ON A DATATABLE
-    const [queryPrix, setQueryPrix] = useState("");
-    const [querySpecialite, setQuerySpecialite] = useState("Tous");
-    const [query, setQuery] = useState("Tous");
+    const [queryPrix, setQueryPrix] = useState(null);
+    const [querySpecialite, setQuerySpecialite] = useState(null);
+    const [query, setQuery] = useState("");
 
-   /* const search = (data) => {
-    if (querySpecialite && queryPrix) {
+    const search = (data) => {
+    /*if (querySpecialite && queryPrix) {
         return data.filter(item => item.Spécialité.toLowerCase() === querySpecialite.toLowerCase() && item.prix.toLowerCase() === queryPrix.toLowerCase())
     }
     return [];
 }*/
 
-/* if (query) {
-    if(querySpecialite && query) {
-        if (querySpecialite && queryPrix && query) {
-            return data.filter(item => item.Spécialité.toLowerCase() === querySpecialite.toLowerCase() && item.prix.toLowerCase() === queryPrix.toLowerCase() && item.name.toLowerCase().includes(query))
+        if (query) {
+            if (querySpecialite && query) {
+                if (querySpecialite && queryPrix && query) {
+                    return data.filter(item => item.Spécialité.toLowerCase() === querySpecialite.toLowerCase() && item.prix.toLowerCase() === queryPrix.toLowerCase() && item.name.toLowerCase().includes(query))
+                }
+                return data.filter(item => item.Spécialité.toLowerCase() === querySpecialite.toLowerCase() && item.name.toLowerCase().includes(query))
+            }
+            if (query && queryPrix) {
+                return data.filter(item => item.name.toLowerCase().includes(query) && item.prix.toLowerCase() === queryPrix.toLowerCase())
+            }
+            return data.filter(item => item.name.toLowerCase().includes(query))
         }
-        return data.filter(item => item.Spécialité.toLowerCase() === querySpecialite.toLowerCase() && item.name.toLowerCase().includes(query))
-    }
-    if (query && queryPrix){
-        return data.filter(item => item.name.toLowerCase().includes(query) && item.prix.toLowerCase() === queryPrix.toLowerCase())
-    }
-    return data.filter(item => item.name.toLowerCase().includes(query))
-}
-if (querySpecialite) {
-    if (querySpecialite && queryPrix){
-        return data.filter(item => item.Spécialité.toLowerCase() === querySpecialite.toLowerCase() && item.prix.toLowerCase() === queryPrix.toLowerCase())
-    }
-    return data.filter(item => item.Spécialité.toLowerCase() === querySpecialite.toLowerCase())
-}
-if (queryPrix) {
-    return data.filter(item => item.prix.toLowerCase() === queryPrix.toLowerCase())
-}
-return [];
-//data.filter((item) =>
-    //keys.some((key) =>
-        //item[key].toLowerCase().includes(query)))
+        if (querySpecialite) {
+            if (querySpecialite && queryPrix) {
+                return data.filter(item => item.Spécialité.toLowerCase() === querySpecialite.toLowerCase() && item.prix.toLowerCase() === queryPrix.toLowerCase())
+            }
+            return data.filter(item => item.Spécialité.toLowerCase() === querySpecialite.toLowerCase())
+        }
+        if (queryPrix) {
+            return data.filter(item => item.prix.toLowerCase() === queryPrix.toLowerCase())
+        }
+        return Restaurant;
 
-};*/
+
+    };
 
 const specialites = Restaurant.map(rest => rest.Spécialité);
 const uniqueSpecialites = [...new Set(specialites)];
 const prix = Restaurant.map(rest => rest.prix);
 const uniquePrix = [...new Set(prix)];
-    useEffect(() => {
-        let data = [...query];
+   /* useEffect(() => {
+        let data = [...Restaurant];
         if(querySpecialite) {
-            data = data.filter(item => item.Spécialité === querySpecialite);
+            data = Restaurant.filter(item => item.Spécialité === querySpecialite);
         }
         if(queryPrix) {
-            data = data.filter(item => item.prix === queryPrix);
+            data = Restaurant.filter(item => item.prix === queryPrix);
         }
         if(query) {
-            data = data.filter(item => item.name.toLowerCase().includes(query))
+            data = Restaurant.filter(item => item.name.toLowerCase().includes(query))
         }
 
-    }, [queryPrix, query, querySpecialite]);
+    }, [queryPrix, query, querySpecialite]);*/
 
     return (
     <div className="app">
@@ -100,7 +98,7 @@ const uniquePrix = [...new Set(prix)];
             ))}
         </select>
 
-        {<Table_Restaurant data={Restaurant}/>}
+        {<Table_Restaurant data={search(Restaurant)}/>}
     </div>
 )
 
