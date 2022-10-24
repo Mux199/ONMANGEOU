@@ -14,12 +14,12 @@ function Search() {
         if (query) {
             if (querySpeciality && query) {
                 if (querySpeciality && queryPrix && query) {
-                    return data.filter(item => item.speciality === querySpeciality && item.prix === queryPrix && item.name.toLowerCase().includes(query))
+                    return data.filter(item => item.speciality.toLowerCase() === querySpeciality.toLowerCase() && item.prix.toLowerCase() === queryPrix.toLowerCase() && item.name.toLowerCase().includes(query))
                 }
-                return data.filter(item => item.speciality === querySpeciality && item.name.toLowerCase().includes(query))
+                return data.filter(item => item.speciality.toLowerCase() === querySpeciality.toLowerCase() && item.name.toLowerCase().includes(query))
             }
             if (query && queryPrix) {
-                return data.filter(item => item.name.toLowerCase().includes(query) && item.prix === queryPrix)
+                return data.filter(item => item.name.toLowerCase().includes(query) && item.prix.toLowerCase() === queryPrix.toLowerCase())
             }
             return data.filter(item => item.name.toLowerCase().includes(query))
         }
