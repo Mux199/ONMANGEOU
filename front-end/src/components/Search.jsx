@@ -9,14 +9,16 @@ function Search() {
     const [queryPrix, setQueryPrix] = useState('');
     const [querySpeciality, setQuerySpeciality] = useState('');
     const [querymin, setQuerymin] = useState(1);
-    const [querymax, setQuerymax] = useState(3);
+    const [querymax, setQuerymax] = useState(5);
     const [query, setQuery] = useState("");
+
     const [filterData, setFilterData] = useState([]);
 
     const Specialitys = Restaurant.map(rest => rest.speciality);
     const uniqueSpecialitys = [...new Set(Specialitys)];
     const prix = Restaurant.map(rest => rest.prix);
     const uniquePrix = [...new Set(prix)];
+
 
     useEffect(() => {
         let result = [...Restaurant];
@@ -28,6 +30,8 @@ function Search() {
         if (queryPrix !== "Tous") {
             result = result.filter((item) => item.prix === queryPrix);
         }
+
+
 
         if (querySpeciality !== "Tous") {
             result = result.filter((item) => item.speciality === querySpeciality);
@@ -55,7 +59,7 @@ function Search() {
                 }}
             >
                 <option value={"Tous"}>
-                    Tous
+                    Spécialité
                 </option>
                 {uniqueSpecialitys.map(specialitys => (
                     <option value={specialitys}>
@@ -68,7 +72,7 @@ function Search() {
                     setQueryPrix(e.target.value)}
             >
                 <option value={"Tous"}>
-                    Tous
+                    Prix
                 </option>
                 {uniquePrix.map(prix => (
                     <option value={prix}>
@@ -76,38 +80,7 @@ function Search() {
                     </option>
                 ))}
             </select>
-            <ReactSlider
-                className={"slider"}
-                trackClassName={"tracker"}
-                defaultValue={(querymin,querymax)}
-                min={1000}
-                max={5000}
-                minDistance={50}
-                step={50}
 
-                withTracks={true}
-                pearling={true}
-                renderThumb={(props) => {
-                    return <div {...props} className = "thumb"></div>;
-                }}
-                renderTrack={(props) => {
-                    return <div {...props} className = "track"></div>;
-                }}
-                onChange={([querymin, querymax]) => {
-                    setQuerymax(querymax);
-                    setQuerymin(querymin);
-                }}
-            />
-            <div className="values-wrapper">
-                <p>
-                    Min Value:
-                    <span>{querymin}</span>
-                </p>
-                <p>
-                    Max Value:
-                    <span>{querymax}</span>
-                </p>
-            </div>
 
 
 
