@@ -17,14 +17,10 @@ const Table_Restaurant = ({ data }) => {
                         <td>{item.name}</td>
                         <td>{item.phone}</td>
                         <td>{item.adresse}</td>
-                        <td>{item.Spécialité}</td>
+                        <td>{item.speciality}</td>
                         <td>{item.prix}</td>
                         <td>{item.note}</td>
                         <td>{item.description}</td>
-                        <td>
-                            <img src={`${process.env.PUBLIC_URL}/assets/img/resto/${item.img}`}
-                              alt={`/asset/img/resto/${item.img}`}/>
-                        </td>
                     </tr>
                 ))}
                 </tbody>
