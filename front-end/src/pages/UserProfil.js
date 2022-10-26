@@ -1,15 +1,13 @@
 import React, { useContext } from "react";
 import SideBar from "../components/SideBar";
-import { DatePicker } from "reactstrap-date-picker";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { UidContext } from "../AppContext";
-import { Navigate } from "react-router-dom";
 import {Row,Col} from "reactstrap";
 
 const styles = {
   display: "flex",
-  justifyContent: "space-between",
+  justifyContent: "flex-start",
 };
 
 export default function UserProfil() {
@@ -20,7 +18,6 @@ export default function UserProfil() {
   };
   return (
     <div className="user-profil" style={styles}>
-      {/* {uid == null ? <Navigate to="/connexion" /> : <SideBar />} */}
       <div>
       <SideBar />
       </div>
@@ -33,9 +30,6 @@ export default function UserProfil() {
           </Row>
         </Link>
         </Col>
-
-
-       
       </div>
     </div>
   );
