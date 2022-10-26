@@ -2,8 +2,7 @@ import React, {useState,useEffect} from "react";
 import Table_Restaurant from "./Table_Restaurant";
 import "../styles/components/_search.scss"
 import Restaurant from "../assets/restaurants.json";
-import ReactSlider from "react-slider";
-
+import ReactSlider from "react-slider"
 
 function Search() {
     ///////////////////////SEARCH ON A DATATABLE
@@ -21,8 +20,9 @@ function Search() {
 
     useEffect(() => {
         let result = [...Restaurant];
+
         if (query) {
-            result = result.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()) || item.city.toLowerCase().includes(query.toLowerCase()) );
+            result = result.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()) || item.city.toLowerCase().includes(query.toLowerCase()));
         }
 
         if (queryPrix !== "Tous") {
@@ -30,62 +30,60 @@ function Search() {
         }
 
         if (querySpeciality !== "Tous") {
-            result = result.filter((item) => item.speciality=== querySpeciality);
+            result = result.filter((item) => item.speciality === querySpeciality);
         }
 
-        if(querymax && querymin){
+        if (querymax && querymin) {
             result = result.filter((item) => querymin <= item.note && item.note <= querymax);
+            setFilterData(result);
         }
-        setFilterData(result);
     }, [queryPrix, querySpeciality, query, querymax, querymin])
 
 
     return (
-    <div className="app">
-        <input
-            className="search"
-            placeholder="Trouvez votre Restaurant"
-            onChange={(e) => {
-                setQuery(e.target.value.toLowerCase())
-            }}
-        />
-        <select
-            onChange={(e) => {
-                setQuerySpeciality(e.target.value)
-            }}
-        >
-            <option value={"Tous"}>
-                Tous
-            </option>
-            {uniqueSpecialitys.map(specialitys => (
-                <option value={specialitys}>
-                    {specialitys}
+        <div className="app">
+            <input
+                className="search"
+                placeholder="Trouvez votre Restaurant"
+                onChange={(e) => {
+                    setQuery(e.target.value.toLowerCase())
+                }}
+            />
+            <select
+                onChange={(e) => {
+                    setQuerySpeciality(e.target.value)
+                }}
+            >
+                <option value={"Tous"}>
+                    Tous
                 </option>
-            ))}
-        </select>
-        <select
-            onChange={(e) =>
-                setQueryPrix(e.target.value)}
-        >
-            <option value={"Tous"}>
-            Tous
-            </option>
-            {uniquePrix.map(prix => (
-                <option value={prix}>
-                    {prix}
+                {uniqueSpecialitys.map(specialitys => (
+                    <option value={specialitys}>
+                        {specialitys}
+                    </option>
+                ))}
+            </select>
+            <select
+                onChange={(e) =>
+                    setQueryPrix(e.target.value)}
+            >
+                <option value={"Tous"}>
+                    Tous
                 </option>
-            ))}
-        </select>
-
-        <div className="container">
+                {uniquePrix.map(prix => (
+                    <option value={prix}>
+                        {prix}
+                    </option>
+                ))}
+            </select>
             <ReactSlider
                 className={"slider"}
                 trackClassName={"tracker"}
                 defaultValue={(querymin,querymax)}
-                min={1}
-                max={5}
-                minDistance={1}
-                step={1}
+                min={1000}
+                max={5000}
+                minDistance={50}
+                step={50}
 
                 withTracks={true}
                 pearling={true}
@@ -95,27 +93,27 @@ function Search() {
                 renderTrack={(props) => {
                     return <div {...props} className = "track"></div>;
                 }}
-                onChange={([min, max]) => {
-                    setQuerymax(max);
-                    setQuerymin(min);
+                onChange={([querymin, querymax]) => {
+                    setQuerymax(querymax);
+                    setQuerymin(querymin);
                 }}
             />
-        <div className="values-wrapper">
-            <p>
-                Min Value:
-                <span>{querymin}</span>
-            </p>
-            <p>
-                Max Value:
-                <span>{querymax}</span>
-            </p>
-        </div>
-        </div>
+            <div className="values-wrapper">
+                <p>
+                    Min Value:
+                    <span>{querymin}</span>
+                </p>
+                <p>
+                    Max Value:
+                    <span>{querymax}</span>
+                </p>
+            </div>
 
 
-        {<Table_Restaurant data={filterData}/>}
-    </div>
-)}
+
+            {<Table_Restaurant data={filterData}/>}
+        </div>
+    )}
 ///////////////////// API SEARCH
 
 /*function Srch() {
