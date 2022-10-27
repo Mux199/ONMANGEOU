@@ -1,37 +1,40 @@
 import React, {useState,useEffect} from "react";
 import Table_Restaurant from "./Table_Restaurant";
-import "../styles/components/_search.scss"
+import "../styles/components/_search.scss";
 import Restaurant from "../assets/restaurants.json";
-import ReactSlider from "react-slider"
+import ReactSlider from "react-slider";
 
 function Search() {
     ///////////////////////SEARCH ON A DATATABLE
-    const [queryPrix, setQueryPrix] = useState('');
-    const [querySpeciality, setQuerySpeciality] = useState('');
+    const [queryPrix, setQueryPrix] = useState("Tous");
+    const [querySpeciality, setQuerySpeciality] = useState("Tous");
     const [querymin, setQuerymin] = useState(1);
     const [querymax, setQuerymax] = useState(5);
     const [query, setQuery] = useState("");
-
+    const [queryCity, setQueryCity] = useState("Tous");
     const [filterData, setFilterData] = useState([]);
 
     const Specialitys = Restaurant.map(rest => rest.speciality);
     const uniqueSpecialitys = [...new Set(Specialitys)];
     const prix = Restaurant.map(rest => rest.prix);
     const uniquePrix = [...new Set(prix)];
-
+    const city = Restaurant.map(rest => rest.city);
+    const uniqueCity = [...new Set(city)];
 
     useEffect(() => {
         let result = [...Restaurant];
 
         if (query) {
-            result = result.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()) || item.city.toLowerCase().includes(query.toLowerCase()));
+            result = result.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()));
         }
 
         if (queryPrix !== "Tous") {
             result = result.filter((item) => item.prix === queryPrix);
         }
 
-
+        if (queryCity !== "Tous") {
+            result = result.filter((item) => item.city === queryCity);
+        }
 
         if (querySpeciality !== "Tous") {
             result = result.filter((item) => item.speciality === querySpeciality);
@@ -41,7 +44,7 @@ function Search() {
             result = result.filter((item) => querymin <= item.note && item.note <= querymax);
             setFilterData(result);
         }
-    }, [queryPrix, querySpeciality, query, querymax, querymin])
+    }, [queryPrix, querySpeciality, query, querymax, querymin, queryCity])
 
 
     return (
@@ -80,7 +83,51 @@ function Search() {
                     </option>
                 ))}
             </select>
+            <select
+                onChange={(e) =>
+                    setQueryCity(e.target.value)}
+            >
+                <option value={"Tous"}>
+                    Ville
+                </option>
+                {uniqueCity.map(city => (
+                    <option value={city}>
+                        {city}
+                    </option>
+                ))}
+            </select>
+            <ReactSlider
+                className={"slider"}
+                trackClassName={"tracker"}
+                defaultValue={(querymin,querymax)}
+                min={1000}
+                max={5000}
+                minDistance={50}
+                step={50}
 
+                withTracks={true}
+                pearling={true}
+                renderThumb={(props) => {
+                    return <div {...props} className = "thumb"></div>;
+                }}
+                renderTrack={(props) => {
+                    return <div {...props} className = "track"></div>;
+                }}
+                onChange={([querymin, querymax]) => {
+                    setQuerymax(querymax);
+                    setQuerymin(querymin);
+                }}
+            />
+            <div className="values-wrapper">
+                <p>
+                    Min Value:
+                    <span>{querymin}</span>
+                </p>
+                <p>
+                    Max Value:
+                    <span>{querymax}</span>
+                </p>
+            </div>
 
 
 
