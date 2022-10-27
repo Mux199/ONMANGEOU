@@ -101,38 +101,7 @@ function Search() {
                     </option>
                 ))}
             </select>
-            <ReactSlider
-                className={"slider"}
-                trackClassName={"tracker"}
-                defaultValue={(querymin,querymax)}
-                min={1000}
-                max={5000}
-                minDistance={50}
-                step={50}
-
-                withTracks={true}
-                pearling={true}
-                renderThumb={(props) => {
-                    return <div {...props} className = "thumb"></div>;
-                }}
-                renderTrack={(props) => {
-                    return <div {...props} className = "track"></div>;
-                }}
-                onChange={([querymin, querymax]) => {
-                    setQuerymax(querymax);
-                    setQuerymin(querymin);
-                }}
-            />
-            <div className="values-wrapper">
-                <p>
-                    Min Value:
-                    <span>{querymin}</span>
-                </p>
-                <p>
-                    Max Value:
-                    <span>{querymax}</span>
-                </p>
-            </div>
+            
 
 
 
