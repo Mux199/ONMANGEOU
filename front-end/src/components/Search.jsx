@@ -8,8 +8,8 @@ function Search() {
     ///////////////////////SEARCH ON A DATATABLE
     const [queryPrix, setQueryPrix] = useState("Tous");
     const [querySpeciality, setQuerySpeciality] = useState("Tous");
-    const [querymin, setQuerymin] = useState(1);
-    const [querymax, setQuerymax] = useState(5);
+    const [querymin, setQuerymin] = useState(1000);
+    const [querymax, setQuerymax] = useState(5000);
     const [query, setQuery] = useState("");
     const [queryCity, setQueryCity] = useState("Tous");
     const [filterData, setFilterData] = useState([]);
@@ -23,23 +23,28 @@ function Search() {
 
     useEffect(() => {
         let result = [...Restaurant];
-
+        //filtre barre de recherche (ville,nom)
         if (query) {
-            result = result.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()));
+            result = result.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()) || item.city.toLowerCase().includes(query.toLowerCase()));
         }
 
+        //filtre bouton Prix
         if (queryPrix !== "Tous") {
             result = result.filter((item) => item.prix === queryPrix);
         }
 
+        //filtre bouton Ville
         if (queryCity !== "Tous") {
             result = result.filter((item) => item.city === queryCity);
         }
 
+        //filtre bouton Spécialité
         if (querySpeciality !== "Tous") {
             result = result.filter((item) => item.speciality === querySpeciality);
         }
 
+
+        //filtre RangeSlider note
         if (querymax && querymin) {
             result = result.filter((item) => querymin <= item.note && item.note <= querymax);
             setFilterData(result);
@@ -96,10 +101,42 @@ function Search() {
                     </option>
                 ))}
             </select>
+            <div slider id="slider-distance">
+                <div>
+                    <div inverse-left style="width:70%;"></div>
+                    <div inverse-right style="width:70%;"></div>
+                    <div range style="left:0%;right:0%;"></div>
+                    <span thumb style="left:0%;"></span>
+                    <span thumb style="left:100%;"></span>
+                    <div sign style="left:0%;">
+                        <span id="value">0</span>
+                    </div>
+                    <div sign style="left:100%;">
+                        <span id="value">100</span>
+                    </div>
+                </div>
+                <input type="range" value="0" max="100" min="0" step="1" onInput="
+  this.value=Math.min(this.value,this.parentNode.childNodes[5].value-1);
+  let value = (this.value/parseInt(this.max))*100
+  var children = this.parentNode.childNodes[1].childNodes;
+  children[1].style.width=value+'%';
+  children[5].style.left=value+'%';
+  children[7].style.left=value+'%';children[11].style.left=value+'%';
+  children[11].childNodes[1].innerHTML=this.value;"/>
+
+                <input type="range" value="100" max="100" min="0" step="1" onInput="
+  this.value=Math.max(this.value,this.parentNode.childNodes[3].value-(-1));
+  let value = (this.value/parseInt(this.max))*100
+  var children = this.parentNode.childNodes[1].childNodes;
+  children[3].style.width=(100-value)+'%';
+  children[5].style.right=(100-value)+'%';
+  children[9].style.left=value+'%';children[13].style.left=value+'%';
+  children[13].childNodes[1].innerHTML=this.value;"/>
+            </div>
             <ReactSlider
                 className={"slider"}
                 trackClassName={"tracker"}
-                defaultValue={(querymin,querymax)}
+                defaultValue={(1000,5000)}
                 min={1000}
                 max={5000}
                 minDistance={50}
@@ -112,10 +149,6 @@ function Search() {
                 }}
                 renderTrack={(props) => {
                     return <div {...props} className = "track"></div>;
-                }}
-                onChange={([querymin, querymax]) => {
-                    setQuerymax(querymax);
-                    setQuerymin(querymin);
                 }}
             />
             <div className="values-wrapper">
