@@ -1,32 +1,3 @@
-
-.slider {
-    cursor: pointer;
-    width: 100%;
-}
-
-.track {
-    background-color: var(--gray);
-    height: 2px;
-}
-
-.track:nth-child(2) {
-    background-color: var(--char-coal);
-}
-
-.thumb {
-    width: 0.75rem;
-    height: 0.75rem;
-    background: var(--white);
-    border: 2px solid var(--char-coal);
-    border-radius: 50%;
-    cursor: pointer;
-    position: absolute;
-    top: -7px;
-}
-
-.values-wrapper {
-    margin-top: 2rem;
-}
 .search {
     .searchBar {
         padding:2rem 1rem;

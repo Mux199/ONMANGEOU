@@ -12,6 +12,7 @@ const Table_Restaurant = ({ data }) => {
                 <th>Note</th>
                 <th>Description</th>
                 <th>Image</th>
+                <th></th>
             </tr>
             {data.map((item) => (
                 <tr key={item.id}>
@@ -27,6 +28,7 @@ const Table_Restaurant = ({ data }) => {
                         <img height="144" width="256" src={`${process.env.PUBLIC_URL}/assets/img/resto/${item.img}`}
                              alt={`/asset/img/resto/${item.img}`}/>
                     </td>
+                    <button>{"Réservez"}</button>
                     </tr>
                     ))}
                 </tbody>
