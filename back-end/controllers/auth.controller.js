@@ -17,6 +17,7 @@ module.exports.signUpUser = async (req, res) => {
     firstname,
     lastname,
     telephone,
+    name,
     professional,
     RestaurantName,
     adresse,
@@ -49,7 +50,7 @@ module.exports.signUpUser = async (req, res) => {
     if (professional) {
       const restaurant = await RestaurantModel.create({
         user: user,
-        name: RestaurantName,
+        name,
         adresse,
         telephone,
         siret,

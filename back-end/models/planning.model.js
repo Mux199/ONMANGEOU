@@ -28,12 +28,8 @@ const planningSchema = new mongoose.Schema({
   },
   places: {
     type: Map,
-    of: { String },
+    of: [{ String }],
     default: null,
-  },
-  reservations: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: "reservation",
   },
 });
 

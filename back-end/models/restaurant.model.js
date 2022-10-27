@@ -22,9 +22,11 @@ const restaurantSchema = new mongoose.Schema({
     minlength: 5,
   },
   telephone: {
-    type: Number,
-    maxlength: 10,
+    type: String,
     minlength: 10,
+    maxlength: 15,
+    trim: true,
+    match: /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/,
   },
   siret: {
     type: Number,
@@ -66,7 +68,7 @@ const restaurantSchema = new mongoose.Schema({
   description: {
     type: String,
     required: true,
-    maxlength: 200,
+    maxlength: 250,
     minlength: 2,
   },
   type: {
