@@ -24,7 +24,7 @@ const Table_Restaurant = ({ data }) => {
                     <td>{item.note}</td>
                     <td>{item.description}</td>
                     <td>
-                        <img src={`${process.env.PUBLIC_URL}/assets/img/resto/${item.img}`}
+                        <img height="144" width="256" src={`${process.env.PUBLIC_URL}/assets/img/resto/${item.img}`}
                              alt={`/asset/img/resto/${item.img}`}/>
                     </td>
                     </tr>
