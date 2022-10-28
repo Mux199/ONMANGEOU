@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Calendar from "react-calendar";
 import Table from "./Table";
 import SideBar from "../components/SideBar";
 import {
@@ -34,7 +33,6 @@ export default (props) => {
 
   const [locations] = useState(["Intérieur", "Terrasse"]);
   const [times] = useState([
-    "11H",
     "12H",
     "13H",
     "14H",
@@ -124,11 +122,11 @@ const reserver = async _ => {
     (booking.phone.length === 0) |
     (booking.email.length === 0)
   ) {
-    console.log("Incomplete Details");
+    console.log("Informations incomplètes");
     setReservationError(true);
   } else {
     const datetime = getDate();
-    let res = await fetch("http://localhost:5000/reserve", {
+    let res = await fetch("http://localhost:5000/book", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -140,14 +138,14 @@ const reserver = async _ => {
       })
     });
     res = await res.text();
-    console.log("Reserved: " + res);
+    console.log("La révervation est faite: " + res);
     props.setPage(2);
   }
 };
 
   // Generating tables from available tables state
   const getTables = _ => {
-    console.log("Getting tables");
+    console.log("Choisir une table");
     if (getEmptyTables() > 0) {
       let tables = [];
       totalTables.forEach(table => {
