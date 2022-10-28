@@ -257,7 +257,7 @@ const getSizes = _ => {
         </p>
         <p className="selected-table">
           {selection.table.id
-            ? "You are booking table " + selection.table.name
+            ? "Vous reservez une table " + selection.table.name
             : null}
         </p>
 
