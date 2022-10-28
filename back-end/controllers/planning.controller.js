@@ -1,5 +1,6 @@
 const PlanningModel = require("../models/planning.model");
 const RestaurantModel = require("../models/restaurant.model");
+const UserModel = require("../models/user.model");
 
 // get planning /
 
@@ -86,6 +87,17 @@ module.exports.deletePlanning = (req, res) => {
 
 module.exports.updatePlanning = (req, res) => {
   ReservationModel.find(req.params.id, (err, docs) => {
+    if (!err) {
+      res.status(200).send(docs);
+    } else {
+      return res.status(404).send("id unknown : " + req.params.id);
+    }
+  });
+};
+
+module.exports.getAllPlanning = (req, res) => {
+  console.log(req.params);
+  PlanningModel.findOne({ restaurant: req.params.id }, (err, docs) => {
     if (!err) {
       res.status(200).send(docs);
     } else {

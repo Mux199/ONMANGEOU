@@ -95,9 +95,11 @@ const restaurantSchema = new mongoose.Schema({
   },
   col: {
     type: Number,
+    required: true,
   },
   row: {
     type: Number,
+    required: true,
   },
 });
 

@@ -26,9 +26,13 @@ const planningSchema = new mongoose.Schema({
       "22H00",
     ],
   },
+  // places: {
+  //   type: Map,
+  //   of: [mongoose.Schema.Types.Mixed],
+  //   default: null,
+  // },
   places: {
-    type: Map,
-    of: [{ String }],
+    type: Array,
     default: null,
   },
 });
