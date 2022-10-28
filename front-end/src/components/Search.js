@@ -1,5 +1,6 @@
+import { type } from "@testing-library/user-event/dist/type";
 import React from "react";
-import { Row, Col } from "reactstrap";
+import { Row, Col, Container,Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
 function Search() {
