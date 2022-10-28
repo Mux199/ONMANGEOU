@@ -2,7 +2,7 @@ const Table_Restaurant = ({ data }) => {
     return (
         <table>
             <tbody>
-            <tr>
+            <div className={"list-label"}>
                 <th>Nom</th>
                 <th>Numéro de Téléphone</th>
                 <th>Ville</th>
@@ -13,9 +13,10 @@ const Table_Restaurant = ({ data }) => {
                 <th>Description</th>
                 <th>Image</th>
                 <th></th>
-            </tr>
+            </div>
             {data.map((item) => (
                 <tr key={item.id}>
+                    <div className={"list-items"}>
                     <td>{item.name}</td>
                     <td>{item.phone}</td>
                     <td>{item.city}</td>
@@ -29,7 +30,9 @@ const Table_Restaurant = ({ data }) => {
                              alt={`/asset/img/resto/${item.img}`}/>
                     </td>
                     <button>{"Réservez"}</button>
+                </div>
                     </tr>
+
                     ))}
                 </tbody>
                 </table>
