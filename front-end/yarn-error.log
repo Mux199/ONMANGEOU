@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\ouda2\AppData\Local\node\corepack\yarn\1.22.19\bin\yarn.js add react-slider
+  C:\Program Files\nodejs\node.exe C:\Users\ouda2\AppData\Local\node\corepack\yarn\1.22.19\bin\yarn.js add @mui/material
 
 PATH: 
   C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Users\ouda2\AppData\Local\Microsoft\WindowsApps;C:\Users\ouda2\AppData\Local\GitHubDesktop\bin;C:\Users\ouda2\AppData\Roaming\npm
@@ -38,6 +38,7 @@ npm manifest:
       "react-pro-sidebar": "^0.7.1",
       "react-router-dom": "^6.4.1",
       "react-scripts": "5.0.1",
+      "react-slider": "^2.0.4",
       "react-uid": "^2.3.2",
       "reactstrap": "^9.1.4",
       "reactstrap-date-picker": "^1.0.4",
@@ -7750,6 +7751,13 @@ Lockfile:
     dependencies:
       "tslib" "^2.0.0"
   
+  "react-slider@^2.0.4":
+    "integrity" "sha512-sWwQD01n6v+MbeLCYthJGZPc0kzOyhQHyd0bSo0edg+IAxTVQmj3Oy4SBK65eX6gNwS9meUn6Z5sIBUVmwAd9g=="
+    "resolved" "https://registry.npmjs.org/react-slider/-/react-slider-2.0.4.tgz"
+    "version" "2.0.4"
+    dependencies:
+      "prop-types" "^15.8.1"
+  
   "react-transition-group@^4.4.2":
     "integrity" "sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g=="
     "resolved" "https://registry.npmjs.org/react-transition-group/-/react-transition-group-4.4.5.tgz"
@@ -7767,7 +7775,7 @@ Lockfile:
     dependencies:
       "tslib" "^2.0.0"
   
-  "react@*", "react@^16.3.0 || ^17.0.0 || ^18.0.0", "react@^16.3.0 || 17", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^18.0.0", "react@^18.2.0", "react@>= 16", "react@>=16.13.1", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0":
+  "react@*", "react@^16 || ^17 || ^18", "react@^16.3.0 || ^17.0.0 || ^18.0.0", "react@^16.3.0 || 17", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^18.0.0", "react@^18.2.0", "react@>= 16", "react@>=16.13.1", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0":
     "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
     "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
     "version" "18.2.0"
