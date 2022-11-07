@@ -4,6 +4,7 @@ import "../styles/components/_search.scss";
 import Restaurant from "../assets/restaurants.json";
 import Slider from '@mui/material/Slider';
 
+
 function Search() {
     ///////////////////////SEARCH ON A DATATABLE
     const [queryPrix, setQueryPrix] = useState("Tous");
@@ -126,8 +127,10 @@ function Search() {
                     </option>
                 ))}
             </select>
-
+<br/>
+<box className={"Slider_Note"}>
             <Slider
+
                 value={[querymin,querymax]}
                 min={1}
                 max={5}
@@ -141,7 +144,7 @@ function Search() {
                 marks={customMarks}
                 valueLabelDisplay="auto"
             />
-
+</box>
             {<Table_Restaurant data={filterData}/>}
         </div>
     )}
