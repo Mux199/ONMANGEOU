@@ -2,8 +2,7 @@ import React, {useState,useEffect} from "react";
 import Table_Restaurant from "./Table_Restaurant";
 import "../styles/components/_search.scss";
 import Restaurant from "../assets/restaurants.json";
-import Box from '@mui/material/Box';
-import {Slider} from "@material-ui/core";
+import Slider from '@mui/material/Slider';
 
 function Search() {
     ///////////////////////SEARCH ON A DATATABLE
@@ -14,7 +13,6 @@ function Search() {
     const [query, setQuery] = useState("");
     const [queryCity, setQueryCity] = useState("Tous");
     const [filterData, setFilterData] = useState(Restaurant);
-    const [value, setValue] = useState([1,5]);
 
     const Specialitys = Restaurant.map(rest => rest.speciality);
     const uniqueSpecialitys = [...new Set(Specialitys)];
@@ -74,7 +72,7 @@ function Search() {
         if (querymin && querymax) {
             result = result.filter((item) => querymin <= item.note && item.note <= querymax);
         }
-            setFilterData(result);
+        setFilterData(result);
 
     }, [queryPrix, querySpeciality, query, querymax, querymin, queryCity])
 
