@@ -9,13 +9,12 @@ function Search() {
     ///////////////////////SEARCH ON A DATATABLE
     const [queryPrix, setQueryPrix] = useState("Tous");
     const [querySpeciality, setQuerySpeciality] = useState("Tous");
-    const [querymin, setQuerymin] = useState(10);
-    const [querymax, setQuerymax] = useState(50);
-    const [queryNote, setQueryNote] = useState();
+    const [querymin, setQuerymin] = useState(1);
+    const [querymax, setQuerymax] = useState(5);
     const [query, setQuery] = useState("");
     const [queryCity, setQueryCity] = useState("Tous");
     const [filterData, setFilterData] = useState(Restaurant);
-    const [value, setValue] = useState([10,50]);
+    const [value, setValue] = useState([1,5]);
 
     const Specialitys = Restaurant.map(rest => rest.speciality);
     const uniqueSpecialitys = [...new Set(Specialitys)];
@@ -24,10 +23,7 @@ function Search() {
     const city = Restaurant.map(rest => rest.city);
     const uniqueCity = [...new Set(city)];
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-
+    //label pour Range Slider
     const customMarks = [
         {
             value: 1,
@@ -75,13 +71,7 @@ function Search() {
 
 
         //filtre RangeSlider note
-        if (queryNote) {
-            if (queryNote < querymax){
-                setQuerymin(queryNote)
-            }
-            if (queryNote => querymax){
-                setQuerymax(queryNote)
-            }
+        if (querymin && querymax) {
             result = result.filter((item) => querymin <= item.note && item.note <= querymax);
         }
             setFilterData(result);
@@ -138,17 +128,21 @@ function Search() {
                     </option>
                 ))}
             </select>
-            </*><Slider
-                style = {{}}
-                value={value}
+
+            <Slider
+                value={[querymin,querymax]}
                 min={1}
                 max={5}
-                onChange={(e) =>
-                    setQueryNote(e.target.value) &&
-                    handleChange(e,e)}
+                onChange={(event, newValue) =>
+                    setQuerymax(newValue[1])
+                }
+                onChangeCommitted={(event, newValue) =>
+                    setQuerymin(newValue[0])
+
+                }
                 marks={customMarks}
                 valueLabelDisplay="auto"
-            /><*/></>
+            />
 
             {<Table_Restaurant data={filterData}/>}
         </div>
