@@ -15,6 +15,7 @@ import {
 import { FaList } from "react-icons/fa";
 import { FiHome, FiLogOut, FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
 import { BiCog } from "react-icons/bi";
+import {AiOutlineHistory} from "react-icons/ai";
 
 
 import "react-pro-sidebar/dist/css/styles.css";
@@ -60,6 +61,8 @@ const Sidebar = () => {
               <MenuItem icon={<FaList />}>Informations personnelles</MenuItem>
              
               <MenuItem icon={<BiCog />}>Paramètres</MenuItem>
+
+              <MenuItem icon={<AiOutlineHistory/>}>Historique</MenuItem>
             </Menu>
           </SidebarContent>
           <SidebarFooter  onClick={handleClick}>
