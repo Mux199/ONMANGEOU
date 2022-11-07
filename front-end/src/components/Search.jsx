@@ -2,17 +2,20 @@ import React, {useState,useEffect} from "react";
 import Table_Restaurant from "./Table_Restaurant";
 import "../styles/components/_search.scss";
 import Restaurant from "../assets/restaurants.json";
-import ReactSlider from "react-slider";
+import Box from '@mui/material/Box';
+import {Slider} from "@material-ui/core";
 
 function Search() {
     ///////////////////////SEARCH ON A DATATABLE
     const [queryPrix, setQueryPrix] = useState("Tous");
     const [querySpeciality, setQuerySpeciality] = useState("Tous");
-    const [querymin, setQuerymin] = useState(1);
-    const [querymax, setQuerymax] = useState(5);
+    const [querymin, setQuerymin] = useState(10);
+    const [querymax, setQuerymax] = useState(50);
+    const [queryNote, setQueryNote] = useState();
     const [query, setQuery] = useState("");
     const [queryCity, setQueryCity] = useState("Tous");
-    const [filterData, setFilterData] = useState([]);
+    const [filterData, setFilterData] = useState(Restaurant);
+    const [value, setValue] = useState([10,50]);
 
     const Specialitys = Restaurant.map(rest => rest.speciality);
     const uniqueSpecialitys = [...new Set(Specialitys)];
@@ -20,6 +23,33 @@ function Search() {
     const uniquePrix = [...new Set(prix)];
     const city = Restaurant.map(rest => rest.city);
     const uniqueCity = [...new Set(city)];
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
+    const customMarks = [
+        {
+            value: 1,
+            label: '1⭐',
+        },
+        {
+            value: 2,
+            label: '2⭐',
+        },
+        {
+            value: 3,
+            label: '3⭐',
+        },
+        {
+            value: 4,
+            label: '4⭐',
+        },
+        {
+            value: 5,
+            label: '5⭐',
+        },
+    ];
 
     useEffect(() => {
         let result = [...Restaurant];
@@ -45,10 +75,17 @@ function Search() {
 
 
         //filtre RangeSlider note
-        if (querymax && querymin) {
+        if (queryNote) {
+            if (queryNote < querymax){
+                setQuerymin(queryNote)
+            }
+            if (queryNote => querymax){
+                setQuerymax(queryNote)
+            }
             result = result.filter((item) => querymin <= item.note && item.note <= querymax);
-            setFilterData(result);
         }
+            setFilterData(result);
+
     }, [queryPrix, querySpeciality, query, querymax, querymin, queryCity])
 
 
@@ -101,9 +138,17 @@ function Search() {
                     </option>
                 ))}
             </select>
-
-
-
+            </*><Slider
+                style = {{}}
+                value={value}
+                min={1}
+                max={5}
+                onChange={(e) =>
+                    setQueryNote(e.target.value) &&
+                    handleChange(e,e)}
+                marks={customMarks}
+                valueLabelDisplay="auto"
+            /><*/></>
 
             {<Table_Restaurant data={filterData}/>}
         </div>
