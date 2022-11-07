@@ -25,10 +25,10 @@ export default (props) => {
         </Row> */}
       </div>
       <Row style={{ display:'flex', justifyContent:'space-around', alignItems: 'center', margin:'20px 0 0 0'}}>
-          <Col md={6}>
-            <Search />
+          <Col>
+            <Search/>
           </Col>
-          <Col  md={6}>
+          <Col md={6}>
             <img src={require("../assets/img/Cover.jpg" )} style={{width:'100%'}}/>
           </Col>
       </Row>
