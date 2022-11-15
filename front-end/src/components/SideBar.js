@@ -15,10 +15,11 @@ import {
 import { FaList } from "react-icons/fa";
 import { FiHome, FiLogOut, FiArrowLeftCircle, FiArrowRightCircle } from "react-icons/fi";
 import { BiCog } from "react-icons/bi";
+import {AiOutlineHistory} from "react-icons/ai";
 
 
 import "react-pro-sidebar/dist/css/styles.css";
-import "../styles/pages/SideBar.css";
+import "../styles/pages/SideBar.scss";
 
 
 const Sidebar = () => {
@@ -39,8 +40,8 @@ const Sidebar = () => {
         <ProSidebar collapsed={menuCollapse} >
           <SidebarHeader>
           <div className="logotext">
-              {menuCollapse ? "Logo" : "Mon profil"}
-            </div>
+              {menuCollapse ? "Mon profil" : "Mon profil"}
+          </div>
             <div className="closemenu" onClick={menuIconClick}>
               {menuCollapse ? (
                 <FiArrowRightCircle/>
@@ -51,12 +52,17 @@ const Sidebar = () => {
           </SidebarHeader>
           <SidebarContent>
             <Menu iconShape="square">
-              <MenuItem active={true} icon={<FiHome />}>
+              <MenuItem icon={<FiHome />} >
+              {/* <Link to={'/'} style={{ color: 'black', fontWeight:'bold'}}> */}
+              <a href="/"></a>
                 Accueil
+             {/* </Link> */}
               </MenuItem>  
               <MenuItem icon={<FaList />}>Informations personnelles</MenuItem>
              
               <MenuItem icon={<BiCog />}>Paramètres</MenuItem>
+
+              <MenuItem icon={<AiOutlineHistory/>}>Historique</MenuItem>
             </Menu>
           </SidebarContent>
           <SidebarFooter  onClick={handleClick}>

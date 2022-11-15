@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Navbar, NavbarBrand, Row, Col } from "reactstrap";
-import Footer from "./Footer";
+import { Navbar, Row, Col } from "reactstrap";
 
 export default (props) => {
   return (

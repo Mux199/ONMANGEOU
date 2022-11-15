@@ -1,7 +1,6 @@
 import React from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function SignUpUser() {

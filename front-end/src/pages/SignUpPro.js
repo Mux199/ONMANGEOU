@@ -1,5 +1,5 @@
 import {React, useEffect,useRef,useState} from "react";
-import { Form, FormGroup, Label, Input, Button, Dropdown, DropdownMenu, DropdownItem } from "reactstrap";
+import { Form, FormGroup, Label, Input, Button,Container,Row,Col } from "reactstrap";
 import {Link} from "react-router-dom";
 import axios from "axios";
 const styles = {
@@ -9,6 +9,8 @@ const styles = {
 export default function SignUpPro(){
     const [active, setActive] = useState(false);
     const [activeW, setActiveW] = useState(false);
+    const [lcol, setCol] = useState();
+    const [lrow, setRow] = useState();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -26,6 +28,14 @@ export default function SignUpPro(){
     }
     const hideWaiting=() =>{
       setActiveW(false);
+    }
+
+    const handleColChange = (e) => {
+      setCol(e.target.value)
+    }
+
+    const handleRowChange = (e) => {
+      setRow(e.target.value)
     }
 
 
@@ -206,16 +216,38 @@ export default function SignUpPro(){
         </FormGroup>
         <FormGroup>
             <Label>Nombre de rangée(lignes)</Label>
-            <Input type="number" name="number-place">
+            <Input type="number" name="numberLigne" value={lrow} onChange={handleRowChange}>
           
             </Input>
         </FormGroup>
         <FormGroup>
-            <Label>Nombre de rangée(colonne)</Label>
-            <Input type="number" name="number-place">
+            <Label>Nombre de rangée(colonnes)</Label>
+            <Input type="number" name="numberColonne" value={lcol} onChange={handleColChange}>
           
             </Input>
         </FormGroup>
+        <FormGroup>
+          {
+            new Array(lrow).fill(0).map((_,i)=>{
+
+              new Array(lcol).fill(0).map((_,j)=>{
+              console.log(i, j)
+               return(
+               <Input 
+               type="number" name="">
+               </Input>
+             )})
+            })
+          }
+          <div>
+          <Label htmlFor="room">Disposition de la salle
+          </Label>
+          <Input 
+          type="number" name="">
+          </Input>
+          </div>
+        </FormGroup>
+        
         <div>
          <Link to={"/ProProfil"}>
             <Button className="valid-btn" type="submit">
