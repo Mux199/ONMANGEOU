@@ -12,6 +12,7 @@ const styles = {
     const ChooseDate = () => {
         const [startDate, setStartDate] = useState(new Date());
     }
+    const [queryPrix, setQueryPrix] = useState("Tous");
     return (
         <div className="pro-profil" style={styles}>
              <SideBar/>                
