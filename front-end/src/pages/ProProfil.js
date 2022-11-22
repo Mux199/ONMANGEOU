@@ -36,7 +36,7 @@ import Table_Reservation from "../components/Table_Reservation";
             />
             <select
                 onChange={(e) => {
-                    setQuerySpeciality(e.target.value)
+                    setQuery(e.target.value)
                 }}
             >
                 <option value={"Tous"}>
