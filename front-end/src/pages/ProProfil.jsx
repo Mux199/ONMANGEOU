@@ -1,17 +1,18 @@
 import {React, useEffect} from "react";
 import SideBar from "../components/SideBar"
-import { DatePicker } from "reactstrap-date-picker";
 import { useState } from "react";
 import { Label } from "reactstrap";
 import Restaurant from "../assets/restaurants.json";
 import Table_Reservation from "../components/Table_Reservation";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
  export default function ProProfil(){
-    const ChooseDate = () => {
-        const [startDate, setStartDate] = useState(new Date());
-    }
+     const ChooseDate = () => {
+         const [startDate, setStartDate] = useState("");}
 
     const [query, setQuery] = useState("Tous");
+     const [date, setQueryDate] = useState("Tous");
     const [filterData, setFilterData] = useState(Restaurant);
 
      useEffect(() => {
@@ -20,10 +21,12 @@ import Table_Reservation from "../components/Table_Reservation";
          if (query) {
              result = result.filter((item) =>  item.name.toLowerCase().includes(query.toLowerCase()));
          }
-
+         if (ChooseDate != "") {
+             result = result.filter((item) =>  item.name.toLowerCase().includes(query.toLowerCase()));
+         }
          setFilterData(result);
 
-     }, [query])
+     }, [query,ChooseDate])
 
     return (
         <div className="app">
@@ -36,19 +39,20 @@ import Table_Reservation from "../components/Table_Reservation";
             />
             <select
                 onChange={(e) => {
-                    setQuerySpeciality(e.target.value)
+                    setQueryDate(e.target.value)
                 }}
             >
                 <option value={"Tous"}>
                     Date
                 </option>
-                {uniqueDate.map(dates => (
-                    <option value={specialitys}>
-                        {specialitys}
+                {Date.map(dates => (
+                    <option value={date}>
+                        {date}
                     </option>
                 ))}
-
-            {<Table_Reservation data={filterData}/>}
+                </select>
+            <Table_Reservation data={filterData}/>
             </div>
+
         )
      }
