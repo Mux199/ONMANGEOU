@@ -31,7 +31,7 @@ export default function Table_Restaurant ({ data }) {
                             <TableCell component="th" scope="row">
                                 {item.name}
                             </TableCell>
-                            <TableCell>{item.nbre}</TableCell>
+                            <TableCell>{item.persons}</TableCell>
                             <TableCell>{item.phone}</TableCell>
                             <TableCell>{item.email}</TableCell>
                             <TableCell><button>Supprimez</button></TableCell>
