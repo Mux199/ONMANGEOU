@@ -8,8 +8,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
  export default function ProProfil(){
-     const ChooseDate = () => {
-         const [startDate, setStartDate] = useState("");}
+     const [startDate, setStartDate] = useState(new Date());
 
     const [query, setQuery] = useState("Tous");
      const [date, setQueryDate] = useState("Tous");
@@ -21,12 +20,12 @@ import 'react-datepicker/dist/react-datepicker.css';
          if (query) {
              result = result.filter((item) =>  item.name.toLowerCase().includes(query.toLowerCase()));
          }
-         if (ChooseDate != "") {
+         if (startDate != "") {
              result = result.filter((item) =>  item.name.toLowerCase().includes(query.toLowerCase()));
          }
          setFilterData(result);
 
-     }, [query,ChooseDate])
+     }, [query,startDate])
 
     return (
         <div className="app">
@@ -37,20 +36,12 @@ import 'react-datepicker/dist/react-datepicker.css';
                     setQuery(e.target.value.toLowerCase())
                 }}
             />
-            <select
-                onChange={(e) => {
-                    setQueryDate(e.target.value)
-                }}
-            >
-                <option value={"Tous"}>
-                    Date
-                </option>
-                {Date.map(dates => (
-                    <option value={date}>
-                        {date}
-                    </option>
-                ))}
-                </select>
+                <DatePicker>
+                    <DatePicker
+                        selected={startDate}
+                        onChange={date => setStartDate(date)}
+                    />
+                </DatePicker>
             <Table_Reservation data={filterData}/>
             </div>
 
