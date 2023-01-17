@@ -36,12 +36,11 @@ import 'react-datepicker/dist/react-datepicker.css';
                     setQuery(e.target.value.toLowerCase())
                 }}
             />
-                <DatePicker>
-                    <DatePicker
-                        selected={startDate}
-                        onChange={date => setStartDate(date)}
-                    />
-                </DatePicker>
+                <DatePicker
+                    selected={startDate}
+                    onChange={date => setStartDate(date)}
+                    minDate={new Date()}
+                />
             <Table_Reservation data={filterData}/>
             </div>
 
