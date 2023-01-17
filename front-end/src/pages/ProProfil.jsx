@@ -47,7 +47,8 @@ import Table_Reservation from "../components/Table_Reservation";
                         {specialitys}
                     </option>
                 ))}
+
             {<Table_Reservation data={filterData}/>}
             </div>
         )
-        }
+     }
