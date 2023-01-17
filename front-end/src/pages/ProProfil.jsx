@@ -43,11 +43,6 @@ import 'react-datepicker/dist/react-datepicker.css';
                     minDate={new Date()}
                     maxDate={new Date(2022, 11, 31)}
                 />
-            <DatePicker
-                selected={endDate}
-                onChange={date => setEndDate(date)}
-                minDate={new Date()}
-            />
             <Table_Reservation data={filterData}/>
             </div>
 
