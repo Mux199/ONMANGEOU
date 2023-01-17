@@ -16,10 +16,11 @@ import 'react-datepicker/dist/react-datepicker.css';
 
      useEffect(() => {
          let result = [...Reservation];
-         //filtre barre de recherche (id,nom)
+         //filtre barre de recherche (id,nom,mail,téléphone)
          if (query) {
              result = result.filter((item) =>  item.name.toLowerCase().includes(query.toLowerCase()) || item.id.toLowerCase().includes(query.toLowerCase()) || item.phone.toLowerCase().includes(query.toLowerCase()) || item.email.toLowerCase().includes(query.toLowerCase()) );
          }
+         //filtre
          if (startDate && endDate ) {
                      result = result.filter((item) => startDate <= item.date && item.date <= endDate);
          }
@@ -40,6 +41,7 @@ import 'react-datepicker/dist/react-datepicker.css';
                     selected={startDate}
                     onChange={date => setStartDate(date)}
                     minDate={new Date()}
+                    maxDate={new Date(2022, 11, 31)}
                 />
             <DatePicker
                 selected={endDate}
