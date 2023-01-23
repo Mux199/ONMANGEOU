@@ -13,7 +13,6 @@ import {
 } from "reactstrap";
 export default (props) => {
   const [totalTables, setTotalTables] = useState([]);
-
   const [selection, setSelection] = useState({
     table: {
       name: null,
@@ -24,6 +23,8 @@ export default (props) => {
     location: "Emplacement",
     size: 0
   });
+
+  let date = new Date()
 
   const [booking, setBooking] = useState({
     name: "",
@@ -272,6 +273,7 @@ const getSizes = _ => {
         <Row noGutters className="text-center align-items-center">
           <Col xs="12" sm="3">
             <input
+              min={date.toISOString().substr(0,10)}
               type="date"
               required="required"
               className="booking-dropdown"
