@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-export default function Table_Restaurant ({ data }) {
+export default function Table_Reservation ({ data }) {
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -31,7 +31,7 @@ export default function Table_Restaurant ({ data }) {
                             <TableCell component="th" scope="row">
                                 {item.name}
                             </TableCell>
-                            <TableCell>{item.nbre}</TableCell>
+                            <TableCell>{item.persons}</TableCell>
                             <TableCell>{item.phone}</TableCell>
                             <TableCell>{item.email}</TableCell>
                             <TableCell><button>Supprimez</button></TableCell>
