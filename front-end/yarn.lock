@@ -7741,7 +7741,7 @@ react-calendar@^3.9.0:
     merge-class-names "^1.1.1"
     prop-types "^15.6.0"
 
-react-datepicker@*:
+react-datepicker@^4.8.0:
   version "4.8.0"
   resolved "https://registry.npmjs.org/react-datepicker/-/react-datepicker-4.8.0.tgz"
   integrity sha512-u69zXGHMpxAa4LeYR83vucQoUCJQ6m/WBsSxmUMu/M8ahTSVMMyiyQzauHgZA2NUr9y0FUgOAix71hGYUb6tvg==
