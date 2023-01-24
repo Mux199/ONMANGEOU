@@ -34,7 +34,7 @@ export default function Table_Reservation ({ data }) {
                             <TableCell>{item.persons}</TableCell>
                             <TableCell>{item.phone}</TableCell>
                             <TableCell>{item.email}</TableCell>
-                            <TableCell><button>Supprimez</button></TableCell>
+                            <TableCell><button>Annulez</button></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
