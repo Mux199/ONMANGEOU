@@ -4,7 +4,6 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function SignUpUser() {
-  const [active, setActive] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -24,7 +23,7 @@ export default function SignUpUser() {
     );
     axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 
-    if (password != passwordConfirm) {
+    if (password !== passwordConfirm) {
       passwordConfirmError.innerHTML =
         "les deux mots de passe ne correspondent pas";
     } else {

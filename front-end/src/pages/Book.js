@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Table from "./Table";
-import SideBar from "../components/SideBar";
 import {
   Row,
   Col,
@@ -12,7 +11,7 @@ import {
   Button
 } from "reactstrap";
 export default (props) => {
-  const [totalTables, setTotalTables] = useState([]);
+  const [totalTables] = useState([]);
   const [selection, setSelection] = useState({
     table: {
       name: null,
@@ -229,12 +228,6 @@ const getSizes = _ => {
     });
     return newLocations;
   };
-
-  const styles = {
-    display: "flex",
-    justifyContent: "space-between",
-  };
-
 
   return (
     // <div className="app">

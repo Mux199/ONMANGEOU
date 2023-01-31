@@ -15,8 +15,10 @@ import SignUpPro from "./pages/SignUpPro";
 import ProProfil from "./pages/ProProfil";
 import Table from "./pages/Table";
 
-export default (_) => {
-  const [page, setPage] = useState(0);
+
+
+const App = () => {
+  const [setPage] = useState(0);
 
   return (
     <div>
@@ -38,4 +40,5 @@ export default (_) => {
       <Footer />
     </div>
   );
-};
+}
+export default App

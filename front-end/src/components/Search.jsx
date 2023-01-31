@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from "react";
-import Table_Restaurant from "./Table_Restaurant";
+import Table_Reservation from "./Table_Reservation";
 import "../styles/components/_search.scss";
 import Restaurant from "../assets/restaurants.json";
 import Slider from '@mui/material/Slider';

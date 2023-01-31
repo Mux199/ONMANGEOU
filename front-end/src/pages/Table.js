@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "reactstrap";
 
-export default props => {
+export default props => {  
   const getRow1 = _ => {
     let chairs = [];
     for (var i = 0; i < Math.ceil(props.chairs / 2); i++) {

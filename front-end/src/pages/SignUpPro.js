@@ -1,5 +1,5 @@
-import {React, useEffect,useRef,useState} from "react";
-import { Form, FormGroup, Label, Input, Button,Container,Row,Col } from "reactstrap";
+import {React,useState} from "react";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import {Link} from "react-router-dom";
 import axios from "axios";
 const styles = {
@@ -7,8 +7,8 @@ const styles = {
 }
 
 export default function SignUpPro(){
-    const [active, setActive] = useState(false);
-    const [activeW, setActiveW] = useState(false);
+    const [setActive] = useState(false);
+    const [setActiveW] = useState(false);
     const [lcol, setCol] = useState();
     const [lrow, setRow] = useState();
     const [email, setEmail] = useState("");
@@ -17,19 +17,6 @@ export default function SignUpPro(){
     const [nom, setNom] = useState("");
     const [prenom, setPrenom] = useState("");
     const [telephone, setTelephone] = useState("");
-    const showPrice =() =>{
-      setActive(true);
-    }
-    const hidePrice=() =>{
-      setActive(false);
-    }
-    const showWaiting =() =>{
-      setActiveW(true);
-    }
-    const hideWaiting=() =>{
-      setActiveW(false);
-    }
-
     const handleColChange = (e) => {
       setCol(e.target.value)
     }
@@ -46,7 +33,6 @@ export default function SignUpPro(){
         const nomError = document.querySelector(".nom.error");
         const prenomError = document.querySelector(".prenom.error");
         const telephoneError = document.querySelector(".telephone.error");
-        const passewordConfirm = document.querySelector(".passewordConfirm.error");
         axios( {
           method: "post",
           url:`${process.env.REACT_APP_API_URL}api/user/register`,

@@ -2,14 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Row, Col } from "reactstrap";
 
-export default (props) => {
+
+export default Navbar = () => {
   return (
     <div className="navbar">
       <Navbar light expand="md">
         <div
           className="nav-brand"
           onClick={(_) => {
-            props.setPage(0);
+            //props.setPage(0);
           }}
         >
           <Row>

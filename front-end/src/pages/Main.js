@@ -1,7 +1,7 @@
 import React from "react";
-import { Row, Col, Button } from "reactstrap";
+import { Row, Col} from "reactstrap";
 import Search from "../components/Search";
-export default (props) => {
+const Main = () => {
   return (
     <div >
       <div className="main">
@@ -25,3 +25,4 @@ export default (props) => {
       </div>
   );
 };
+export default Main
