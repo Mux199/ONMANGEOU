@@ -7,8 +7,6 @@ const styles = {
 }
 
 export default function SignUpPro(){
-    const [setActive] = useState(false);
-    const [setActiveW] = useState(false);
     const [lcol, setCol] = useState();
     const [lrow, setRow] = useState();
     const [email, setEmail] = useState("");

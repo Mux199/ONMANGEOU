@@ -1,6 +1,5 @@
 import {React, useEffect} from "react";
 import { useState } from "react";
-import { Label } from "reactstrap";
 import Table_Reservation from "../components/Table_Reservation";
 import Reservation from "../assets/reservation.json";
 import DatePicker from 'react-datepicker';
