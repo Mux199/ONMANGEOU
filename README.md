@@ -3,7 +3,7 @@ Cette application ONMANGEOU permet aux restaurateurs de presenter leur restauran
 Les clients peuvent réserver une table dans un des restaurants proposés sur le site.
 
 # Contributing
-Veuillez consulter le [guide de contribution][1] pour obtenir des instructions détaillées sur la façon de contribuer à notre projet.
+Veuillez consulter le [guide de contribution][1] pour obtenir des instructions détaillées sur la façon d'installer et de contribuer à notre projet.
 
 Nous acceptons [différents types de contributions][2], y compris certaines qui ne nécessitent pas que vous écriviez une seule ligne de code.
 
