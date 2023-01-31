@@ -1,10 +1,10 @@
 # ONMANGEOU
 Cette application ONMANGEOU permet aux restaurateurs de mettre leur restaurant et aux utilisateurs de réserver une table.
 
-Installation
+# Installation
  npm i
 
-Server Start
+# Server Start
 Partie front
  cd front_end
  npm start
