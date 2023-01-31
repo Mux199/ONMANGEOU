@@ -26,19 +26,6 @@ To get an overview of the project, read the [README][2]. Here are some resources
   git checkout -b your-new-branch-name
 
 
-## Installation
- npm i
-
-## Server Start
-### Partie front
- cd front-end
- npm start
-
-### Partie back
- cd back-end
- npm start
- 
-
 
  
  [1]: ./CODE_OF_CONDUCT.md (Code of Conduct)
