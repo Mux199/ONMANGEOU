@@ -13,6 +13,7 @@ import Choice from "./pages/Choice";
 import SignUpUser from "./pages/SignUpUser";
 import SignUpPro from "./pages/SignUpPro";
 import ProProfil from "./pages/ProProfil";
+import Table from "./pages/Table";
 
 export default (_) => {
   const [page, setPage] = useState(0);
@@ -32,6 +33,7 @@ export default (_) => {
         <Route path="*" element={<Main />} />
         <Route path="choice" element={<Choice />} />
         <Route path="proProfil" element={<ProProfil /> } />
+        <Route path="table" element={<Table /> } />
       </Routes>
       <Footer />
     </div>
