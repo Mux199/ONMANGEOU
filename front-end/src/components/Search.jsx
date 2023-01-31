@@ -139,7 +139,6 @@ function Search() {
                 }
                 onChangeCommitted={(event, newValue) =>
                     setQuerymin(newValue[0])
-
                 }
                 marks={customMarks}
                 valueLabelDisplay="auto"
