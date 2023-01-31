@@ -22,8 +22,6 @@ jobs:
     - name: setupfront
       working-directory: ./front-end
       run: ls 
-    - name: build
-      run: ls
-    #- run: npm ci
-    #- run: npm run build --if-present
-    #- run: npm test
+      run: npm ci #installer les dependances
+      run: npm run build --if-present
+      run: npm test
