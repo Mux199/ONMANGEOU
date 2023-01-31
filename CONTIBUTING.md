@@ -10,7 +10,6 @@ In this guide you will get an overview of the contribution workflow from opening
 
 To get an overview of the project, read the [README][2]. Here are some resources to help you get started with open source contributions:
 
-
 ## Make changes locally
 
 1. Fork the repository.
@@ -25,7 +24,8 @@ To get an overview of the project, read the [README][2]. Here are some resources
 
   ```bash
   git checkout -b your-new-branch-name
-  
+
+
 ## Installation
  npm i
 
@@ -38,6 +38,8 @@ To get an overview of the project, read the [README][2]. Here are some resources
  cd back-end
  npm start
  
+
+
  
  [1]: ./CODE_OF_CONDUCT.md (Code of Conduct)
  [2]: ./README.md (README)
