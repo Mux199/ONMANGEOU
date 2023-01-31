@@ -6,6 +6,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import {Link} from "react-router-dom";
+
 
 export default function Table_Restaurant ({ data }) {
     return (
@@ -41,7 +43,7 @@ export default function Table_Restaurant ({ data }) {
                             <TableCell>{item.adresse}</TableCell>
                             <TableCell><img height="144" width="256" src={`${process.env.PUBLIC_URL}/assets/img/resto/${item.img}`}
                                             alt={`/asset/img/resto/${item.img}`}/></TableCell>
-                            <TableCell><button>Réservez</button></TableCell>
+                            <TableCell><Link to={"/Book"}> <button >Réservez</button></Link> </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
