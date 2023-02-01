@@ -10,7 +10,8 @@ import {
   Input,
   Button
 } from "reactstrap";
-export default (props) => {
+//export default (props) => {
+  const Book = () => {
   const [totalTables] = useState([]);
   const [selection, setSelection] = useState({
     table: {
@@ -139,7 +140,7 @@ const reserver = async _ => {
     });
     res = await res.text();
     console.log("La révervation est faite: " + res);
-    props.setPage(2);
+    Book.setPage(2);
   }
 };
 
@@ -428,3 +429,5 @@ const getSizes = _ => {
 )
 
 };
+
+export default Book
