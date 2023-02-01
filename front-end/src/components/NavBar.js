@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Navbar, Row, Col } from "reactstrap";
 
-
-export default Navbar = () => {
+const NavBar = () => {
   return (
     <div className="navbar">
       <Navbar light expand="md">
@@ -32,3 +31,5 @@ export default Navbar = () => {
     </div>
   );
 };
+
+export default NavBar
