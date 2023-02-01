@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from "react";
-import Table_Restaurant from "./Table_Restaurant"
+import TABLE_RESTAURANT from "./TABLE_RESTAURANT"
 import "../styles/components/_search.scss";
 import Restaurant from "../assets/restaurants.json";
 import Slider from '@mui/material/Slider';
@@ -144,7 +144,7 @@ function Search() {
                 valueLabelDisplay="auto"
             />
 </box>
-            {<Table_Restaurant data={filterData}/>}
+            {<TABLE_RESTAURANT data={filterData}/>}
         </div>
     )}
 ///////////////////// API SEARCH

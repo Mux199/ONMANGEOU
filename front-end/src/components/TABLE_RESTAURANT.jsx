@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 import {Link} from "react-router-dom";
 
 
-const Table_Restaurant = ({ data }) => {
+const TABLE_RESTAURANT = ({ data }) => {
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -51,4 +51,4 @@ const Table_Restaurant = ({ data }) => {
         </TableContainer>
     );
 }
-export default Table_Restaurant
+export default TABLE_RESTAURANT
