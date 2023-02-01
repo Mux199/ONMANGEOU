@@ -1,6 +1,6 @@
 import {React, useEffect} from "react";
 import { useState } from "react";
-import Table_Reservation from "../components/Table_Reservation";
+import TABLE_RESERVATION from "../components/TABLE_RESERVATION";
 import Reservation from "../assets/reservation.json";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -24,7 +24,7 @@ import 'react-datepicker/dist/react-datepicker.css';
          }
          setFilterData(result);
 
-     }, [query,startDate, endDate, Reservation])
+     }, [query,startDate, endDate,])
 
     return (
         <div className="app">
@@ -56,7 +56,7 @@ import 'react-datepicker/dist/react-datepicker.css';
                 minDate={startDate}
                 dateFormat="dd/MM/yyyy"
             />
-            <Table_Reservation data={filterData}/>
+            <TABLE_RESERVATION data={filterData}/>
             </div>
 
         )
