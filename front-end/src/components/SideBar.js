@@ -54,7 +54,7 @@ const Sidebar = () => {
             <Menu iconShape="square">
               <MenuItem icon={<FiHome />} >
               {/* <Link to={'/'} style={{ color: 'black', fontWeight:'bold'}}> */}
-              <a href="/"></a>
+              <a href="/"> </a>
                 Accueil
              {/* </Link> */}
               </MenuItem>  
