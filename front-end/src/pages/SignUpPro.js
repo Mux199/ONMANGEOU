@@ -210,7 +210,7 @@ export default function SignUpPro(){
           
             </Input>
         </FormGroup>
-        <FormGroup>
+        {/*<FormGroup>
           {
             new Array(lrow).fill(0).map((_,i)=>{
 
@@ -230,7 +230,7 @@ export default function SignUpPro(){
           type="number" name="">
           </Input>
           </div>
-        </FormGroup>
+        </FormGroup>  */}
         
         <div>
          <Link to={"/ProProfil"}>
