@@ -1,9 +1,9 @@
+
 # ONMANGEOU
 Cette application ONMANGEOU permet aux restaurateurs de presenter leur restaurant, avec une petite description et le nombre de clients qu'ils peuvent accueillir.
 Les clients peuvent réserver une table dans un des restaurants proposés sur le site.
 
-
-
+Ce projet a été réalisé par Muriella ZAFINDRAMOMA, Reine MANOUNOU, Oudeinguene SEYCHA
 
 ## Premiers pas
 
