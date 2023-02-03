@@ -4,7 +4,18 @@ Les clients peuvent réserver une table dans un des restaurants proposés sur le
 
 
 
-## Installation
+
+## Premiers pas
+
+Fork le repository
+
+Clone le repository forké
+
+ git clone https://github.com/your_username/program
+ 
+ 
+ ## Installation
+ 
  npm i
 
 ## Server Start
