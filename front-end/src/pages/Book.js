@@ -32,7 +32,7 @@ import {
     email: ""
   });
 
-  const [locations] = useState(["Intérieur", "Terrasse"]);
+  const [locations] = useState(["Intérieur"]);
   const [times] = useState([
     "12H",
     "13H",
@@ -180,7 +180,7 @@ const reserver = async _ => {
 const getSizes = _ => {
   let newSizes = [];
 
-  for (let i = 1; i < 8; i++) {
+  for (let i = 1; i < 11; i++) {
     newSizes.push(
       <DropdownItem
         key={i}
