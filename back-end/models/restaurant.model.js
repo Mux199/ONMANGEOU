@@ -114,6 +114,11 @@ const restaurantSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  img: {
+    type: String,
+    maxlength: 40,
+    minlength: 2,
+  },
 });
 
 restaurantSchema.plugin(uniqueValidator);

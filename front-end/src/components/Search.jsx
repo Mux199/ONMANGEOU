@@ -22,7 +22,6 @@ function Search() {
     const [querymax, setQuerymax] = useState(5);
     const [query, setQuery] = useState("");
     const [queryCity, setQueryCity] = useState("Tous");
-    const [filterData2, setFilterData2] = useState(Restaurant);
     const [filterData, setFilterData] = useState(restausData);
 
     const Specialitys = restausData.map(rest => rest.type);

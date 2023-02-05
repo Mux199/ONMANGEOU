@@ -10,6 +10,12 @@ const createToken = (id) => {
   });
 };
 
+let img = [
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+  23, 24, 25, 26, 27, 28, 29, 30,
+];
+const getRandomValue = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
 module.exports.signUpUser = async (req, res) => {
   const {
     email,
@@ -48,6 +54,7 @@ module.exports.signUpUser = async (req, res) => {
     });
     //create professional if role
     if (role == "professional") {
+      let img = getRandomValue().toString() + ".jpg";
       const restaurant = await RestaurantModel.create({
         user,
         name,
@@ -64,6 +71,7 @@ module.exports.signUpUser = async (req, res) => {
         description,
         postalCode,
         cols,
+        img,
         rows,
         telephone: telephoneRestaurant,
       });
