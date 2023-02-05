@@ -18,8 +18,18 @@ const reservationSchema = new mongoose.Schema(
     },
     hours: {
       type: String,
-      maxlength: 20,
-      minlength: 2,
+      maxlength: 5,
+      minlength: 5,
+      enum: [
+        "12H00",
+        "13H00",
+        "14H00",
+        "18H00",
+        "19H00",
+        "20H00",
+        "21H00",
+        "22H00",
+      ],
     },
     time: {
       type: String,
@@ -27,14 +37,18 @@ const reservationSchema = new mongoose.Schema(
       required: true,
     },
     nbClients: {
-      type: Integer,
+      type: Number,
       required: true,
-      max: 150,
+      max: 10,
       min: 1,
     },
     statut: {
       type: String,
-      enum: ["confirmer", "en attente", "refus"],
+      enum: ["confirmé", "annulé"],
+    },
+    note: {
+      type: Number,
+      default: 5,
     },
   },
   { timestamps: true }

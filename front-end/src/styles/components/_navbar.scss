@@ -1,10 +1,35 @@
 .navbar {
-    color: aqua;
-    background-color: #fece00;
-   
-
+    //color: aqua;
+    background-color: white;
+    position: sticky;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+    border-bottom: solid 1px #fece00;
 }
 
+
+.nav-container {
+    height: 60px;
+    width: 100%;
+    justify-content: space-between;
+
+}
+.nav-container,.nav-links {
+    display: flex;
+}
+
+ul {
+    list-style: none;
+}
+
+.logo {
+    width: fit-content;
+}
+
+.nav-links {
+
+}
 a{
 color: black;
 text-decoration:none;
