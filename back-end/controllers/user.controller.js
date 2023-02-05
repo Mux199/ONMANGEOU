@@ -191,3 +191,49 @@ module.exports.unlikeRestaurant = async (req, res) => {
     return res.status(500).send({ message: err });
   }
 };
+
+module.exports.follow = async (req, res) => {
+  let user;
+  try {
+    user = await UserModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        $addToSet: {
+          likes: req.body.idToFollow,
+        },
+      },
+      { new: true, upsert: true, setDefaultsOnInsert: true }
+    );
+  } catch (err) {
+    return res.status(500).json({ message: err });
+  }
+
+  if (!user) {
+    return res.status(400).json({ message: "User not found" });
+  }
+
+  return res.status(201).json(user.toJSON({ select: "-password" }));
+};
+
+module.exports.unfollow = async (req, res) => {
+  let user;
+  try {
+    user = await UserModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        $pull: {
+          likes: req.body.idToUnFollow,
+        },
+      },
+      { new: true, upsert: true, setDefaultsOnInsert: true }
+    );
+  } catch (err) {
+    return res.status(500).json({ message: err });
+  }
+
+  if (!user) {
+    return res.status(400).json({ message: "User not found" });
+  }
+
+  return res.status(201).json(user.toJSON({ select: "-password" }));
+};

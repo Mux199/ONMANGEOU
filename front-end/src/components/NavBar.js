@@ -23,11 +23,16 @@ export default (props) => {
         {uid && uid._id != null ? (
           <ul className="nav-links">
             {uid.role == "user" && (
-              <li>
-                <Link to={"/userProfil"}>
-                  <button className="profil">Profil</button>
-                </Link>
-              </li>
+              <>
+                <li>
+                  <button className="like">J'aime</button>
+                </li>
+                <li>
+                  <Link to={"/userProfil"}>
+                    <button className="profil">Profil</button>
+                  </Link>
+                </li>
+              </>
             )}
             {uid.role == "professional" && (
               <li>
