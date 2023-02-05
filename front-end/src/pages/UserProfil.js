@@ -34,11 +34,15 @@ export default function UserProfil() {
   if (uid._id == null || uid.role == "" || uid.role != "user") {
     <Navigate to="/connexion" />;
   }*/
-
+  let util = "user";
   return (
     <div className="user-profil" style={styles}>
       <div>
-        <SideBar navigation={navigation} setNavigation={setNavigation} />
+        <SideBar
+          navigation={navigation}
+          setNavigation={setNavigation}
+          util={util}
+        />
       </div>
 
       <div className="">

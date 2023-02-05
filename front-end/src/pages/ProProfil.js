@@ -16,7 +16,7 @@ export default function ProProfil() {
   const ChooseDate = () => {
     const [startDate, setStartDate] = useState(new Date());
   };
-  const [info, setInfo] = useState("Réservation");
+  const [navigation, setNavigation] = useState("Réservation");
 
   const [uid, setUid] = useContext(UidContext);
   const userData = useSelector((state) => state.rootReducer.userReducer);
@@ -36,21 +36,27 @@ export default function ProProfil() {
     <Navigate to="/connexion" />;
   }
 */
+  let util = "pro";
+
   return (
     <div className="pro-profil" style={styles}>
       <div>
-        <SideBar info={info} setInfo={setInfo} />
+        <SideBar
+          navigation={navigation}
+          setNavigation={setNavigation}
+          util={util}
+        />
       </div>
 
       <div className="">
         <Col className="">
-          {info == "Réservation" && (
+          {navigation == "Réservation" && (
             <div>
               <h1>Reservation</h1>
               <Row>Reservation</Row>
             </div>
           )}
-          {info == "Informations personnelles" && (
+          {navigation == "Informations personnelles" && (
             <div>
               <h1>Informations personnelles</h1>
               <Row>
@@ -85,8 +91,8 @@ export default function ProProfil() {
               </Row>
             </div>
           )}
-          {console.log(info)}
-          {info == "Historique" && (
+          {console.log(navigation)}
+          {navigation == "Historique" && (
             <div>
               <h1>Historique</h1>
               <Row>Historique</Row>

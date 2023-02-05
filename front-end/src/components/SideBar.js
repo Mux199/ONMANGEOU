@@ -29,7 +29,7 @@ import "../styles/components/SideBar.scss";
 const Sidebar = (props) => {
   const [menuCollapse, setMenuCollapse] = useState(false);
   const { navigation, setNavigation } = props;
-
+  const util = props;
   const menuIconClick = () => {
     menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
   };
@@ -74,11 +74,13 @@ const Sidebar = (props) => {
                   Informations personnelles
                 </MenuItem>
               </div>
-              <div>
-                <MenuItem icon={<FiHeart />} onClick={handleMessage}>
-                  Favoris
-                </MenuItem>
-              </div>
+              {util == "user" && (
+                <div>
+                  <MenuItem icon={<FiHeart />} onClick={handleMessage}>
+                    Favoris
+                  </MenuItem>
+                </div>
+              )}
               <div>
                 <MenuItem icon={<AiOutlineHistory />} onClick={handleMessage}>
                   Historique
