@@ -26,7 +26,7 @@ export default function Table_Restaurant ({ data }) {
                 <TableBody>
                     {data.map((item) => (
                         <TableRow
-                            key={item.id}
+                            key={item._id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row">
