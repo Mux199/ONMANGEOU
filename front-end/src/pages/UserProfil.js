@@ -1,9 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import SideBar from "../components/SideBar";
-import { Link } from "react-router-dom";
 import { UidContext } from "../components/AppContext";
 import { Row, Col } from "reactstrap";
-import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTelephone } from "../store/reducers/actions/user.actions";
 import { dateParser } from "../components/Utils";
