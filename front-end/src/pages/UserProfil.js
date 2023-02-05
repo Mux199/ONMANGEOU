@@ -17,13 +17,14 @@ export default function UserProfil() {
   const [uid, setUid] = useContext(UidContext);
 
   const userData = useSelector((state) => state.rootReducer.userReducer);
+  const dispatch = useDispatch();
+
   const ChooseDate = () => {
     const [startDate, setStartDate] = useState(new Date());
   };
   const [navigation, setNavigation] = useState("Réservation");
   const [telephone, setTelephone] = useState("");
   const [updateForm, setUpdateForm] = useState(false);
-  const dispatch = useDispatch();
 
   const handleUpdate = () => {
     dispatch(updateTelephone(userData._id, telephone));

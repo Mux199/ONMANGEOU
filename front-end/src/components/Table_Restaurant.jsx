@@ -34,10 +34,10 @@ export default function Table_Restaurant ({ data }) {
                             </TableCell>
                             <TableCell>{item.note}⭐</TableCell>
                             <TableCell>{item.city}</TableCell>
-                            <TableCell>{item.prix}</TableCell>
-                            <TableCell>{item.speciality}</TableCell>
+                            <TableCell>{item.priceRange}</TableCell>
+                            <TableCell>{item.type}</TableCell>
                             <TableCell>{item.description}</TableCell>
-                            <TableCell>{item.phone}</TableCell>
+                            <TableCell>{item.telephone}</TableCell>
                             <TableCell>{item.adresse}</TableCell>
                             <TableCell><img height="144" width="256" src={`${process.env.PUBLIC_URL}/assets/img/resto/${item.img}`}
                                             alt={`/asset/img/resto/${item.img}`}/></TableCell>
