@@ -6,6 +6,7 @@ import { Row, Col } from "reactstrap";
 import { Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTelephone } from "../store/reducers/actions/user.actions";
+import { dateParser } from "../components/Utils";
 
 const styles = {
   display: "flex",
@@ -106,11 +107,16 @@ export default function UserProfil() {
                 <Col>Membre depuis le :</Col>
               </Row>
               <Row>
-                <Col>{userData.createdAt.substr(0, 10)}</Col>
+                <Col>{dateParser(userData.createdAt)}</Col>
               </Row>
             </div>
           )}
-          {console.log(navigation)}
+          {navigation == "Favoris" && (
+            <div>
+              <h1>Favoris</h1>
+              <Row>Favoris</Row>
+            </div>
+          )}
           {navigation == "Historique" && (
             <div>
               <h1>Historique</h1>

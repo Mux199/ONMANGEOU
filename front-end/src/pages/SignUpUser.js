@@ -54,7 +54,7 @@ export default function SignUpUser() {
             firstnameError.innerHTML = res.data.errors.firstname;
             telephoneError.innerHTML = res.data.errors.telephone;
           } else {
-            //window.location = "/userProfil";
+            window.location = "/connexion";
           }
         })
         .catch((err) => {

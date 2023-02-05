@@ -38,31 +38,6 @@ module.exports.blockRestaurant = async (req, res) => {
   }
 };
 
-module.exports.addRestaurant = async (req, res) => {
-  try {
-    await RestaurantModel.findOneAndUpdate(
-      { _id: req.params.id },
-      {
-        $set: {
-          blocked: req.body.blocked,
-        },
-      },
-      {
-        new: true,
-        upsert: true,
-        runValidators: true,
-        context: "query",
-      }
-    )
-      .then((docs) =>
-        res.status(200).send({ message: "user block : " + req.body.blocked })
-      )
-      .catch((err) => res.status(500).send({ message: err }));
-  } catch (err) {
-    return res.status(500).send({ message: err });
-  }
-};
-
 module.exports.updateRestaurant = async (req, res) => {
   try {
     await RestaurantModel.findOneAndUpdate(

@@ -18,6 +18,7 @@ import {
   FiLogOut,
   FiArrowLeftCircle,
   FiArrowRightCircle,
+  FiHeart,
 } from "react-icons/fi";
 import { BiCog } from "react-icons/bi";
 import { AiOutlineHistory } from "react-icons/ai";
@@ -68,13 +69,21 @@ const Sidebar = (props) => {
                   Réservation
                 </MenuItem>
               </div>
-              <MenuItem icon={<BiCog />} onClick={handleMessage}>
-                Informations personnelles
-              </MenuItem>
-
-              <MenuItem icon={<AiOutlineHistory />} onClick={handleMessage}>
-                Historique
-              </MenuItem>
+              <div>
+                <MenuItem icon={<BiCog />} onClick={handleMessage}>
+                  Informations personnelles
+                </MenuItem>
+              </div>
+              <div>
+                <MenuItem icon={<FiHeart />} onClick={handleMessage}>
+                  Favoris
+                </MenuItem>
+              </div>
+              <div>
+                <MenuItem icon={<AiOutlineHistory />} onClick={handleMessage}>
+                  Historique
+                </MenuItem>
+              </div>
             </Menu>
           </SidebarContent>
           <SidebarFooter onClick={handleClick}>

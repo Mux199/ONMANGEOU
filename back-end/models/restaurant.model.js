@@ -74,6 +74,10 @@ const restaurantSchema = new mongoose.Schema({
     type: Array,
     required: true,
   },
+  weekdays: {
+    type: Array,
+    required: true,
+  },
   description: {
     type: String,
     required: true,

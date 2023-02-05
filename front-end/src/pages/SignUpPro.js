@@ -39,6 +39,26 @@ export default function SignUpPro() {
 
   const [nbplaces, setnbplaces] = useState(1);
 
+  const weekdays = [
+    "Lundi",
+    "Mardi",
+    "Mercredi",
+    "Jeudi",
+    "Vendredi",
+    "Samedi",
+    "Dimanche",
+  ];
+  const [selectedWeekdays, setSelectedWeekdays] = useState([]);
+
+  const handleCheckboxChange = (e) => {
+    const weekday = e.target.value;
+    if (selectedWeekdays.includes(weekday)) {
+      setSelectedWeekdays(selectedWeekdays.filter((d) => d !== weekday));
+    } else {
+      setSelectedWeekdays([...selectedWeekdays, weekday]);
+    }
+  };
+
   const handleSpecialityChange = (event) => {
     setSpeciality(event.target.value);
   };
@@ -108,6 +128,8 @@ export default function SignUpPro() {
     const siretError = document.querySelector(".siret.error");
     const cityError = document.querySelector(".city.error");
     const adresseError = document.querySelector(".adresse.error");
+    const weekdayError = document.querySelector(".weekday.error");
+
     const postalCodeError = document.querySelector(".postalCode.error");
     const telephoneRestaurantError = document.querySelector(
       ".telephoneRestaurant.error"
@@ -227,6 +249,13 @@ export default function SignUpPro() {
       siretError.innerHTML = "";
     }
 
+    if (selectedWeekdays.length == 0) {
+      weekdayError.innerHTML =
+        "Il faut selectionner au moins 1 jour d'ouverture";
+    } else {
+      weekdayError.innerHTML = "";
+    }
+
     if (!errors) {
       passwordConfirmError.innerHTML = "";
       axios({
@@ -250,6 +279,7 @@ export default function SignUpPro() {
           postalCode,
           adresse,
           nbplaces,
+          weekdays: selectedWeekdays,
           city,
           siret,
           description: restaurantDescription,
@@ -265,7 +295,7 @@ export default function SignUpPro() {
             firstnameError.innerHTML = res.data.errors.firstname;
             telephoneError.innerHTML = res.data.errors.telephone;
           } else {
-            window.location = "/ProProfil";
+            window.location = "/connexion";
           }
         })
         .catch((err) => {
@@ -397,7 +427,23 @@ export default function SignUpPro() {
           />
         </FormGroup>
         <div className="restaurantDescription error"></div>
-
+        <FormGroup>
+          <Label>Jours d'ouverture du restaurant</Label>
+          {weekdays.map((weekday) => (
+            <Label key={weekday}>
+              <Input
+                type="checkbox"
+                value={weekday}
+                checked={selectedWeekdays.includes(weekday)}
+                onChange={handleCheckboxChange}
+              />
+              {weekday}
+            </Label>
+          ))}
+          <br />
+          <p>Selected weekdays: {selectedWeekdays.join(", ")}</p>
+        </FormGroup>
+        <div className="weekday error"></div>
         <FormGroup>
           <Label>Adresse du restaurant</Label>
           <Input
