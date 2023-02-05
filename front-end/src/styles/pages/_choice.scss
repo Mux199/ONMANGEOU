@@ -1,3 +1,10 @@
 .choice{
 background-color: #fece00;
+display:grid;
+}
+.choice:first-child{
+    align-items: center;
+}
+#Restaurateur{
+    align-items: center;
 }

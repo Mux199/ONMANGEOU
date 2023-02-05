@@ -15,8 +15,8 @@ module.exports.userInfo = (req, res) => {
 
 module.exports.updateUser = async (req, res) => {
   try {
-    await UserModel.findOneAndUpdate(
-      { _id: req.params.id },
+    await UserModel.findByIdAndUpdate(
+      req.params.id,
       {
         $set: {
           telephone: req.body.telephone,
@@ -25,8 +25,7 @@ module.exports.updateUser = async (req, res) => {
       {
         new: true,
         upsert: true,
-        runValidators: true,
-        context: "query",
+        setDefaultsOnInsert: true,
       }
     )
       .select("-password")
@@ -142,7 +141,7 @@ module.exports.blockUser = async (req, res) => {
 
 module.exports.deleteUser = async (req, res) => {
   try {
-    await UserModel.deleteOne({ _id: req.params.id }).exec();
+    await UserModel.remove({ _id: req.params.id }).exec();
     res.status(200).json({ message: "successfully deleted. " });
   } catch (err) {
     return res.status(500).send({ message: err });
@@ -191,4 +190,50 @@ module.exports.unlikeRestaurant = async (req, res) => {
   } catch (err) {
     return res.status(500).send({ message: err });
   }
+};
+
+module.exports.follow = async (req, res) => {
+  let user;
+  try {
+    user = await UserModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        $addToSet: {
+          likes: req.body.idToFollow,
+        },
+      },
+      { new: true, upsert: true, setDefaultsOnInsert: true }
+    );
+  } catch (err) {
+    return res.status(500).json({ message: err });
+  }
+
+  if (!user) {
+    return res.status(400).json({ message: "User not found" });
+  }
+
+  return res.status(201).json(user.toJSON({ select: "-password" }));
+};
+
+module.exports.unfollow = async (req, res) => {
+  let user;
+  try {
+    user = await UserModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        $pull: {
+          likes: req.body.idToUnFollow,
+        },
+      },
+      { new: true, upsert: true, setDefaultsOnInsert: true }
+    );
+  } catch (err) {
+    return res.status(500).json({ message: err });
+  }
+
+  if (!user) {
+    return res.status(400).json({ message: "User not found" });
+  }
+
+  return res.status(201).json(user.toJSON({ select: "-password" }));
 };

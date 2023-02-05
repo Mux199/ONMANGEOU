@@ -5,7 +5,7 @@ module.exports.getAllRestaurant = async (req, res) => {
   return res.status(200).json(restaurants);
 };
 
-module.exports.restaurantInfo = (req, res) => {
+module.exports.getRestaurant = (req, res) => {
   console.log(req.params);
   RestaurantModel.findById(req.params.id, (err, docs) => {
     if (!err) res.status(200).send(docs);
@@ -38,7 +38,7 @@ module.exports.blockRestaurant = async (req, res) => {
   }
 };
 
-module.exports.addRestaurant = async (req, res) => {
+module.exports.updateRestaurant = async (req, res) => {
   try {
     await RestaurantModel.findOneAndUpdate(
       { _id: req.params.id },
@@ -59,6 +59,8 @@ module.exports.addRestaurant = async (req, res) => {
       )
       .catch((err) => res.status(500).send({ message: err }));
   } catch (err) {
-    return res.status(500).send({ message: err });
+    return res.status(400).send(err);
   }
 };
+
+// delete restaurant

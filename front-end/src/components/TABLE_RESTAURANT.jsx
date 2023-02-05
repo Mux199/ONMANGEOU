@@ -28,7 +28,7 @@ const TABLE_RESTAURANT = ({ data }) => {
                 <TableBody>
                     {data.map((item) => (
                         <TableRow
-                            key={item.id}
+                            key={item._id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row">
@@ -36,10 +36,10 @@ const TABLE_RESTAURANT = ({ data }) => {
                             </TableCell>
                             <TableCell>{item.note}⭐</TableCell>
                             <TableCell>{item.city}</TableCell>
-                            <TableCell>{item.prix}</TableCell>
-                            <TableCell>{item.speciality}</TableCell>
+                            <TableCell>{item.priceRange}</TableCell>
+                            <TableCell>{item.type}</TableCell>
                             <TableCell>{item.description}</TableCell>
-                            <TableCell>{item.phone}</TableCell>
+                            <TableCell>{item.telephone}</TableCell>
                             <TableCell>{item.adresse}</TableCell>
                             <TableCell><img height="144" width="256" src={`${process.env.PUBLIC_URL}/assets/img/resto/${item.img}`}
                                             alt={`/asset/img/resto/${item.img}`}/></TableCell>

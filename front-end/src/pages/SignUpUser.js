@@ -7,23 +7,27 @@ export default function SignUpUser() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [nom, setNom] = useState("");
-  const [prenom, setPrenom] = useState("");
+  const [lastname, setLastName] = useState("");
+  const [firstname, setFirstName] = useState("");
   const [telephone, setTelephone] = useState("");
 
   const handleRegister = (e) => {
     e.preventDefault();
     const emailError = document.querySelector(".email.error");
     const passwordError = document.querySelector(".password.error");
-    const nomError = document.querySelector(".nom.error");
-    const prenomError = document.querySelector(".prenom.error");
+    const lastnameError = document.querySelector(".lastname.error");
+    const firstnameError = document.querySelector(".firstname.error");
     const telephoneError = document.querySelector(".telephone.error");
     const passwordConfirmError = document.querySelector(
       ".passwordConfirm.error"
     );
+    let formValid = false;
     axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 
-    if (password !== passwordConfirm) {
+    if (firstname.length == 0) {
+    }
+
+    if (password != passwordConfirm) {
       passwordConfirmError.innerHTML =
         "les deux mots de passe ne correspondent pas";
     } else {
@@ -35,8 +39,8 @@ export default function SignUpUser() {
         data: {
           email,
           password,
-          firstname: nom,
-          lastname: prenom,
+          firstname,
+          lastname,
           telephone,
           role: "user",
         },
@@ -46,11 +50,11 @@ export default function SignUpUser() {
           if (res.data.errors) {
             emailError.innerHTML = res.data.errors.email;
             passwordError.innerHTML = res.data.errors.password;
-            nomError.innerHTML = res.data.errors.nom;
-            prenomError.innerHTML = res.data.errors.prenom;
+            lastnameError.innerHTML = res.data.errors.lastname;
+            firstnameError.innerHTML = res.data.errors.firstname;
             telephoneError.innerHTML = res.data.errors.telephone;
           } else {
-            window.location = "/userProfil";
+            window.location = "/connexion";
           }
         })
         .catch((err) => {
@@ -62,29 +66,29 @@ export default function SignUpUser() {
     <div className="signUpUser">
       <Form onSubmit={handleRegister}>
         <FormGroup>
-          <Label htmlFor="nom">Nom</Label>
+          <Label htmlFor="lastname">Nom</Label>
           <Input
-            id="nom"
-            name="nom"
+            id="lastname"
+            name="lastname"
             placeholder="Insérez votre nom"
             type="text"
-            onChange={(e) => setNom(e.target.value)}
-            value={nom}
+            onChange={(e) => setLastName(e.target.value)}
+            value={lastname}
           />
         </FormGroup>
-        <div className="nom error"></div>
+        <div className="lastname error"></div>
         <FormGroup>
-          <Label htmlFor="prenom">Prénom</Label>
+          <Label htmlFor="firstname">Prénom</Label>
           <Input
-            id="prenom"
-            name="prenom"
+            id="firstname"
+            name="firstname"
             placeholder="Insérez votre prénom"
             type="text"
-            onChange={(e) => setPrenom(e.target.value)}
-            value={prenom}
+            onChange={(e) => setFirstName(e.target.value)}
+            value={firstname}
           />
         </FormGroup>
-        <div className="prenom error"></div>
+        <div className="firstname error"></div>
         <FormGroup>
           <Label htmlFor="telephone">Téléphone</Label>
           <Input
