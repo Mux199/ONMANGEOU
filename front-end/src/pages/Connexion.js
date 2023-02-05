@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import { UidContext } from "../components/AppContext";
 
 export default function Connexion() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  //const [{ uid, setUid }, setContext] = useContext(UidContext);
+  const [uid, setUid] = useContext(UidContext);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -22,12 +25,29 @@ export default function Connexion() {
       },
     })
       .then((res) => {
-        console.log(res);
+        setUid({ _id: res.data._id, role: res.data.role });
         if (res.data.errors) {
           emailError.innerHTML = res.data.errors.email;
           passwordError.innerHTML = res.data.errors.password;
         } else {
-          window.location = "/Book";
+          if (res.data._id) {
+            switch (res.data.role) {
+              case "user":
+                console.log("user");
+                window.location = "/userProfil";
+                break;
+              case "professional":
+                console.log("professional");
+                window.location = "/proProfil";
+                break;
+              case "admin":
+                window.location = "/adminProfil";
+                break;
+              default:
+                console.log("connexion");
+                window.location = "/connexion";
+            }
+          }
         }
       })
       .catch((err) => {

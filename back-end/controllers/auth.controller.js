@@ -18,8 +18,7 @@ module.exports.signUpUser = async (req, res) => {
     lastname,
     telephone,
     name,
-    professional,
-    RestaurantName,
+    role,
     adresse,
     siret,
     city,
@@ -28,14 +27,14 @@ module.exports.signUpUser = async (req, res) => {
     waiting,
     priceRange,
     places,
+    nbplaces,
     description,
-    restaurantTelephone,
+    cols,
+    rows,
+    telephoneRestaurant,
   } = req.body;
 
-  console.log(req.body);
-  console.log("firstname");
-
-  console.log(firstname);
+  console.log(role);
   try {
     // create user
     const user = await UserModel.create({
@@ -44,31 +43,31 @@ module.exports.signUpUser = async (req, res) => {
       firstname,
       lastname,
       telephone,
-      role: professional ? "professional" : "user",
+      role,
     });
-    //create professional if exist
-    if (professional) {
+    //create professional if role
+    if (role == "professional") {
       const restaurant = await RestaurantModel.create({
-        user: user,
+        user,
         name,
         adresse,
-        telephone,
         siret,
         city,
         type,
+        name,
         waiting,
         priceRange,
         places,
+        nbplaces,
         description,
         postalCode,
-        telephone: restaurantTelephone,
+        cols,
+        rows,
+        telephone: telephoneRestaurant,
       });
     }
-
-    console.log(res);
     res.status(201).json({ user: user.email, role: user.role });
   } catch (err) {
-    console.log(err);
     const errors = signUpErrors(err);
     res.status(200).json({ errors });
   }
@@ -86,7 +85,7 @@ module.exports.signIn = async (req, res) => {
     }
     const token = createToken(user._id);
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge });
-    res.status(200).json({ user: user._id, role: user.role });
+    res.status(200).json({ _id: user._id, role: user.role });
   } catch (err) {
     const errors = signInErrors(err);
     res.status(200).json({ errors });
@@ -95,5 +94,5 @@ module.exports.signIn = async (req, res) => {
 
 module.exports.logout = (req, res) => {
   res.cookie("jwt", "", { maxAge: 1 });
-  res.status(302).redirect("/");
+  res.redirect("/");
 };

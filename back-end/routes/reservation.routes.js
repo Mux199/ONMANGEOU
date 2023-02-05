@@ -1,9 +1,16 @@
 const router = require("express").Router();
 const reservationController = require("../controllers/reservation.controller");
 
-// restaurant
-// router.get("/", reservationController.getAllRestaurant);
-// router.get("/:id", reservationController.restaurantInfo);
-router.post("/addReservation", reservationController.addReservation);
+// reservation routes
+router.get(
+  "/getUserReservation/:id",
+  reservationController.getAllUserReservation
+);
+router.get(
+  "/getRestaurantReservation/:id",
+  reservationController.getAllRestaurantReservation
+);
 
+router.post("/addReservation", reservationController.addReservation);
+router.put("/cancelReservation", reservationController.cancelReservation);
 module.exports = router;

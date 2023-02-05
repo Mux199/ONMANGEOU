@@ -36,12 +36,14 @@ app.use(cookieParser());
 //jwt
 app.get("*", checkUser);
 app.get("/jwtid", requireAuth, (req, res) => {
-  res.status(200).send(res.locals.user._id);
+  res
+    .status(200)
+    .send({ _id: res.locals.user._id, role: res.locals.user.role });
 });
 
 // routes
 app.use("/api/user", userRoutes);
-// app.use("/api/restaurant", restaurantRoutes);
+app.use("/api/restaurant", restaurantRoutes);
 app.use("/api/planning", planningRoutes);
 app.use("/api/reservation", reservationRoutes);
 

@@ -39,12 +39,16 @@ const reservationSchema = new mongoose.Schema(
     nbClients: {
       type: Number,
       required: true,
-      max: 150,
+      max: 10,
       min: 1,
     },
     statut: {
       type: String,
-      enum: ["confirmer", "en attente", "refus"],
+      enum: ["confirmé", "annulé"],
+    },
+    note: {
+      type: Number,
+      default: 5,
     },
   },
   { timestamps: true }

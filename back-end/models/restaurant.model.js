@@ -29,10 +29,12 @@ const restaurantSchema = new mongoose.Schema({
     match: /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/,
   },
   siret: {
-    type: Number,
+    type: String,
     maxlength: 14,
     minlength: 14,
     required: true,
+    trim: true,
+    match: /^\d{14}$/,
   },
   city: {
     type: String,
@@ -42,10 +44,11 @@ const restaurantSchema = new mongoose.Schema({
     trim: false,
   },
   postalCode: {
-    type: Number,
+    type: String,
     required: true,
     maxlength: 5,
     minlength: 5,
+    match: /^\d{5}$/,
   },
   waiting: {
     type: String,
@@ -61,6 +64,12 @@ const restaurantSchema = new mongoose.Schema({
     minlength: 2,
     enum: ["pas cher", "moyen", "cher"],
   },
+  nbplaces: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 400,
+  },
   places: {
     type: Array,
     required: true,
@@ -69,7 +78,7 @@ const restaurantSchema = new mongoose.Schema({
     type: String,
     required: true,
     maxlength: 250,
-    minlength: 2,
+    minlength: 5,
   },
   type: {
     type: String,
@@ -79,7 +88,7 @@ const restaurantSchema = new mongoose.Schema({
     enum: [
       "japonais",
       "français",
-      "américain",
+      "americain",
       "italien",
       "chinois",
       "indien",
@@ -93,11 +102,11 @@ const restaurantSchema = new mongoose.Schema({
     max: 5,
     default: 5,
   },
-  col: {
+  cols: {
     type: Number,
     required: true,
   },
-  row: {
+  rows: {
     type: Number,
     required: true,
   },

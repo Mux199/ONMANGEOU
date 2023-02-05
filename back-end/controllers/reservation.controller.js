@@ -2,14 +2,153 @@ const ReservationModel = require("../models/reservation.model");
 const PlanningModel = require("../models/planning.model");
 const RestaurantModel = require("../models/restaurant.model");
 
-// user choose place
-module.exports.addReservation = async (req, res) => {
-  const { restaurant, user, nbClients, place, date, hour } = req.body;
+const flattenArray = (matrix) => {
+  let flattened = [];
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+      flattened.push([[i, j], matrix[i][j]]);
+    }
+  }
+  return flattened.sort((a, b) => a[1] - b[1]);
+};
 
-  console.log(req.params);
-  // resa on cherche si on a une resa le même jour au même temps ( soit midi, soit soir )
-  // et on refuse sinon
-  // l'utilisateur choisit sa place
+function possibleReservation(arr, value) {
+  let possible = false;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i][1] >= value) {
+      possible = true;
+      return possible;
+    }
+  }
+  return possible;
+}
+const findBestPosition = (
+  matrix,
+  flattened,
+  nbClients,
+  resa,
+  nbplaces,
+  lastname
+) => {
+  let difference = Infinity;
+  let bestPos = null;
+  let bestValue = null;
+  for (let i = 0; i < flattened.length; i++) {
+    if (flattened[i][1] >= nbClients) {
+      let currDifference = flattened[i][1] - nbClients;
+      if (currDifference < difference) {
+        difference = currDifference;
+        bestPos = i;
+        bestValue = flattened[i][1];
+      }
+    }
+  }
+  if (bestPos !== null) {
+    matrix[flattened[bestPos][0][0]][flattened[bestPos][0][1]] = {
+      resa: resa,
+      placeUse: nbClients,
+      placeTotal: bestValue,
+      lastname: lastname,
+    };
+    flattened.splice(bestPos, 1);
+  }
+  return {
+    newMatrix: matrix,
+    flattened2: flattened,
+    remainingPlaces: nbplaces - bestValue,
+    bestPos,
+  };
+};
+
+const findBestPositionAndCreate = (
+  matrix,
+  flattened,
+  nbClients,
+  resa,
+  nbplaces,
+  lastname
+) => {
+  let newMatrix = Array(matrix.length)
+    .fill()
+    .map(() => Array(matrix[0].length).fill(null));
+  let difference = Infinity;
+  let bestPos = null;
+  let bestValue = null;
+  for (let i = 0; i < flattened.length; i++) {
+    if (flattened[i][1] >= nbClients) {
+      let currDifference = flattened[i][1] - nbClients;
+      if (currDifference < difference) {
+        difference = currDifference;
+        bestPos = i;
+        bestValue = flattened[i][1];
+      }
+    }
+    newMatrix[flattened[i][0][0]][flattened[i][0][1]] = {
+      resa: null,
+      placeUse: 0,
+      placeTotal: flattened[i][1],
+      lastname: "vide",
+    };
+  }
+  if (bestPos !== null) {
+    newMatrix[flattened[bestPos][0][0]][flattened[bestPos][0][1]] = {
+      resa: resa,
+      placeUse: nbClients,
+      placeTotal: bestValue,
+      lastname: lastname,
+    };
+    flattened.splice(bestPos, 1);
+  }
+  return {
+    newMatrix,
+    flattened2: flattened,
+    remainingPlaces: nbplaces - bestValue,
+  };
+};
+
+function cancelResa(matrix, flattenedArray, id, places) {
+  let index = -1;
+  let remainingPlaces = places;
+  let newPlace = 0;
+  let newPostion = [];
+  const updatedMatrix = matrix.map((row, i) => {
+    return row.map((reservation, j) => {
+      if (reservation.resa && reservation.resa.toString() == id) {
+        index = i * row.length + j;
+        remainingPlaces += reservation.placeTotal;
+        newPlace = reservation.placeUse;
+        newPostion = [i, j];
+        return {
+          resa: null,
+          placeUse: 0,
+          placeTotal: reservation.placeTotal,
+          lastname: "vide",
+        };
+      }
+      return reservation;
+    });
+  });
+  if (index !== -1) {
+    let newElement = [newPostion, newPlace];
+    let index = flattenedArray.length;
+    for (let i = 0; i < flattenedArray.length; i++) {
+      if (newElement[1] < flattenedArray[i][1]) {
+        index = i;
+        break;
+      }
+    }
+    flattenedArray.splice(index, 0, newElement);
+  }
+  return {
+    layout: updatedMatrix,
+    disponibility: flattenedArray,
+    remainingPlaces,
+  };
+}
+
+module.exports.addReservation = async (req, res) => {
+  const { restaurant, user, nbClients, date, hour, lastname } = req.body;
+  // le système choisit la place
   // on ajoute dans reservation
   let dateFormat = new Date(date);
   let time;
@@ -35,17 +174,20 @@ module.exports.addReservation = async (req, res) => {
         hours: hour,
         date: dateFormat,
       }).exec();
-      console.log(planning);
-
-      console.log("before");
 
       if (planning == null) {
         const restau = await RestaurantModel.findById({
           _id: restaurant,
         }).exec();
-        console.log("restau");
 
-        console.log(restau);
+        let flattened = flattenArray(restau.places);
+        const possible = possibleReservation(flattened, nbClients);
+        if (!possible) {
+          return res.status(400).send({
+            message:
+              "Il n'y a plus de places disponibles pour le nombre de client voulu",
+          });
+        }
         const reservation = await ReservationModel.create({
           restaurant,
           user,
@@ -53,229 +195,173 @@ module.exports.addReservation = async (req, res) => {
           hours: hour,
           time,
           nbClients,
-          statut: "confirmer",
+          statut: "confirmé",
         });
-        console.log("before initializePlanning : ");
 
-        let places = initializePlanning(
-          restau.col,
-          restau.places,
-          place,
-          reservation.id,
-          nbClients
-        );
-        console.log("initializePlanning dans add : ");
-        console.log(places);
+        let { newMatrix, flattened2, remainingPlaces } =
+          findBestPositionAndCreate(
+            restau.places,
+            flattened,
+            nbClients,
+            reservation._id,
+            restau.nbplaces,
+            lastname
+          );
 
-        const plann = await PlanningModel.create({
+        const createPlanning = await PlanningModel.create({
           restaurant,
           date: dateFormat,
           hours: hour,
-          places,
+          layout: newMatrix,
+          disponibility: flattened2,
+          remainingPlaces,
+          totalPlaces: restau.nbplaces,
         });
-        console.log("plann");
-        console.log(plann);
+        res.status(201).json({
+          planning: createPlanning,
+          message: "la reservation a bien été effectuée",
+        });
       } else {
-        //planning.places
+        // Le planning a déjà été instancié
+        // choisir la place la plus adapté
+
+        const possible = possibleReservation(planning.disponibility, nbClients);
+        if (!possible) {
+          return res.status(400).send({
+            message:
+              "Il n'y a plus de places disponibles pour le nombre de client voulu",
+          });
+        }
+
+        const reservation = await ReservationModel.create({
+          restaurant,
+          user,
+          date: dateFormat,
+          hours: hour,
+          time,
+          nbClients,
+          statut: "confirmé",
+        });
+
+        let { newMatrix, flattened2, remainingPlaces } = findBestPosition(
+          planning.layout,
+          planning.disponibility,
+          nbClients,
+          reservation._id,
+          planning.remainingPlaces,
+          lastname
+        );
+
+        let idPlanning = planning._id.toString();
+        await PlanningModel.findOneAndUpdate(
+          { _id: idPlanning },
+          {
+            $set: {
+              layout: newMatrix,
+              disponibility: flattened2,
+              remainingPlaces: remainingPlaces,
+            },
+          },
+          { new: true, upsert: true, setDefaultsOnInsert: true }
+        )
+          .then((docs) => {
+            console.log(docs);
+            return res.send({
+              docs,
+              message: "la reservation a bien été effectuée",
+            });
+          })
+          .catch((err) => {
+            return res.status(500).send({ message: err });
+          });
       }
+    } else {
+      // il y a deja une reservation
+      // on renvoit un message d'erreur comme quoi une reservation existe
+      console.log("Vous avez déjà une reservation à cette date et meme heure");
+      return res.status(400).send({
+        message: "Vous avez déjà une reservation à cette date et meme heure",
+      });
     }
-
-    //   (err, docs) => {
-    //     console.log("docs");
-    //     console.log(docs);
-    //     console.log("err");
-    //     console.log(err);
-    //     if (err) {
-    //       console.log("resa present already");
-    //       return res
-    //         .status(400)
-    //         .send("Une reservation est déjà en cours le " + time);
-    //     } else {
-    //       const planning = PlanningModel.findOne({
-    //         restaurant: restaurant,
-    //         hours: hour,
-    //         date: dateFormat,
-    //       }).exec();
-    //       if (planning.places == null) {
-    //         const restau = RestaurantModel.findById({
-    //           _id: restaurant,
-    //         })
-    //           .exec()
-    //           .then((finalResult) => {
-    //             console.log(finalResult);
-    //           });
-    //         console.log("restau");
-
-    //         console.log(restau);
-    //         const reservation = ReservationModel.create({
-    //           restaurant,
-    //           user,
-    //           date: dateFormat,
-    //           hours: hour,
-    //           time,
-    //           nbClients,
-    //           statut: "confirmer",
-    //         });
-    //         console.log("before initializePlanning : ");
-
-    //         let places = initializePlanning(
-    //           restau.col,
-    //           restau.places,
-    //           place,
-    //           reservation,
-    //           nbClients
-    //         );
-    //         console.log("initializePlanning : ");
-    //         console.log(places);
-
-    //         const plann = PlanningModel.create({
-    //           restaurant,
-    //           date: dateFormat,
-    //           hours: hour,
-    //           places,
-    //         });
-    //       } else {
-    //         //planning.places
-    //       }
-    //     }
-    //   }
-    // );
   } catch (err) {
     return res.status(500).send({ message: err });
   }
 };
 
-const initializePlanning = function (
-  col,
-  tableau,
-  emplacement,
-  reservation,
-  nbpers
-) {
-  console.log("tableau muriella");
-  console.log(tableau);
-  console.log(emplacement);
-
-  let arr = tableau.map(function (element, index) {
-    console.log("boucle");
-    for (let i = 0; i < col; i++) {
-      console.log("i : " + i);
-      console.log(element[i]);
-      if (
-        index == emplacement[0] &&
-        i == emplacement[1] &&
-        nbpers <= element[i]
-      ) {
-        console.log("dans la boucle if nbpers");
-        element[i] = { place: element[i], reserve: nbpers, resa: reservation };
-        console.log("element[i]");
-        console.log(element);
-      } else {
-        element[i] = { place: element[i], reserve: null, resa: null };
-        console.log("element[i]");
-        console.log(element);
-      }
-    }
-    console.log("before return ");
-    //return [index, element];
-    return element;
-  });
-  // console.log(arr);
-
-  console.log("initialize");
-  console.log("arr");
-  console.log(arr);
-  console.log(arr[0][1]);
-  //let planning = new Map(arr);
-
-  return arr;
-};
-
-// and refresh page if not available
-module.exports.addPlanning = async (req, res) => {
-  const { restaurant, user, location, places, date, hours } = req.body;
-  console.log("addPlanning");
-  const restaurantPlaces = await RestaurantModel.findById(
-    restaurant,
-    "places"
-  ).exec();
-  // const users = await PlanningModel.find().select("-password");
-
+module.exports.cancelReservation = async (req, res) => {
+  const { _id, restaurant, date, hours } = req.body;
   try {
-    place = initializePlanning;
-    const planning = await PlanningModel.create({
-      restaurant,
-      user,
-      location,
-      places,
-      date,
-      hours,
-    });
-    console.log(res);
-    res.status(201).json({ planning });
+    const planning = await PlanningModel.findOne({
+      restaurant: restaurant,
+      hours: hours,
+      date: date,
+    }).exec();
+    if (planning == null) {
+      return res.status(400).send({
+        message: "Il n'y a pas de reservation a annuler",
+      });
+    }
+    let { layout, disponibility, remainingPlaces } = cancelResa(
+      planning.layout,
+      planning.disponibility,
+      _id,
+      planning.remainingPlaces
+    );
+
+    await ReservationModel.findOneAndUpdate(
+      { _id: _id },
+      { $set: { statut: "annulé" } },
+      { new: true, upsert: true, setDefaultsOnInsert: true }
+    )
+      .then(() => {
+        console.log(docs.statut);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    await PlanningModel.findOneAndUpdate(
+      { _id: _id },
+      {
+        $set: {
+          layout: layout,
+          disponibility: disponibility,
+          remainingPlaces: remainingPlaces,
+        },
+      },
+      { new: true, upsert: true, setDefaultsOnInsert: true }
+    )
+      .then(() => {
+        return res.status(200).send({
+          message: "la reservation a bien été annulée",
+        });
+      })
+      .catch((err) => {
+        return res.status(500).send({ message: err });
+      });
   } catch (err) {
-    console.log(err);
-    res.status(400).json({ err });
+    return res.status(500).send({ message: err });
   }
 };
 
-module.exports.searchAndAddReservation = (req, res) => {
-  // l'utilisateur laisse l'algothtme choisir sa place
-  console.log(req.params);
-  // resa on cherche si on a une resa le même jour au même temps ( soit midi, soit soir )
-  // et on refuse sinon
-  // on cherche soit l'utilisateur choisit sa place soit il laisse choisir
-  // on ajoute dans reservation
-  ReservationModel.find(req.params.id, (err, docs) => {
+module.exports.getAllUserReservation = (req, res) => {
+  ReservationModel.find({ user: req.params.id }, (err, docs) => {
     if (!err) {
+      console.log(docs);
       res.status(200).send(docs);
     } else {
-      return res.status(404).send("id unknown : " + req.params.id);
+      return res.status(400).send(err);
     }
   });
 };
 
-module.exports.getAllReservation = (req, res) => {
-  console.log(req.params);
-  // resa on cherche si on a une resa le même jour au même temps ( soit midi, soit soir )
-  // et on refuse sinon
-  // on cherche soit l'utilisateur choisit sa place soit il laisse choisir
-  // on ajoute dans reservation
-  ReservationModel.find(req.params.id, (err, docs) => {
+module.exports.getAllRestaurantReservation = (req, res) => {
+  ReservationModel.find({ restaurant: req.params.id }, (err, docs) => {
     if (!err) {
+      console.log(docs);
       res.status(200).send(docs);
     } else {
-      return res.status(404).send("id unknown : " + req.params.id);
-    }
-  });
-};
-
-module.exports.getReservation = (req, res) => {
-  console.log(req.params);
-  // resa on cherche si on a une resa le même jour au même temps ( soit midi, soit soir )
-  // et on refuse sinon
-  // on cherche soit l'utilisateur choisit sa place soit il laisse choisir
-  // on ajoute dans reservation
-  ReservationModel.find(req.params.id, (err, docs) => {
-    if (!err) {
-      res.status(200).send(docs);
-    } else {
-      return res.status(404).send("id unknown : " + req.params.id);
-    }
-  });
-};
-
-module.exports.updateReservation = (req, res) => {
-  console.log(req.params);
-  // resa on cherche si on a une resa le même jour au même temps ( soit midi, soit soir )
-  // et on refuse sinon
-  // on cherche soit l'utilisateur choisit sa place soit il laisse choisir
-  // on ajoute dans reservation
-  ReservationModel.find(req.params.id, (err, docs) => {
-    if (!err) {
-      res.status(200).send(docs);
-    } else {
-      return res.status(404).send("id unknown : " + req.params.id);
+      return res.status(400).send(err);
     }
   });
 };

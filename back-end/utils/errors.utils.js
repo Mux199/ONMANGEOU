@@ -1,9 +1,11 @@
 module.exports.signUpErrors = (err) => {
-  // console.log(err.errors);
-  // console.log(err.errors.email);
-  // console.log(err.errors.email.properties.message);
-
-  let errors = { email: "", password: "", nom: "", prenom: "", telephone: "" };
+  let errors = {
+    email: "",
+    password: "",
+    lastname: "",
+    firstname: "",
+    telephone: "",
+  };
 
   if (err.message.includes("email"))
     errors.email = err.errors.email.properties.message.replace("Path ", "");
@@ -23,17 +25,22 @@ module.exports.signUpErrors = (err) => {
   console.log(errors.password);
 
   if (err.message.includes("firstname"))
-    errors.nom = err.errors.firstname.properties.message.replace("Path ", "");
+    errors.firstname = err.errors.firstname.properties.message.replace(
+      "Path ",
+      ""
+    );
 
   if (err.message.includes("lastname"))
-    errors.prenom = err.errors.lastname.properties.message.replace("Path ", "");
+    errors.lastname = err.errors.lastname.properties.message.replace(
+      "Path ",
+      ""
+    );
 
   if (err.message.includes("telephone"))
     errors.telephone = err.errors.telephone.properties.message.replace(
       "Path ",
       ""
     );
-
   return errors;
 };
 

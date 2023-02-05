@@ -9,7 +9,6 @@ const planningSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    unique: true,
   },
   hours: {
     type: String,
@@ -26,14 +25,21 @@ const planningSchema = new mongoose.Schema({
       "22H00",
     ],
   },
-  // places: {
-  //   type: Map,
-  //   of: [mongoose.Schema.Types.Mixed],
-  //   default: null,
-  // },
-  places: {
+  disponibility: {
     type: Array,
     default: null,
+  },
+  layout: {
+    type: Array,
+    default: null,
+  },
+  remainingPlaces: {
+    type: Number,
+    default: 0,
+  },
+  totalPlaces: {
+    type: Number,
+    default: 0,
   },
 });
 

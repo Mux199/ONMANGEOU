@@ -30,13 +30,3 @@ module.exports.updateMenu = (req, res) => {
     }
   });
 };
-
-module.exports.deleteMenu = (req, res) => {
-  MenuModel.find(req.params.id, (err, docs) => {
-    if (!err) {
-      res.status(200).send(docs);
-    } else {
-      return res.status(404).send("id unknown : " + req.params.id);
-    }
-  });
-};
