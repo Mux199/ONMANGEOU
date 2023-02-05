@@ -27,7 +27,7 @@ import "../styles/components/SideBar.scss";
 
 const Sidebar = (props) => {
   const [menuCollapse, setMenuCollapse] = useState(false);
-  const { info, setInfo } = props;
+  const { navigation, setNavigation } = props;
 
   const menuIconClick = () => {
     menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
@@ -36,7 +36,7 @@ const Sidebar = (props) => {
   const handleMessage = (event) => {
     console.log(event.target.closest("span").innerHTML);
     const closetSpan = event.target.closest("span").innerHTML;
-    setInfo(closetSpan);
+    setNavigation(closetSpan);
   };
 
   const handleClick = (e) => {

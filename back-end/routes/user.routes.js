@@ -10,6 +10,7 @@ router.get("/logout", authController.logout);
 // user
 router.get("/", userController.getAllUsers);
 router.get("/:id", userController.userInfo);
+router.put("/:id", userController.updateUser);
 router.put("/blockUser/:id", userController.blockUser);
 router.put("/:id", userController.updateUser);
 router.put("likeRestaurant/:id", userController.likeRestaurant);
