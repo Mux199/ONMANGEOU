@@ -21,7 +21,7 @@ jobs:
       working-directory: ./back-end
       run: ls 
     - name: installation des dependances
-      working-directory: ./bakc-end
+      working-directory: ./back-end
       run: npm ci
     - name: build du code
       working-directory: ./back-end
