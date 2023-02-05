@@ -365,3 +365,8 @@ module.exports.getAllRestaurantReservation = (req, res) => {
     }
   });
 };
+
+module.exports.getAllReservation = (req, res) => {
+  const reservation = ReservationModel.find();
+  return res.status(200).json(reservation);
+};

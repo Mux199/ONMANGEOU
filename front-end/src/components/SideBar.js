@@ -29,7 +29,8 @@ import "../styles/components/SideBar.scss";
 const Sidebar = (props) => {
   const [menuCollapse, setMenuCollapse] = useState(false);
   const { navigation, setNavigation } = props;
-  const util = props;
+  const util = props.util;
+
   const menuIconClick = () => {
     menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
   };

@@ -3,9 +3,14 @@ import Table_Restaurant from "./Table_Restaurant";
 import "../styles/components/_search.scss";
 import Restaurant from "../assets/restaurants.json";
 import Slider from '@mui/material/Slider';
+import { useDispatch, useSelector } from "react-redux";
 
 
 function Search() {
+
+    const restausData = useSelector((state) => state.restausReducer);
+    const dispatch = useDispatch();
+    console.log(restausData)
     ///////////////////////SEARCH ON A DATATABLE
     const [queryPrix, setQueryPrix] = useState("Tous");
     const [querySpeciality, setQuerySpeciality] = useState("Tous");
@@ -21,6 +26,17 @@ function Search() {
     const uniquePrix = [...new Set(prix)];
     const city = Restaurant.map(rest => rest.city);
     const uniqueCity = [...new Set(city)];
+
+    if(restausData){
+        setFilterData(restausData)
+        Specialitys = restausData.map(rest => rest.speciality);
+        uniqueSpecialitys = [...new Set(Specialitys)];
+        prix = restausData.map(rest => rest.prix);
+        uniquePrix = [...new Set(prix)];
+        city = restausData.map(rest => rest.city);
+        uniqueCity = [...new Set(city)];
+    }
+
 
     //label pour Range Slider
     const customMarks = [

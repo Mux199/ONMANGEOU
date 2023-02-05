@@ -8,7 +8,9 @@ import "./styles/styles.scss";
 import store from "./store/store";
 
 import { Provider } from "react-redux";
+import { getRestaurants } from "./store/reducers/actions/restaurants.actions";
 
+store.dispatch(getRestaurants());
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

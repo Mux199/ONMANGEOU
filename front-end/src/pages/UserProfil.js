@@ -119,6 +119,10 @@ export default function UserProfil() {
             <div>
               <h1>Favoris</h1>
               <Row>Favoris</Row>
+              <Row>
+                Nombre de favoris :{" "}
+                {userData.likes ? userData.likes.length : ""}
+              </Row>
             </div>
           )}
           {navigation == "Historique" && (

@@ -14,3 +14,9 @@ module.exports.getPlanning = (req, res) => {
     }
   });
 };
+
+// get planning
+module.exports.getAllPlanning = (req, res) => {
+  const planning = PlanningModel.find();
+  return res.status(200).json(planning);
+};
