@@ -219,6 +219,7 @@ module.exports.addReservation = async (req, res) => {
         });
         res.status(201).json({
           planning: createPlanning,
+          reservation: reservation,
           message: "la reservation a bien été effectuée",
         });
       } else {
@@ -267,7 +268,8 @@ module.exports.addReservation = async (req, res) => {
           .then((docs) => {
             console.log(docs);
             return res.send({
-              docs,
+              planning: docs,
+              reservation: reservation,
               message: "la reservation a bien été effectuée",
             });
           })
@@ -284,7 +286,10 @@ module.exports.addReservation = async (req, res) => {
       });
     }
   } catch (err) {
-    return res.status(500).send({ message: err });
+    return res.status(500).send({
+      message: "Il y a eu une erreur la reservation n'a pas été effectué",
+      err: err,
+    });
   }
 };
 

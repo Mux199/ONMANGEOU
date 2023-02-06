@@ -11,8 +11,17 @@ import {
   Button,
 } from "reactstrap";
 
+import { useDispatch, useSelector } from "react-redux";
+
+function printPlanning(matrix) {}
+
 //export default (props) => {
 const Book = (props) => {
+  const dispatch = useDispatch();
+  console.log("props book ");
+  console.log(props);
+  console.log(props.id);
+  const idRestaurant = useState(props.id);
   const [totalTables] = useState([]);
   const [selection, setSelection] = useState({
     table: {
