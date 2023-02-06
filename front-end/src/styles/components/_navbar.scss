@@ -4,8 +4,8 @@
     position: sticky;
     width: 100%;
     top: 0;
-    z-index: 100;
-    border-bottom: solid 1px #fece00;
+    z-index: 1010;
+    //border-bottom: solid 1px #fece00;
 }
 
 
@@ -23,18 +23,39 @@ ul {
     list-style: none;
 }
 
+.nav-links .connexion, .nav-links .signUpUser, .nav-links .logout, .nav-links .profil {
+    line-height: 2;
+    letter-spacing: 1.2px;
+    padding: 8px 20px;
+    border-radius: 30px;
+    border-style: solid;
+    border-width: 0px;
+}
+
+.nav-links .signUpUser, .nav-links .logout  {
+    margin-right: 20px;
+    background-color: #FDC720;
+
+}
+.nav-links .connexion, .nav-links .profil  {
+    margin-right: 30px;
+    background-color: #FBB03B;
+}
+
+.nav-container, .nav-links {
+    display: flex;
+    align-items: baseline;
+}
+
 .logo {
     width: fit-content;
+    margin-left: 20px;
 }
 
-.nav-links {
-
-}
 a{
 color: black;
 text-decoration:none;
 font-style: italic;
-
 
 }
 .signUpUser {

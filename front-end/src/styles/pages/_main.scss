@@ -1,16 +1,30 @@
-// .restaurantname-btn{
+.main {
+    margin-top: 50px;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+}// .restaurantname-btn{
 
 //     color: black;
 //     background-color: #fece00;
 //     font-style: oblique;
 // }
-
-.titre{
-    font-style: italic;
-    color: #fece00;
-}
 // .book-table-btn{
 //     color: black;
 //     background-color: #fece00;
 //     font-style: oblique;
 // }
+/*
+.header {
+        background-image: url("../../assets/img/header.jpg");
+        height: 600px;
+        width: 100%;
+}*/
+
+img {
+    object-fit: cover;
+}
+
+.header-main {
+    justify-content: center;
+}

@@ -4,6 +4,8 @@ import { UidContext } from "../components/AppContext";
 import { Row, Col } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTelephone } from "../store/reducers/actions/user.actions";
+//import { cancelReservation } from "../store/reducers/actions/reservation.actions";
+
 import { dateParser } from "../components/Utils";
 
 const styles = {
@@ -15,7 +17,32 @@ export default function UserProfil() {
   const [uid, setUid] = useContext(UidContext);
 
   const userData = useSelector((state) => state.rootReducer.userReducer);
+  const restausData = useSelector((state) => state.rootReducer.restausReducer);
+  const resaData = useSelector((state) => state.rootReducer.resaReducer);
+
+  console.log(restausData);
+  console.log(resaData);
+
   const dispatch = useDispatch();
+
+  const [myResaData, setMyResaData] = useState(resaData);
+
+  useEffect(() => {
+    setMyResaData(resaData);
+  }, []);
+
+  console.log("myResaData");
+  console.log(myResaData);
+
+  /*const handleCancel = (id, date, hours) => {
+    dispatch(cancelReservation(id, date, hours));
+    setMyResaData(myResaData.filter((item) => item.id !== id));
+  };
+  */
+
+  const handleCancel = (id) => {
+    console.log(id + " id cancel");
+  };
 
   const ChooseDate = () => {
     const [startDate, setStartDate] = useState(new Date());
@@ -24,15 +51,12 @@ export default function UserProfil() {
   const [telephone, setTelephone] = useState("");
   const [updateForm, setUpdateForm] = useState(false);
 
+  const todayDate = new Date();
+
   const handleUpdate = () => {
     dispatch(updateTelephone(userData._id, telephone));
     setUpdateForm(false);
   };
-
-  /*
-  if (uid._id == null || uid.role == "" || uid.role != "user") {
-    <Navigate to="/connexion" />;
-  }*/
   let util = "user";
   return (
     <div className="user-profil" style={styles}>
@@ -45,15 +69,40 @@ export default function UserProfil() {
       </div>
 
       <div className="">
-        <Col className="">
+        <Row className="">
           {navigation == "Réservation" && (
-            <div>
+            <Row className="reservation">
               <h1>Reservation</h1>
-              <Row>Reservation</Row>
-            </div>
+              <Row className="resa-container">
+                {Array.isArray(myResaData) &&
+                  typeof myResaData.map === "function" &&
+                  myResaData.map((item, index) => (
+                    <div key={index} id={item.id}>
+                      {Object.keys(item).map((key) => {
+                        if (key === "id") return null;
+                        return (
+                          <div key={key}>
+                            <span>{key}:</span>
+                            <span>{item[key]}</span>
+                          </div>
+                        );
+                      })}
+                      <span>
+                        <button
+                          onClick={() =>
+                            handleCancel(item.id, item.date, item.hours)
+                          }
+                        >
+                          Cancel
+                        </button>
+                      </span>
+                    </div>
+                  ))}
+              </Row>
+            </Row>
           )}
           {navigation == "Informations personnelles" && (
-            <div className="">
+            <Row className="info-perso">
               <h1>Informations personnelles</h1>
               <Row>
                 <Col>Nom</Col>
@@ -112,25 +161,25 @@ export default function UserProfil() {
               <Row>
                 <Col>{dateParser(userData.createdAt)}</Col>
               </Row>
-            </div>
+            </Row>
           )}
           {navigation == "Favoris" && (
-            <div>
+            <Row className="favorite">
               <h1>Favoris</h1>
               <Row>Favoris</Row>
               <Row>
                 Nombre de favoris :{" "}
                 {userData.likes ? userData.likes.length : ""}
               </Row>
-            </div>
+            </Row>
           )}
           {navigation == "Historique" && (
-            <div>
+            <Row className="history">
               <h1>Historique</h1>
               <Row>Historique</Row>
-            </div>
+            </Row>
           )}
-        </Col>
+        </Row>
       </div>
     </div>
   );

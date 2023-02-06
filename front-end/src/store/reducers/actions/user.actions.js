@@ -1,5 +1,4 @@
 import axios from "axios";
-import { createAction } from "@reduxjs/toolkit";
 
 export const GET_USER = "GET_USER";
 export const UPDATE_TELEPHONE = "UPDATE_TELEPHONE";
