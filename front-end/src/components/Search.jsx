@@ -78,7 +78,11 @@ function Search() {
     ];
 
     useEffect(() => {
-        let result = [...restausData];
+        let result
+        if(restausData){
+            result = [...restausData];
+        }
+        
         //filtre barre de recherche (ville,nom)
         if (query) {
             result = result.filter((item) => item.name.toLowerCase().includes(query.toLowerCase()) || item.city.toLowerCase().includes(query.toLowerCase()));
