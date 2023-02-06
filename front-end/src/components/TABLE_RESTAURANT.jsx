@@ -6,10 +6,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import Book from '../pages/Book';
 
-
-const TABLE_RESTAURANT = ({ data }) => {
+export default function Table_Restaurant ({ data }) {
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -43,7 +43,7 @@ const TABLE_RESTAURANT = ({ data }) => {
                             <TableCell>{item.adresse}</TableCell>
                             <TableCell><img height="144" width="256" src={`${process.env.PUBLIC_URL}/assets/img/resto/${item.img}`}
                                             alt={`/asset/img/resto/${item.img}`}/></TableCell>
-                            <TableCell><Link to={"/Book"}> <button >Réservez</button></Link> </TableCell>
+                            <TableCell><Link to="/Book"><button>Réservez</button></Link></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
@@ -51,4 +51,4 @@ const TABLE_RESTAURANT = ({ data }) => {
         </TableContainer>
     );
 }
-export default TABLE_RESTAURANT
+
