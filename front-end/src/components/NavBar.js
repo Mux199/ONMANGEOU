@@ -15,7 +15,7 @@ export default (props) => {
             <img
               src={require("../assets/img/Logo_onmangeou.png")}
               alt=""
-              style={{ width: "150px" }}
+              style={{ width: "210px" }}
             />
           </NavLink>
         </div>

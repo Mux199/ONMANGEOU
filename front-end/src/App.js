@@ -7,6 +7,7 @@ import UserProfil from "./pages/UserProfil";
 import Logout from "./pages/Logout";
 import Faq from "./pages/Faq";
 import Footer from "./components/Footer";
+import ResearchRestaurant from "./pages/ResearchRestaurant";
 import Book from "./pages/Book";
 import Choice from "./pages/Choice";
 import SignUpUser from "./pages/SignUpUser";
@@ -16,6 +17,7 @@ import { UidContext } from "./components/AppContext";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getUser } from "./store/reducers/actions/user.actions";
+import { getUserResa } from "./store/reducers/actions/reservation.action";
 
 export default (_) => {
   const dispatch = useDispatch();
@@ -53,6 +55,7 @@ export default (_) => {
       console.log("avant dispatch de app");
       dispatch(getUser(context._id));
       console.log("après dispatch de app");
+      dispatch(getUserResa(context._id));
     }
   }, [context._id, dispatch]);
 
@@ -72,6 +75,7 @@ export default (_) => {
           <Route path="*" element={<Main />} />
           <Route path="choice" element={<Choice />} />
           <Route path="proProfil" element={<ProProfil />} />
+          <Route path="rechercheRestaurant" element={<ResearchRestaurant />} />
         </Routes>
         <Footer />
       </div>

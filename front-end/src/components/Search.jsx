@@ -1,14 +1,10 @@
 import React, {useState,useEffect} from "react";
 import Table_Restaurant from "./Table_Restaurant";
 import "../styles/components/_search.scss";
-import Restaurant from "../assets/restaurants.json";
 import Slider from '@mui/material/Slider';
 import { useDispatch, useSelector } from "react-redux";
 
-
 function Search() {
-
-
     const restausData = useSelector((state) => state.rootReducer.restausReducer);
     const dispatch = useDispatch();
 
@@ -24,44 +20,38 @@ function Search() {
     const [queryCity, setQueryCity] = useState("Tous");
     const [filterData, setFilterData] = useState(restausData);
 
-    const Specialitys = restausData.map(rest => rest.type);
-    console.log("Specialitys")
+    useEffect(() => {
+        setFilterData(restausData);
+      }, []);
+      
+      let Specialitys;
+      let uniqueSpecialitys;
+      let prix;
+      let uniquePrix ;
+      let city ;
+      let uniqueCity;
 
-    console.log(Specialitys)
-    const uniqueSpecialitys = [...new Set(Specialitys)];
-    console.log("uniqueSpecialitys")
+    if(Array.isArray(restausData) &&
+                  typeof restausData.map === "function" ) {
+         Specialitys = restausData.map(rest => rest.type);
+         uniqueSpecialitys = [...new Set(Specialitys)];
+         prix = restausData.map(rest => rest.priceRange);
+         uniquePrix = [...new Set(prix)];
+         city = restausData.map(rest => rest.city);
+         uniqueCity = [...new Set(city)];
+    } else {
+     Specialitys = [{}].map(rest => rest.type);
 
-    console.log(uniqueSpecialitys)
-    const prix = restausData.map(rest => rest.priceRange);
-    console.log("prix")
+     uniqueSpecialitys = [...new Set(Specialitys)];
 
-    console.log(prix)
+     prix = [{}].map(rest => rest.priceRange);
 
-    const uniquePrix = [...new Set(prix)];
-    console.log("uniquePrix")
+     uniquePrix = [...new Set(prix)];
 
-    console.log(uniquePrix)
+     city = [{}].map(rest => rest.city);
 
-    const city = restausData.map(rest => rest.city);
-    console.log("city")
-
-    console.log(city)
-    const uniqueCity = [...new Set(city)];
-    console.log("uniqueCity")
-
-    console.log(uniqueCity)
-/*
-    if(restausData){
-        setFilterData(restausData)
-        
-        Specialitys = restausData.map(rest => rest.speciality);
-        uniqueSpecialitys = [...new Set(Specialitys)];
-        prix = restausData.map(rest => rest.prix);
-        uniquePrix = [...new Set(prix)];
-        city = restausData.map(rest => rest.city);
-        uniqueCity = [...new Set(city)];
-    }
-*/
+     uniqueCity = [...new Set(city)];
+}
 
     //label pour Range Slider
     const customMarks = [
@@ -108,7 +98,7 @@ function Search() {
         if (querySpeciality !== "Tous") {
             result = result.filter((item) => item.type === querySpeciality);
         }
-
+        console.log("ok")
 
         //filtre RangeSlider note
         if (querymin && querymax) {
@@ -185,8 +175,9 @@ function Search() {
                 marks={customMarks}
                 valueLabelDisplay="auto"
             />
-</box>
-            {<Table_Restaurant data={filterData}/>}
+            </box>
+            {Array.isArray(restausData) &&
+                  typeof restausData.map === "function" ? (<Table_Restaurant data={filterData}/>) : (<Table_Restaurant data={[]}/>)}
         </div>
     )}
 ///////////////////// API SEARCH
@@ -194,7 +185,6 @@ function Search() {
 /*function Srch() {
     const [query, setQuery] = useState("");
     const [data, setData] = useState([]);
-
     useEffect(() => {
         const fetchData = async () => {
             const res = await axios.get(`http://localhost:5000?q=${query}`);
@@ -202,7 +192,6 @@ function Search() {
         };
         if (query.length === 0 || query.length > 2) fetchData();
     }, [query]);
-
     return (
         <div className="app">
             <input

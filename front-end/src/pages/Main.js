@@ -1,37 +1,19 @@
 import React from "react";
-import { Row, Col, Button } from "reactstrap";
-import Search from "../components/Search";
+import { Row, Col } from "reactstrap";
+import { Link } from "react-router-dom";
+import { ReactSVG } from "react-svg";
+
 export default (props) => {
   return (
-    <div >
-      <div className="main">
-        <Row noGutters className="text-center align">
-          <Col>
-            <div className="titre">
-             <h1>Choisissez le restaurant</h1> 
-            </div>
-            {/* <Button 
-              className="restaurantname-btn">
-              Choisissez le restaurant
-            </Button> */}
-            {/* <Button
-              className="book-table-btn">
-              Réserver une table
-            </Button> */}
-          </Col>
-        </Row>
-        {/* <Row>
-          <Search />
-        </Row> */}
-      </div>
-      <Row style={{ display:'flex', justifyContent:'space-around', alignItems: 'center', margin:'20px 0 0 0'}}>
-          <Col>
-            <Search/>
-          </Col>
-          <Col md={6}>
-            <img src={require("../assets/img/Cover.jpg" )} style={{width:'100%'}}/>
-          </Col>
+    <div className="main">
+      <Row className="header-main align">
+        <Link to={"/rechercheRestaurant"}>
+          <img
+            src={require("../assets/img/header.png")}
+            style={{ width: "auto", height: "70vh" }}
+          />
+        </Link>
       </Row>
-      </div>
+    </div>
   );
 };

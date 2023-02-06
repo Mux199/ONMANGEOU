@@ -10,8 +10,9 @@ import {
   Input,
   Button,
 } from "reactstrap";
+
 //export default (props) => {
-const Book = () => {
+const Book = (props) => {
   const [totalTables] = useState([]);
   const [selection, setSelection] = useState({
     table: {
