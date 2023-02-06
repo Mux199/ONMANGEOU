@@ -351,7 +351,7 @@ const getSizes = _ => {
               )
             ) : (
               <p className="table-display-message">
-                Veuillez choisir la date et l'heurre de votre réservation.
+                Veuillez choisir la date et l'heure de votre réservation.
               </p>
             )}
           </Col>
