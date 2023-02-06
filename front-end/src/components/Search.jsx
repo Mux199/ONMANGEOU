@@ -110,7 +110,7 @@ function Search() {
         }
         setFilterData(result);
 
-    }, [queryPrix, querySpeciality, query, querymax, querymin, queryCity])
+    }, [queryPrix, querySpeciality, query, querymax, querymin, queryCity, restausData])
 
 
     return (
