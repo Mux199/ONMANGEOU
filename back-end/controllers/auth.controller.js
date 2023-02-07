@@ -109,7 +109,7 @@ module.exports.signUpUser = async (req, res) => {
     res.status(201).json({ user: user.email, role: user.role });
   } catch (err) {
     const errors = signUpErrors(err);
-    res.status(200).json({ errors });
+    res.status(400).json({ errors });
   }
 };
 
@@ -128,7 +128,7 @@ module.exports.signIn = async (req, res) => {
     res.status(200).json({ _id: user._id, role: user.role });
   } catch (err) {
     const errors = signInErrors(err);
-    res.status(200).json({ errors });
+    res.status(400).json({ errors });
   }
 };
 
