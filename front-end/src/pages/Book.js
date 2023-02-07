@@ -425,18 +425,6 @@ const Book = (props) => {
               />
             </Col>
           </Row>
-          <Row noGutters className="text-center">
-            <Col>
-              <Button
-                className="book-table-btn"
-                onClick={(_) => {
-                  reserver();
-                }}
-              >
-                Réserver
-              </Button>
-            </Col>
-          </Row>
         </div>
       )}
     </div>
