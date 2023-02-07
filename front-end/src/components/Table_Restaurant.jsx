@@ -60,7 +60,7 @@ export default function Table_Restaurant ({ data }) {
                             <TableCell>{item.adresse}</TableCell>
                             <TableCell><img height="144" width="256" src={`${process.env.PUBLIC_URL}/assets/img/resto/${item.img}`}
                                             alt={`/asset/img/resto/${item.img}`}/></TableCell>
-                            <TableCell>{myUserData && myUserData.role == "user" ? (<><Link to={"/book"} state={item._id} onClick={handleLink}><button>Réservez</button></Link><button>Like</button></>):(<></>)}</TableCell>
+                            <TableCell><><Link to={"/book"} state={item._id} onClick={handleLink}><button>Réservez</button></Link></></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

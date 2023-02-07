@@ -428,7 +428,6 @@ const Book = (props) => {
           <Row noGutters className="text-center">
             <Col>
               <Button
-                color="none"
                 className="book-table-btn"
                 onClick={(_) => {
                   reserver();

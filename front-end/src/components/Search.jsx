@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 function Search() {
     const restausData = useSelector((state) => state.rootReducer.restausReducer);
+    const userData = useSelector((state) => state.rootReducer.userReducer);
     const dispatch = useDispatch();
 
     console.log("restausData")

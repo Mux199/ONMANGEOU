@@ -59,13 +59,13 @@ const Sidebar = (props) => {
           </SidebarHeader>
           <SidebarContent>
             <Menu iconShape="square">
-              <a href="/rechercheRestaurant">
+              <Link to={"/rechercheRestaurant"}>
                 <MenuItem icon={<FiHome />}>
                   {/* <Link to={'/'} style={{ color: 'black', fontWeight:'bold'}}> */}
                   Accueil
                   {/* </Link> */}
                 </MenuItem>
-              </a>
+              </Link>
               <div>
                 <MenuItem onClick={handleMessage} icon={<FaList />}>
                   Réservation
