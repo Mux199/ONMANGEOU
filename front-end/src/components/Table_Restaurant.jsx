@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useState} from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,9 +8,14 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Link } from "react-router-dom";
-import Book from '../pages/Book';
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Table_Restaurant ({ data }) {
+    const userData = useSelector((state) => state.rootReducer.userReducer);
+    const dispatch = useDispatch();
+    const [myUserData, setMyUserData] = useState(userData);
+    console.log("myUserData")
+    console.log(myUserData)
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -43,7 +49,7 @@ export default function Table_Restaurant ({ data }) {
                             <TableCell>{item.adresse}</TableCell>
                             <TableCell><img height="144" width="256" src={`${process.env.PUBLIC_URL}/assets/img/resto/${item.img}`}
                                             alt={`/asset/img/resto/${item.img}`}/></TableCell>
-                            <TableCell><Link to="/Book"><button>Réservez</button></Link></TableCell>
+                            <TableCell>{myUserData && myUserData.role == "user" ? (<><Link to={`/book/${item._id}`}><button>Réservez</button></Link> <button>Like</button></>):(<></>)}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

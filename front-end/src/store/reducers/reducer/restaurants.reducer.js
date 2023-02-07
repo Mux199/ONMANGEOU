@@ -3,7 +3,7 @@ import {
   getRestaurants,
 } from "../actions/restaurants.actions";
 
-const initialState = { test: "It works" };
+const initialState = [{}];
 
 export default (state = initialState, action) => {
   switch (action.type) {
