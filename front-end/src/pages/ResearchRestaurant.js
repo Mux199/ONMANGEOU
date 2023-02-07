@@ -1,7 +1,11 @@
 import React from "react";
 import { Row, Col, Button } from "reactstrap";
 import Search from "../components/Search";
+import { useSelector } from "react-redux";
+
 export default (props) => {
+  const restausData = useSelector((state) => state.rootReducer.restausReducer);
+
   return (
     <div>
       <div className="research">

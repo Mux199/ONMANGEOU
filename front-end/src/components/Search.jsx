@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 function Search() {
     const restausData = useSelector((state) => state.rootReducer.restausReducer);
+    const userData = useSelector((state) => state.rootReducer.userReducer);
     const dispatch = useDispatch();
 
     console.log("restausData")
@@ -162,8 +163,8 @@ function Search() {
                     </option>
                 ))}
             </select>
-<br/>
-<box className={"Slider_Note"}>
+            <br/>
+         <div className={"Slider_Note"}>
             <Slider
 
                 value={[querymin,querymax]}
@@ -179,33 +180,10 @@ function Search() {
                 marks={customMarks}
                 valueLabelDisplay="auto"
             />
-            </box>
-            {Array.isArray(restausData) &&
+            </div>
+
+                {Array.isArray(restausData) &&
                   typeof restausData.map === "function" ? (<Table_Restaurant data={filterData}/>) : (<Table_Restaurant data={[]}/>)}
-        </div>
+       </div>
     )}
-///////////////////// API SEARCH
-
-/*function Srch() {
-    const [query, setQuery] = useState("");
-    const [data, setData] = useState([]);
-    useEffect(() => {
-        const fetchData = async () => {
-            const res = await axios.get(`http://localhost:5000?q=${query}`);
-            setData(res.data);
-        };
-        if (query.length === 0 || query.length > 2) fetchData();
-    }, [query]);
-    return (
-        <div className="app">
-            <input
-                className="search"
-                placeholder="Search..."
-                onChange={(e) => setQuery(e.target.value.toLowerCase())}
-            />
-            {<Table data={data} />}
-        </div>
-    );
-}*/
-
 export default Search;

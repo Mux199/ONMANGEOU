@@ -10,9 +10,22 @@ import {
   Input,
   Button,
 } from "reactstrap";
+import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+function printPlanning(matrix) {}
 
 //export default (props) => {
 const Book = (props) => {
+  const dispatch = useDispatch();
+  let { state } = useLocation();
+  console.log("state");
+
+  console.log(state);
+  console.log("props book ");
+  console.log(props);
+  console.log(props.id);
+  const idRestaurant = useState(props.id);
   const [totalTables] = useState([]);
   const [selection, setSelection] = useState({
     table: {
@@ -410,19 +423,6 @@ const Book = (props) => {
                   });
                 }}
               />
-            </Col>
-          </Row>
-          <Row noGutters className="text-center">
-            <Col>
-              <Button
-                color="none"
-                className="book-table-btn"
-                onClick={(_) => {
-                  reserver();
-                }}
-              >
-                Réserver
-              </Button>
             </Col>
           </Row>
         </div>
