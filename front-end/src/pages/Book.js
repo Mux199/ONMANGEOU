@@ -10,7 +10,7 @@ import {
   Input,
   Button,
 } from "reactstrap";
-
+import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 function printPlanning(matrix) {}
@@ -18,6 +18,10 @@ function printPlanning(matrix) {}
 //export default (props) => {
 const Book = (props) => {
   const dispatch = useDispatch();
+  let { state } = useLocation();
+  console.log("state");
+
+  console.log(state);
   console.log("props book ");
   console.log(props);
   console.log(props.id);

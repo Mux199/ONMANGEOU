@@ -5,6 +5,14 @@ const UserModel = require("./models/user.model");
 const RestaurantModel = require("./models/restaurant.model");
 const PlanningModel = require("./models/planning.model");
 
+describe("GET /", () => {
+  it("should return ...", async () => {
+    const res = await request(app).get("api/user");
+    console.log(res);
+    expect(res.status).toEqual(200);
+  });
+});
+
 describe("createToken", () => {
   it("creates a JSON Web Token with an expiration of 3 days", () => {
     const id = "user_id";

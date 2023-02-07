@@ -51,3 +51,5 @@ app.use("/api/reservation", reservationRoutes);
 app.listen(process.env.PORT, () => {
   console.log(`Listening on port ${process.env.PORT}`);
 });
+
+module.exports = app;

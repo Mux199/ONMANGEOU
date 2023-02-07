@@ -22,7 +22,7 @@ export default function Table_Restaurant ({ data }) {
     const handleLink = function (event) {
         console.log(event)
         console.log("click handlelink")
-        console.log(event.target)
+        console.log(event.target.value)
     }
     console.log("restaurant id ")
     console.log("restaurant id ")
@@ -60,7 +60,7 @@ export default function Table_Restaurant ({ data }) {
                             <TableCell>{item.adresse}</TableCell>
                             <TableCell><img height="144" width="256" src={`${process.env.PUBLIC_URL}/assets/img/resto/${item.img}`}
                                             alt={`/asset/img/resto/${item.img}`}/></TableCell>
-                            <TableCell>{myUserData && myUserData.role == "user" ? (<><Link to={"/book"} state={item._id} onClick={handleLink(item._id)}><button>Réservez</button></Link><button>Like</button></>):(<></>)}</TableCell>
+                            <TableCell>{myUserData && myUserData.role == "user" ? (<><Link to={"/book"} state={item._id} onClick={handleLink}><button>Réservez</button></Link><button>Like</button></>):(<></>)}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

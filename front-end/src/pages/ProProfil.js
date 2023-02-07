@@ -23,7 +23,6 @@ export default function ProProfil() {
   console.log(userData);
   console.log("uid");
   console.log(uid);
-
   /*
   <img
   src={require("../assets/img/restaurantanimationdribbble.gif")}
