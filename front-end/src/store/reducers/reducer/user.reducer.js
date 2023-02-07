@@ -5,7 +5,11 @@ const initialState = { test: "It works" };
 export default (state = initialState, action) => {
   switch (action.type) {
     case "GET_USER":
-      return action.payload;
+      console.log(state);
+      return {
+        ...state,
+        users: action.payload,
+      };
     case "UPDATE_TELEPHONE":
       return {
         ...state,

@@ -8,6 +8,7 @@ import planningsReducer from "./reducer/plannings.reducer";
 import planningReducer from "./reducer/planning.reducer";
 import resaReducer from "./reducer/reservation.reducer";
 import resasReducer from "./reducer/reservations.reducer";
+import addResa from "./reducer/addResa.reducer";
 
 export default combineReducers({
   userReducer,
@@ -18,4 +19,5 @@ export default combineReducers({
   restausReducer,
   planningReducer,
   planningsReducer,
+  addResa,
 });
