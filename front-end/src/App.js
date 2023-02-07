@@ -71,10 +71,7 @@ export default (_) => {
           <Route path="logout" element={<Logout />} />
           <Route path="faq" element={<Faq />} />
           <Route path="signUpPro" element={<SignUpPro />} />
-          <Route
-            path="book/:id"
-            render={({ match }) => <Book id={match.params.id} />}
-          />
+          <Route path="book" element={<Book />} />
           <Route path="*" element={<Main />} />
           <Route path="choice" element={<Choice />} />
           <Route path="proProfil" element={<ProProfil />} />
