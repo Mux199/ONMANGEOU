@@ -1,5 +1,5 @@
 import React, {useState,useEffect} from "react";
-import Table_Restaurant from "./Table_Restaurant";
+import Table_Restaurant from "./TABLE_RESTAURANT";
 import "../styles/components/_search.scss";
 import Slider from '@mui/material/Slider';
 import { useDispatch, useSelector } from "react-redux";
