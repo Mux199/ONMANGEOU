@@ -1,3 +1,5 @@
+import { ADD_RESA, addResa } from "../actions/addResa.actions";
+
 const initialState = { test: "It works" };
 
 export default (state = initialState, action) => {

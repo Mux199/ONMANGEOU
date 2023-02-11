@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Table from "./Table";
 import {
   Row,
@@ -12,7 +12,7 @@ import {
 } from "reactstrap";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
+import { addResa } from "../store/reducers/actions/addResa.actions";
 function printPlanning(matrix) {}
 
 //export default (props) => {
@@ -20,6 +20,18 @@ const Book = (props) => {
   const dispatch = useDispatch();
   let { state } = useLocation();
   console.log("state");
+
+  const userData = useSelector((state) => state.rootReducer.userReducer);
+  const [userDataNew, setUserData] = useState(userData);
+
+  useEffect(() => {
+    setUserData(userDataNew);
+  }, []);
+
+  const [nbClient, setNbClient] = useState(0);
+  const handleNbClient = function (event) {
+    console.log(event);
+  };
 
   console.log(state);
   console.log("props book ");
@@ -45,7 +57,14 @@ const Book = (props) => {
     phone: "",
     email: "",
   });
+  const [resa, setResa] = useState(null);
+  const handleResa = function () {
+    console.log("handleresa");
+    //restaurant, user, nbClients, date, hour, lastname;
 
+    setResa(dispatch(addResa(state, userDataNew._id)));
+    console.log(resa);
+  };
   const [locations] = useState(["Intérieur"]);
   const [times] = useState([
     "12H",
@@ -330,7 +349,12 @@ const Book = (props) => {
             </Col>
             <Col xs="12" sm="3">
               <UncontrolledDropdown>
-                <DropdownToggle color="none" caret className="booking-dropdown">
+                <DropdownToggle
+                  color="none"
+                  caret
+                  className="booking-dropdown"
+                  onChange={handleNbClient}
+                >
                   {selection.size === 0
                     ? "Choisir le nombre de place"
                     : selection.size.toString()}
@@ -339,6 +363,9 @@ const Book = (props) => {
                   {getSizes()}
                 </DropdownMenu>
               </UncontrolledDropdown>
+            </Col>
+            <Col>
+              <Button onClick={handleResa}>Réserver</Button>
             </Col>
           </Row>
           <Row noGutters className="tables-display">
