@@ -58,7 +58,10 @@ export default function Connexion() {
       })
       .catch((err) => {
         console.log("err");
-
+        if (err.response && err.response.data && err.response.data.errors) {
+          emailError.innerHTML = err.response.data.errors.email;
+          passwordError.innerHTML = err.response.data.errors.password;
+        }
         console.log(err);
       });
   };

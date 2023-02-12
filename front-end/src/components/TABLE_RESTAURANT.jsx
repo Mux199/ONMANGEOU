@@ -8,72 +8,87 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import Modal from "./Modal";
 
 export default function Table_Restaurant ({ data }) {
-    const userData = useSelector((state) => state.rootReducer.userReducer);
-    const dispatch = useDispatch();
-    const [myUserData, setMyUserData] = useState(userData);
+      const userData = useSelector((state) => state.rootReducer.userReducer);
+      const [actualUserData, setActualUserData] = useState({
+        _id: userData && userData.users ? userData.users._id : "",
+        role: userData && userData.users ? userData.users.role : "",
+      });
+      const [showModal, setShowModal] = useState(false);
+      const [value, setValue] = useState("");
     
-    useEffect(() => {
-        setMyUserData(userData);
-      }, []);
-
-    const handleLink = function (event) {
-        /*event.preventDefault();
-        console.log(myUserData)
-        if(myUserData && myUserData.users) {
-            console.log(myUserData)
-
+      const handleValueChange = (e) => setValue(e.target.value);
+    
+      useEffect(() => {
+        if (userData && userData.users) {
+          setActualUserData({
+            _id: userData.users._id,
+            role: userData.users.role,
+          });
         }
+      }, [userData]);
+    
+    const handleLink = function (event) {
+        //event.preventDefault();
         console.log(event)
-        console.log("click handlelink")
-        */
-        console.log(event.target.value)
-        
+        console.log("actualUserData")
+        console.log(actualUserData)
+        if (!actualUserData.role || actualUserData.role !== "user"){
+            setShowModal(true);
+        } else {
+            setShowModal(false);
+            //return <Link to={"/book"} state={item._id}></Link>
+        }
     }
-    console.log("restaurant id ")
-    console.log("restaurant id ")
 
     return (
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Nom</TableCell>
-                        <TableCell>Note</TableCell>
-                        <TableCell>Ville</TableCell>
-                        <TableCell>Prix</TableCell>
-                        <TableCell>Spécialité</TableCell>
-                        <TableCell>Description</TableCell>
-                        <TableCell>Téléphone</TableCell>
-                        <TableCell>Adresse</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {data.map((item) => (
-                        <TableRow
-                            key={item._id}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                            <TableCell component="th" scope="row">
-                                {item.name}
-                            </TableCell>
-                            <TableCell>{item.note}⭐</TableCell>
-                            <TableCell>{item.city}</TableCell>
-                            <TableCell>{item.priceRange}</TableCell>
-                            <TableCell>{item.type}</TableCell>
-                            <TableCell>{item.description}</TableCell>
-                            <TableCell>{item.telephone}</TableCell>
-                            <TableCell>{item.adresse}</TableCell>
-                            <TableCell><img height="144" width="256" src={`${process.env.PUBLIC_URL}/assets/img/resto/${item.img}`}
-                                            alt={`/asset/img/resto/${item.img}`}/></TableCell>
-                            <TableCell><><Link to={"/book"} state={item._id} onClick={handleLink}><button>Réservez</button></Link></></TableCell>
+        <>
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Nom</TableCell>
+                            <TableCell>Note</TableCell>
+                            <TableCell>Ville</TableCell>
+                            <TableCell>Prix</TableCell>
+                            <TableCell>Spécialité</TableCell>
+                            <TableCell>Description</TableCell>
+                            <TableCell>Téléphone</TableCell>
+                            <TableCell>Adresse</TableCell>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                    </TableHead>
+                    <TableBody>
+                        {data.map((item) => (
+                            <TableRow
+                                key={item._id}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    {item.name}
+                                </TableCell>
+                                <TableCell>{item.note}⭐</TableCell>
+                                <TableCell>{item.city}</TableCell>
+                                <TableCell>{item.priceRange}</TableCell>
+                                <TableCell>{item.type}</TableCell>
+                                <TableCell>{item.description}</TableCell>
+                                <TableCell>{item.telephone}</TableCell>
+                                <TableCell>{item.adresse}</TableCell>
+                                <TableCell><img height="144" width="256" src={`${process.env.PUBLIC_URL}/assets/img/resto/${item.img}`}
+                                                alt={`/asset/img/resto/${item.img}`}/></TableCell>
+                                <TableCell><><Link to={"/book"} state={item._id} onClick={handleLink}><button>Réservez</button></Link></></TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <Modal show={showModal} handleClose={() => setShowModal(false)}>
+                <p>Veuillez vous connecter en tant qu'utilisateur</p>
+                <button onClick={() => setShowModal(false)}>Close</button>
+            </Modal>
+        </>
     );
 }
 

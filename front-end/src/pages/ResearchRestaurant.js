@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Button } from "reactstrap";
 import Search from "../components/Search";
 import { useSelector } from "react-redux";
