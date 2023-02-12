@@ -231,8 +231,12 @@ const Book = (props) => {
         }
       } catch (err) {
         console.log(err);
-        responseDisplay[0].innerHTML =
-          "Une erreur s'est produite veuillez recommencer";
+        if (err.response && err.response.data && err.response.data.message) {
+          responseDisplay[0].innerHTML = err.response.data.message;
+        } else {
+          responseDisplay[0].innerHTML =
+            "Une erreur s'est produite veuillez recommencer";
+        }
       }
       //res = await res.text();
       //table-display-message
