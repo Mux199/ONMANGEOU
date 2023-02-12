@@ -17,13 +17,16 @@ const PlanningResa = ({ layout, message, displaySensitiveInfo }) => {
                         <div key={i} className="chair"></div>
                       ))}
                   </div>
-                  <div className="table">
+                  <div
+                    className={
+                      table.resa ? "table reserved" : "table notReserved"
+                    }
+                  >
+                    <p>T {tableIndex + 1}</p>
                     <p>
-                      Table {tableIndex + 1} - Chairs {table.placeUse}/
-                      {table.placeTotal}
+                      Chairs {table.placeUse}/{table.placeTotal}
                     </p>
-                    <p>Reservation: {table.resa || "None"}</p>
-                    <p>Last Name: {table.lastname}</p>
+                    <p>{table.resa ? table.lastname : "libre"}</p>
                   </div>
                   <div className="chairsDown">
                     {Array(Math.ceil(table.placeTotal / 2))

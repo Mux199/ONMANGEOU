@@ -20,6 +20,19 @@
 
    .table {
     border: 5px solid #fece00;
+    border-radius: 20px;
+    padding:10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   }
+
+   .reserved {
+    border: 5px solid #fece00;
+   }
+
+   .notReserved {
+    border: 5px solid #59C994;
    }
 
     .planningCol {
