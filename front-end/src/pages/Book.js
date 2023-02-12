@@ -170,10 +170,6 @@ const Book = (props) => {
       (booking.user === 0) |
       (booking.hour == null)
     ) {
-      setBooking({
-        ...booking,
-        date: getDate(booking.date),
-      });
       console.log("Informations incomplètes");
       console.log("booking.hour");
       console.log(booking.hour);
@@ -191,6 +187,10 @@ const Book = (props) => {
           body: booking,
         }
       );*/
+      setBooking({
+        ...booking,
+        date: getDate(booking.date),
+      });
       console.log("booking");
       console.log(booking);
       var responseDisplay = document.getElementsByClassName(

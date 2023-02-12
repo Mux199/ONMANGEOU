@@ -155,15 +155,10 @@ function cancelResa(matrix, flattenedArray, id, places) {
 
 module.exports.addReservation = async (req, res) => {
   const { restaurant, user, nbClients, date, hour, lastname } = req.body;
-  console.log("req.body");
-  console.log(req.body);
-  console.log("hour");
-
-  console.log(hour);
-
   // le système choisit la place
   // on ajoute dans reservation
   let dateFormat = new Date(date);
+  dateFormat.setHours(0, 0, 0, 0);
   let time;
   if (
     hour.includes("12H00") ||
@@ -181,6 +176,7 @@ module.exports.addReservation = async (req, res) => {
       restaurant: restaurant,
       hours: hour,
     }).exec();
+
     if (!resaUser) {
       const planning = await PlanningModel.findOne({
         restaurant: restaurant,
@@ -192,13 +188,10 @@ module.exports.addReservation = async (req, res) => {
         const restau = await RestaurantModel.findById({
           _id: restaurant,
         }).exec();
+
         let flattened = flattenArray(restau.places);
-        console.log("flattened");
-        console.log(flattened);
         const possible = possibleReservation(flattened, nbClients);
         if (!possible) {
-          console.log(!possible);
-
           return res.status(400).send({
             message:
               "Il n'y a plus de places disponibles pour le nombre de client voulu",
@@ -290,7 +283,6 @@ module.exports.addReservation = async (req, res) => {
             });
           })
           .catch((err) => {
-            console.log("console log 4");
             return res.status(500).send({ message: err });
           });
       }

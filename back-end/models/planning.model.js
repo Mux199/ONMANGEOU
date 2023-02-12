@@ -9,6 +9,7 @@ const planningSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
+    unique: false,
   },
   hours: {
     type: String,
