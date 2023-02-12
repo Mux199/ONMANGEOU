@@ -222,6 +222,9 @@ const Book = (props) => {
         console.log("la res de axios");
         console.log(res.data);
         if (res.data.planning) {
+          console.log(res.data.planning);
+          console.log(res.data.planning.layout);
+
           responseDisplay[0].innerHTML = res.data.message;
           setMessageResponse(res.data.message);
           setPlanning(res.data.planning.layout);
@@ -249,7 +252,7 @@ const Book = (props) => {
       const element = document.getElementsByClassName("table-display-message");
       element.innerHTML = "";
       planning.forEach((item) => {
-        element.innerHTML += React.renderToString(<PlanningResa item={item} />);
+        element.innerHTML += <PlanningResa item={item} />;
       });
     }
   }, [planning]);

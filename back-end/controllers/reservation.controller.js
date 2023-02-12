@@ -287,6 +287,7 @@ module.exports.addReservation = async (req, res) => {
             });
           })
           .catch((err) => {
+            console.log("console log 4");
             return res.status(500).send({ message: err });
           });
       }
@@ -294,11 +295,10 @@ module.exports.addReservation = async (req, res) => {
       // il y a deja une reservation
       // on renvoit un message d'erreur comme quoi une reservation existe
       console.log(
-        "Vous avez déjà une reservation à cette date et meme tranche horaire (midi ou soir)"
+        "Vous avez déjà une reservation à cette date et meme horaire"
       );
       return res.status(400).send({
-        message:
-          "Vous avez déjà une reservation à cette date et meme tranche horaire (midi ou soir)",
+        message: "Vous avez déjà une reservation à cette date et meme horaire",
       });
     }
   } catch (err) {
