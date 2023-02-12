@@ -310,7 +310,9 @@ module.exports.addReservation = async (req, res) => {
       console.log("apres resauser");
       // il y a deja une reservation
       // on renvoit un message d'erreur comme quoi une reservation existe
-      console.log("Vous avez déjà une reservation à cette date et meme heure");
+      console.log(
+        "Vous avez déjà une reservation à cette date et meme tranche horaire (midi ou soir)"
+      );
       return res.status(400).send({
         message: "Vous avez déjà une reservation à cette date et meme heure",
       });

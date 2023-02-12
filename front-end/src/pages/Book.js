@@ -238,8 +238,6 @@ const Book = (props) => {
             "Une erreur s'est produite veuillez recommencer";
         }
       }
-      //res = await res.text();
-      //table-display-message
     }
   };
 
