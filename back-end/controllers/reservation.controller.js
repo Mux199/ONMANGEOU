@@ -314,7 +314,8 @@ module.exports.addReservation = async (req, res) => {
         "Vous avez déjà une reservation à cette date et meme tranche horaire (midi ou soir)"
       );
       return res.status(400).send({
-        message: "Vous avez déjà une reservation à cette date et meme heure",
+        message:
+          "Vous avez déjà une reservation à cette date et meme tranche horaire (midi ou soir)",
       });
     }
   } catch (err) {
