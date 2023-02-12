@@ -157,8 +157,6 @@ module.exports.addReservation = async (req, res) => {
   const { restaurant, user, nbClients, date, hour, lastname } = req.body;
   console.log("req.body");
   console.log(req.body);
-  console.log("hour");
-  console.log(hour);
 
   // le système choisit la place
   // on ajoute dans reservation
@@ -181,7 +179,6 @@ module.exports.addReservation = async (req, res) => {
       time: time,
     }).exec();
     if (!resaUser) {
-      console.log("apres !resauser");
       const planning = await PlanningModel.findOne({
         restaurant: restaurant,
         hours: hour,
@@ -192,20 +189,11 @@ module.exports.addReservation = async (req, res) => {
         const restau = await RestaurantModel.findById({
           _id: restaurant,
         }).exec();
-        console.log("apres planning == null");
-        console.log("restau");
-
-        console.log(restau);
-
-        console.log(restau.places);
-
         let flattened = flattenArray(restau.places);
         console.log("flattened");
         console.log(flattened);
         const possible = possibleReservation(flattened, nbClients);
-        console.log("apres possible resa");
         if (!possible) {
-          console.log("apres !possible");
           console.log(!possible);
 
           return res.status(400).send({
@@ -222,7 +210,6 @@ module.exports.addReservation = async (req, res) => {
           nbClients,
           statut: "confirmé",
         });
-        console.log("apres resa");
 
         let { newMatrix, flattened2, remainingPlaces } =
           findBestPositionAndCreate(
@@ -233,7 +220,6 @@ module.exports.addReservation = async (req, res) => {
             restau.nbplaces,
             lastname
           );
-        console.log("apres newmatrixx");
 
         const createPlanning = await PlanningModel.create({
           restaurant,
@@ -244,7 +230,6 @@ module.exports.addReservation = async (req, res) => {
           remainingPlaces,
           totalPlaces: restau.nbplaces,
         });
-        console.log("apres create pla,,og,");
         return res.status(201).json({
           planning: createPlanning,
           reservation: reservation,
@@ -253,7 +238,6 @@ module.exports.addReservation = async (req, res) => {
       } else {
         // Le planning a déjà été instancié
         // choisir la place la plus adapté
-        console.log("apres planning != null");
 
         const possible = possibleReservation(planning.disponibility, nbClients);
         if (!possible) {
@@ -307,7 +291,6 @@ module.exports.addReservation = async (req, res) => {
           });
       }
     } else {
-      console.log("apres resauser");
       // il y a deja une reservation
       // on renvoit un message d'erreur comme quoi une reservation existe
       console.log(

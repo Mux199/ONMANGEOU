@@ -222,7 +222,7 @@ const Book = (props) => {
         console.log("la res de axios");
         console.log(res.data);
         if (res.data.planning) {
-          responseDisplay[0].innerHTML = PlanningResa();
+          responseDisplay[0].innerHTML = res.data.message;
           setMessageResponse(res.data.message);
           setPlanning(res.data.planning.layout);
         } else {
