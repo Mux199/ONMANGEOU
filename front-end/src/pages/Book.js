@@ -231,7 +231,8 @@ const Book = (props) => {
         }
       } catch (err) {
         console.log(err);
-        //responseDisplay[0].innerHTML = res.data.message;
+        responseDisplay[0].innerHTML =
+          "Une erreur s'est produite veuillez recommencer";
       }
       //res = await res.text();
       //table-display-message
