@@ -176,7 +176,7 @@ module.exports.addReservation = async (req, res) => {
       user: user,
       date: dateFormat,
       restaurant: restaurant,
-      time: time,
+      hours: hour,
     }).exec();
     if (!resaUser) {
       const planning = await PlanningModel.findOne({
