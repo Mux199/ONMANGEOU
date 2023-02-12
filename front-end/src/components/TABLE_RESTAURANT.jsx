@@ -20,11 +20,17 @@ export default function Table_Restaurant ({ data }) {
       }, []);
 
     const handleLink = function (event) {
-        event.preventDefault();
+        /*event.preventDefault();
         console.log(myUserData)
+        if(myUserData && myUserData.users) {
+            console.log(myUserData)
+
+        }
         console.log(event)
         console.log("click handlelink")
+        */
         console.log(event.target.value)
+        
     }
     console.log("restaurant id ")
     console.log("restaurant id ")
