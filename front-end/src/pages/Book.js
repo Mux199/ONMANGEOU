@@ -185,7 +185,7 @@ const Book = (props) => {
       (booking.lastname.length === 0) |
       (booking.restaurant.length === 0) |
       (booking.user === 0) |
-      (selection.time === null)
+      (booking.hour === null)
     ) {
       console.log("Informations incomplètes");
       setReservationError(true);
