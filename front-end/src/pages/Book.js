@@ -13,7 +13,7 @@ import {
 } from "reactstrap";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addResa } from "../store/reducers/actions/addResa.actions";
+import ReactDOM from "react-dom";
 import PlanningResa from "../components/PlanningResa";
 function printPlanning(matrix) {}
 
@@ -225,7 +225,7 @@ const Book = (props) => {
           console.log(res.data.planning);
           console.log(res.data.planning.layout);
 
-          responseDisplay[0].innerHTML = res.data.message;
+          //responseDisplay[0].innerHTML = res.data.message;
           setMessageResponse(res.data.message);
           setPlanning(res.data.planning.layout);
         } else {
@@ -247,13 +247,15 @@ const Book = (props) => {
   useEffect(() => {
     handleResa();
   }, []);
+
   useEffect(() => {
     if (planning) {
-      const element = document.getElementsByClassName("table-display-message");
-      element.innerHTML = "";
-      planning.forEach((item) => {
-        element.innerHTML += <PlanningResa item={item} />;
-      });
+      const rootElement = document.getElementsByClassName(
+        "table-display-message"
+      )[0];
+      ReactDOM.createRoot(rootElement).render(
+        <PlanningResa layout={planning} message={messageResponse} />
+      );
     }
   }, [planning]);
 

@@ -3,6 +3,7 @@ import React from "react";
 const PlanningResa = ({ layout, message, displaySensitiveInfo }) => {
   return (
     <div>
+      <div>{message}</div>
       {layout.map((tableRow, rowIndex) => {
         return (
           <div key={rowIndex}>
