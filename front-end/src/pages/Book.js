@@ -20,20 +20,12 @@ function printPlanning(matrix) {}
 //export default (props) => {
 const Book = (props) => {
   const dispatch = useDispatch();
-  let { state } = useLocation();
-  console.log("state");
+  let location = useLocation();
+  const search = location.search;
+  const queryParams = new URLSearchParams(search);
+  const id = queryParams.get("id");
 
   const userData = useSelector((state) => state.rootReducer.userReducer);
-  /*if (userData && userData.users) {
-    setUserData(userData.users);
-  }*/
-  console.log("userData");
-
-  console.log(userData);
-
-  //setUserData(userData.users);
-
-  console.log(state);
   const [totalTables] = useState([]);
   const [planning, setPlanning] = useState([]);
   const [messageResponse, setMessageResponse] = useState([]);
@@ -50,7 +42,7 @@ const Book = (props) => {
     date: date,
     location: "Emplacement",
     nbClients: 0,
-    restaurant: state,
+    restaurant: id,
   });
 
   useEffect(() => {

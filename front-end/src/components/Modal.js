@@ -5,10 +5,7 @@ function Modal({ handleClose, show, children }) {
 
   return (
     <div className={showHideClassName}>
-      <section className="modal-main">
-        {children}
-        <button onClick={handleClose}>Close</button>
-      </section>
+      <section className="modal-main">{children}</section>
     </div>
   );
 }

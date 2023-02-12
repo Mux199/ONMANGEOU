@@ -3,9 +3,26 @@
 }
 
 .modal.display-block {
-    display: block;
-}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+  }
 
 .modal.display-none {
     display: none;
 }
+
+.modal-main {
+    background-color: white;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 1050;   
+    filter: blur(0px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }

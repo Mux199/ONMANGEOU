@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import Modal from "./Modal";
 
 export default function Table_Restaurant ({ data }) {
+
       const userData = useSelector((state) => state.rootReducer.userReducer);
       const [actualUserData, setActualUserData] = useState({
         _id: userData && userData.users ? userData.users._id : "",
@@ -31,16 +32,22 @@ export default function Table_Restaurant ({ data }) {
         }
       }, [userData]);
     
-    const handleLink = function (event) {
+    const handleLink = function (event, itemId) {
         //event.preventDefault();
         console.log(event)
         console.log("actualUserData")
         console.log(actualUserData)
-        if (!actualUserData.role || actualUserData.role !== "user"){
+        if (actualUserData.role !== "user") {
+            console.log("dans le if ")
+            console.log(!actualUserData.role)
+            console.log(actualUserData.role !== "user")
             setShowModal(true);
         } else {
+            console.log("dans le else ")
             setShowModal(false);
-            //return <Link to={"/book"} state={item._id}></Link>
+            window.location.assign("/book?id=" + itemId);
+
+            console.log("after dans le else ")
         }
     }
 
@@ -78,7 +85,7 @@ export default function Table_Restaurant ({ data }) {
                                 <TableCell>{item.adresse}</TableCell>
                                 <TableCell><img height="144" width="256" src={`${process.env.PUBLIC_URL}/assets/img/resto/${item.img}`}
                                                 alt={`/asset/img/resto/${item.img}`}/></TableCell>
-                                <TableCell><><Link to={"/book"} state={item._id} onClick={handleLink}><button>Réservez</button></Link></></TableCell>
+                                <TableCell><><button onClick={(event) => handleLink(event, item._id)}>Réservez</button></></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
