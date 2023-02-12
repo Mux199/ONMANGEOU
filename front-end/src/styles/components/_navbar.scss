@@ -62,3 +62,25 @@ font-style: italic;
     color: black;
     font-style: oblique;
 }
+
+@media only screen and (max-width: 600px) {
+    .nav-links .connexion, .nav-links .signUpUser, .nav-links .logout, .nav-links .profil {
+        line-height: 1.5;
+        letter-spacing: 1.1px;
+        padding: 5px 10px;
+        border-radius: 20px;
+        border-style: solid;
+        border-width: 0px;
+        font-size: 13px;
+    }
+
+    .nav-links .signUpUser, .nav-links .logout  {
+        margin-right: 10px;
+    }
+
+    .nav-links .connexion, .nav-links .profil  {
+        margin-right: 20px;
+    }
+    
+    
+  }
