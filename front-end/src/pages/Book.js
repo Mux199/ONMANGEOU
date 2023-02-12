@@ -185,7 +185,7 @@ const Book = (props) => {
       (booking.lastname.length === 0) |
       (booking.restaurant.length === 0) |
       (booking.user === 0) |
-      (selection.time == null)
+      (selection.time === null)
     ) {
       console.log("Informations incomplètes");
       setReservationError(true);
@@ -351,7 +351,7 @@ const Book = (props) => {
     //     <h1 className="Entete">ONMANGEOÙ</h1>
 
     // </div>
-    <div>
+    <div className="book">
       <Row noGutters className="text-center">
         <Col>
           <p className="looking-for-restaurant">
