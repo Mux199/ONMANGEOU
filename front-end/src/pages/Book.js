@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Table from "./Table";
+import axios from "axios";
 import {
   Row,
   Col,
@@ -13,6 +14,7 @@ import {
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addResa } from "../store/reducers/actions/addResa.actions";
+import PlanningResa from "../components/PlanningResa";
 function printPlanning(matrix) {}
 
 //export default (props) => {
@@ -22,23 +24,26 @@ const Book = (props) => {
   console.log("state");
 
   const userData = useSelector((state) => state.rootReducer.userReducer);
-  const [userDataNew, setUserData] = useState(userData);
+  const [userDataNew, setUserData] = useState({
+    lastname: "",
+    user: "",
+    _id: "",
+  });
+  /*if (userData && userData.users) {
+    setUserData(userData.users);
+  }*/
+  console.log("userData");
 
-  useEffect(() => {
-    setUserData(userDataNew);
-  }, []);
+  console.log(userData);
+  console.log("userDataNew");
 
-  const [nbClient, setNbClient] = useState(0);
-  const handleNbClient = function (event) {
-    console.log(event);
-  };
+  //setUserData(userData.users);
+  console.log(userDataNew);
 
   console.log(state);
-  console.log("props book ");
-  console.log(props);
-  console.log(props.id);
-  const idRestaurant = useState(props.id);
   const [totalTables] = useState([]);
+  const [planning, setPlanning] = useState([]);
+  const [messageResponse, setMessageResponse] = useState([]);
   const [selection, setSelection] = useState({
     table: {
       name: null,
@@ -49,63 +54,69 @@ const Book = (props) => {
     location: "Emplacement",
     size: 0,
   });
-
+  console.log("selection");
+  console.log(selection);
   let date = new Date();
 
   const [booking, setBooking] = useState({
-    name: "",
-    phone: "",
-    email: "",
+    lastname: userDataNew.lastname,
+    user: userDataNew._id,
+    email: userDataNew.lastname,
+    hour: selection.time,
+    date: selection.date,
+    nbClients: selection.size,
+    restaurant: state,
   });
-  const [resa, setResa] = useState(null);
-  const handleResa = function () {
+
+  useEffect(() => {
+    if (userData && userData.users) setUserData(userData.users);
+    console.log(userDataNew);
+  }, []);
+
+  useEffect(() => {
+    console.log("booking");
+
+    setBooking({
+      lastname: userDataNew.lastname,
+      user: userDataNew._id,
+      email: userDataNew.lastname,
+      hour: selection.time,
+      date: selection.date,
+      nbClients: selection.size,
+      restaurant: state,
+    });
+    console.log(booking);
+  }, []);
+  /*
+  const handleResa2 = function () {
     console.log("handleresa");
     //restaurant, user, nbClients, date, hour, lastname;
 
-    setResa(dispatch(addResa(state, userDataNew._id)));
+    //setResa(dispatch(addResa(state, userDataNew._id)));
     console.log(resa);
   };
+  */
   const [locations] = useState(["Intérieur"]);
   const [times] = useState([
-    "12H",
-    "13H",
-    "14H",
-    "18H",
-    "19H",
-    "20H",
-    "21H",
-    "22H",
+    "12H00",
+    "13H00",
+    "14H00",
+    "18H00",
+    "19H00",
+    "20H00",
+    "21H00",
+    "22H00",
   ]);
 
   const [reservationError, setReservationError] = useState(false);
 
-  const getDate = (_) => {
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-
-    const date =
-      months[selection.date.getMonth()] +
-      " " +
-      selection.date.getDate() +
-      " " +
-      selection.date.getFullYear();
-    let time = selection.time.slice(0, -2);
-    time = selection.time > 24 ? time + 24 + ":00" : time + ":00";
-    console.log(time);
-    const datetime = new Date(date + " " + time);
-    return datetime;
+  const getDate = (date) => {
+    const date2 = new Date(date);
+    const year = date2.getFullYear();
+    const month = `0${date2.getMonth() + 1}`.slice(-2);
+    const day = `0${date2.getDate()}`.slice(-2);
+    const formattedDate = `${month}/${day}/${year}`;
+    return formattedDate;
   };
 
   const getEmptyTables = (_) => {
@@ -149,32 +160,96 @@ const Book = (props) => {
     return newTimes;
   };
 
-  const reserver = async (_) => {
+  const handleResa = async (event) => {
+    event.preventDefault();
+    console.log("booking");
+    console.log(booking);
+    console.log("date");
+    console.log(getDate(selection.date));
+    console.log("time");
+    console.log(selection.time);
+
+    setBooking({
+      lastname: userDataNew.lastname,
+      user: userDataNew._id,
+      hour: selection.time,
+      date: getDate(selection.date),
+      nbClients: selection.size,
+      restaurant: state,
+    });
+    console.log("booking");
+    console.log(booking);
     if (
-      (booking.name.length === 0) |
-      (booking.phone.length === 0) |
-      (booking.email.length === 0)
+      (booking.lastname.length === 0) |
+      (booking.restaurant.length === 0) |
+      (booking.user === 0) |
+      (selection.time == null)
     ) {
       console.log("Informations incomplètes");
       setReservationError(true);
     } else {
       const datetime = getDate();
-      let res = await fetch("http://localhost:5000/book", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...booking,
-          date: datetime,
-          table: selection.table.id,
-        }),
-      });
-      res = await res.text();
-      console.log("La révervation est faite: " + res);
-      Book.setPage(2);
+      /*
+      let res = await fetch(
+        `${process.env.REACT_APP_API_URL}api/reservation/addReservation/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: booking,
+        }
+      );*/
+      console.log("booking");
+      console.log(booking);
+      var responseDisplay = document.getElementsByClassName(
+        "table-display-message"
+      );
+      try {
+        let res = await axios({
+          method: "post",
+          url: `${process.env.REACT_APP_API_URL}api/reservation/addReservation/`,
+          withCredentials: true,
+          data: booking,
+        });
+        console.log(res);
+        console.log(
+          "La révervation est faite: " + res.data && res.data.message
+            ? res.data.message
+            : "vide"
+        );
+
+        console.log("la res de axios");
+        console.log(res.data);
+        if (res.data.planning) {
+          responseDisplay[0].innerHTML = PlanningResa();
+          setMessageResponse(res.data.message);
+          setPlanning(res.data.planning.layout);
+        } else {
+          responseDisplay[0].innerHTML = res.data.message;
+          setMessageResponse(res.data.message);
+        }
+      } catch (err) {
+        console.log(err);
+        responseDisplay[0].innerHTML = res.data.message;
+      }
+      //res = await res.text();
+      //table-display-message
     }
   };
+
+  useEffect(() => {
+    handleResa();
+  }, []);
+  useEffect(() => {
+    if (planning) {
+      const element = document.getElementsByClassName("table-display-message");
+      element.innerHTML = "";
+      planning.forEach((item) => {
+        element.innerHTML += React.renderToString(<PlanningResa item={item} />);
+      });
+    }
+  }, [planning]);
 
   // Generating tables from available tables state
   const getTables = (_) => {
@@ -349,12 +424,7 @@ const Book = (props) => {
             </Col>
             <Col xs="12" sm="3">
               <UncontrolledDropdown>
-                <DropdownToggle
-                  color="none"
-                  caret
-                  className="booking-dropdown"
-                  onChange={handleNbClient}
-                >
+                <DropdownToggle color="none" caret className="booking-dropdown">
                   {selection.size === 0
                     ? "Choisir le nombre de place"
                     : selection.size.toString()}
@@ -405,53 +475,7 @@ const Book = (props) => {
           <Row
             noGutters
             className="text-center justify-content-center reservation-details-container"
-          >
-            <Col xs="12" sm="3" className="reservation-details">
-              <Input
-                type="text"
-                bsSize="lg"
-                placeholder="Name"
-                className="reservation-input"
-                value={booking.name}
-                onChange={(e) => {
-                  setBooking({
-                    ...booking,
-                    name: e.target.value,
-                  });
-                }}
-              />
-            </Col>
-            <Col xs="12" sm="3" className="reservation-details">
-              <Input
-                type="text"
-                bsSize="lg"
-                placeholder="Phone Number"
-                className="reservation-input"
-                value={booking.phone}
-                onChange={(e) => {
-                  setBooking({
-                    ...booking,
-                    phone: e.target.value,
-                  });
-                }}
-              />
-            </Col>
-            <Col xs="12" sm="3" className="reservation-details">
-              <Input
-                type="text"
-                bsSize="lg"
-                placeholder="Email"
-                className="reservation-input"
-                value={booking.email}
-                onChange={(e) => {
-                  setBooking({
-                    ...booking,
-                    email: e.target.value,
-                  });
-                }}
-              />
-            </Col>
-          </Row>
+          ></Row>
         </div>
       )}
     </div>
