@@ -8,10 +8,7 @@ export default (props) => {
     <div className="main">
       <Row className="header-main align">
         <Link to={"/rechercheRestaurant"}>
-          <img
-            src={require("../assets/img/header.png")}
-            style={{ width: "auto", height: "70vh" }}
-          />
+          <ReactSVG src="./header.svg" />
         </Link>
       </Row>
     </div>

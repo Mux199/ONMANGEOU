@@ -5,6 +5,8 @@ import { Row, Col } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTelephone } from "../store/reducers/actions/user.actions";
 //import { cancelReservation } from "../store/reducers/actions/reservation.actions";
+import { getUserResa } from "../store/reducers/actions/reservation.action";
+import Table_Reservation from "../components/TABLE_RESERVATION";
 
 import { dateParser } from "../components/Utils";
 
@@ -15,21 +17,20 @@ const styles = {
 
 export default function UserProfil() {
   const [uid, setUid] = useContext(UidContext);
-
+  const dispatch = useDispatch();
+  console.log("UidContext");
+  console.log(UidContext);
   const userData = useSelector((state) => state.rootReducer.userReducer);
   const restausData = useSelector((state) => state.rootReducer.restausReducer);
   const resaData = useSelector((state) => state.rootReducer.resaReducer);
-
+  //dispatch(getUserResa(uid._id));
   console.log(restausData);
   console.log(resaData);
-
-  const dispatch = useDispatch();
-
   const [myResaData, setMyResaData] = useState(resaData);
 
   useEffect(() => {
     setMyResaData(resaData);
-  }, []);
+  }, [resaData]);
 
   console.log("myResaData");
   console.log(myResaData);
@@ -74,7 +75,15 @@ export default function UserProfil() {
             <Row className="reservation">
               <h1>Reservation</h1>
               <Row className="resa-container">
-                {Array.isArray(myResaData) &&
+                {Array.isArray(myResaData) && myResaData ? (
+                  <Table_Reservation data={myResaData} />
+                ) : (
+                  <Table_Reservation data={[]} />
+                )}
+              </Row>
+            </Row>
+          )}
+          {/*Array.isArray(myResaData) &&
                   typeof myResaData.map === "function" &&
                   myResaData.map((item, index) => (
                     <div key={index} id={item.id}>
@@ -100,7 +109,7 @@ export default function UserProfil() {
                   ))}
               </Row>
             </Row>
-          )}
+                        )*/}
           {navigation == "Informations personnelles" && (
             <Row className="info-perso">
               <h1>Informations personnelles</h1>

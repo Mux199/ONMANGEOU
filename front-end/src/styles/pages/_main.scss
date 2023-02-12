@@ -3,6 +3,7 @@
     height: 50vh;
     display: flex;
     justify-content: center;
+
 }// .restaurantname-btn{
 
 //     color: black;
@@ -27,4 +28,9 @@ img {
 
 .header-main {
     justify-content: center;
+}
+
+.header-main svg {
+    height: 78vh;
+    width: 100%;
 }

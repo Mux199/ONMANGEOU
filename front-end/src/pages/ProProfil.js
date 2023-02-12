@@ -20,6 +20,7 @@ export default function ProProfil() {
 
   const [uid, setUid] = useContext(UidContext);
   const userData = useSelector((state) => state.rootReducer.userReducer);
+
   console.log(userData);
   console.log("uid");
   console.log(uid);
