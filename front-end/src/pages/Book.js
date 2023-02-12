@@ -63,33 +63,6 @@ const Book = (props) => {
     }
   }, [userData]);
 
-  console.log("booking");
-  console.log(booking);
-
-  /*
-  useEffect(() => {
-    console.log("booking");
-
-    setBooking({
-      lastname: userDataNew.lastname,
-      user: userDataNew._id,
-      email: userDataNew.lastname,
-      hour: selection.time,
-      date: selection.date,
-      nbClients: selection.size,
-      restaurant: state,
-    });
-    console.log(booking);
-  }, []);*/
-  /*
-  const handleResa2 = function () {
-    console.log("handleresa");
-    //restaurant, user, nbClients, date, hour, lastname;
-
-    //setResa(dispatch(addResa(state, userDataNew._id)));
-    console.log(resa);
-  };
-  */
   const [locations] = useState(["Intérieur"]);
   const [times] = useState([
     "12H00",
@@ -155,15 +128,6 @@ const Book = (props) => {
     if (event && event.preventDefault) {
       event.preventDefault();
     }
-    console.log("booking");
-    console.log(booking);
-    console.log("date");
-    console.log(getDate(booking.date));
-    console.log("time");
-    console.log(booking.hour);
-
-    console.log("booking");
-    console.log(booking);
     if (
       (booking.lastname.length === 0) |
       (booking.restaurant.length === 0) |
@@ -171,10 +135,10 @@ const Book = (props) => {
       (booking.hour == null)
     ) {
       console.log("Informations incomplètes");
-      console.log("booking.hour");
-      console.log(booking.hour);
       setReservationError(true);
     } else {
+      setReservationError(false);
+
       const datetime = getDate();
       /*
       let res = await fetch(
@@ -191,35 +155,23 @@ const Book = (props) => {
         ...booking,
         date: getDate(booking.date),
       });
-      console.log("booking");
-      console.log(booking);
       var responseDisplay = document.getElementsByClassName(
         "table-display-message"
       );
       try {
-        console.log("booking.hour");
-        console.log(booking.hour);
-        console.log("booking");
-        console.log(booking);
         let res = await axios({
           method: "post",
           url: `${process.env.REACT_APP_API_URL}api/reservation/addReservation/`,
           withCredentials: true,
           data: booking,
         });
-        console.log(res);
         console.log(
           "La révervation est faite: " + res.data && res.data.message
             ? res.data.message
             : "vide"
         );
 
-        console.log("la res de axios");
-        console.log(res.data);
         if (res.data.planning) {
-          console.log(res.data.planning);
-          console.log(res.data.planning.layout);
-
           //responseDisplay[0].innerHTML = res.data.message;
           setMessageResponse(res.data.message);
           setPlanning(res.data.planning.layout);
