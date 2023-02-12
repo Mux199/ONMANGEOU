@@ -157,6 +157,9 @@ module.exports.addReservation = async (req, res) => {
   const { restaurant, user, nbClients, date, hour, lastname } = req.body;
   console.log("req.body");
   console.log(req.body);
+  console.log("hour");
+
+  console.log(hour);
 
   // le système choisit la place
   // on ajoute dans reservation

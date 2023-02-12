@@ -24,55 +24,49 @@ const Book = (props) => {
   console.log("state");
 
   const userData = useSelector((state) => state.rootReducer.userReducer);
-  const [userDataNew, setUserData] = useState({
-    lastname: "",
-    user: "",
-    _id: "",
-  });
   /*if (userData && userData.users) {
     setUserData(userData.users);
   }*/
   console.log("userData");
 
   console.log(userData);
-  console.log("userDataNew");
 
   //setUserData(userData.users);
-  console.log(userDataNew);
 
   console.log(state);
   const [totalTables] = useState([]);
   const [planning, setPlanning] = useState([]);
   const [messageResponse, setMessageResponse] = useState([]);
-  const [selection, setSelection] = useState({
+  let date = new Date();
+
+  const [booking, setBooking] = useState({
     table: {
       name: null,
       id: null,
     },
-    date: new Date(),
-    time: null,
+    lastname: userData.lastname,
+    user: userData._id,
+    hour: null,
+    date: date,
     location: "Emplacement",
-    size: 0,
-  });
-  console.log("selection");
-  console.log(selection);
-  let date = new Date();
-
-  const [booking, setBooking] = useState({
-    lastname: userDataNew.lastname,
-    user: userDataNew._id,
-    email: userDataNew.lastname,
-    hour: selection.time,
-    date: selection.date,
-    nbClients: selection.size,
+    nbClients: 0,
     restaurant: state,
   });
 
+  console.log("booking");
+  console.log(booking);
+
   useEffect(() => {
-    if (userData && userData.users) setUserData(userData.users);
-    console.log(userDataNew);
+    if (userData && userData.users) {
+      setBooking({
+        ...booking,
+        user: userData.users._id,
+        lastname: userData.users.lastname,
+      });
+    }
   }, []);
 
+  /*
   useEffect(() => {
     console.log("booking");
 
@@ -86,7 +80,7 @@ const Book = (props) => {
       restaurant: state,
     });
     console.log(booking);
-  }, []);
+  }, []);*/
   /*
   const handleResa2 = function () {
     console.log("handleresa");
@@ -126,8 +120,8 @@ const Book = (props) => {
 
   // Clicking on a table sets the selection state
   const selectTable = (table_name, table_id) => {
-    setSelection({
-      ...selection,
+    setBooking({
+      ...booking,
       table: {
         name: table_name,
         id: table_id,
@@ -144,13 +138,10 @@ const Book = (props) => {
           className="booking-dropdown-item"
           onClick={(_) => {
             let newSel = {
-              ...selection,
-              table: {
-                ...selection.table,
-              },
-              time: time,
+              ...booking,
+              hour: time,
             };
-            setSelection(newSel);
+            setBooking(newSel);
           }}
         >
           {time}
@@ -167,27 +158,25 @@ const Book = (props) => {
     console.log("booking");
     console.log(booking);
     console.log("date");
-    console.log(getDate(selection.date));
+    console.log(getDate(booking.date));
     console.log("time");
-    console.log(selection.time);
+    console.log(booking.hour);
 
-    setBooking({
-      lastname: userDataNew.lastname,
-      user: userDataNew._id,
-      hour: selection.time,
-      date: getDate(selection.date),
-      nbClients: selection.size,
-      restaurant: state,
-    });
     console.log("booking");
     console.log(booking);
     if (
       (booking.lastname.length === 0) |
       (booking.restaurant.length === 0) |
       (booking.user === 0) |
-      (booking.hour === null)
+      (booking.hour == null)
     ) {
+      setBooking({
+        ...booking,
+        date: getDate(booking.date),
+      });
       console.log("Informations incomplètes");
+      console.log("booking.hour");
+      console.log(booking.hour);
       setReservationError(true);
     } else {
       const datetime = getDate();
@@ -208,6 +197,10 @@ const Book = (props) => {
         "table-display-message"
       );
       try {
+        console.log("booking.hour");
+        console.log(booking.hour);
+        console.log("booking");
+        console.log(booking);
         let res = await axios({
           method: "post",
           url: `${process.env.REACT_APP_API_URL}api/reservation/addReservation/`,
@@ -302,15 +295,12 @@ const Book = (props) => {
         <DropdownItem
           key={i}
           className="booking-dropdown-item"
-          onClick={(e) => {
+          onClick={(_) => {
             let newSel = {
-              ...selection,
-              table: {
-                ...selection.table,
-              },
-              size: i,
+              ...booking,
+              nbClients: i,
             };
-            setSelection(newSel);
+            setBooking(newSel);
           }}
         >
           {i}
@@ -330,13 +320,10 @@ const Book = (props) => {
           className="booking-dropdown-item"
           onClick={(_) => {
             let newSel = {
-              ...selection,
-              table: {
-                ...selection.table,
-              },
+              ...booking,
               location: loc,
             };
-            setSelection(newSel);
+            setBooking(newSel);
           }}
         >
           {loc}
@@ -355,18 +342,18 @@ const Book = (props) => {
       <Row noGutters className="text-center">
         <Col>
           <p className="looking-for-restaurant">
-            {!selection.table.id
+            {!booking.table.id
               ? "Réserver une Table"
               : "Confirmer la réservation"}
             <i
               className={
-                !selection.table.id ? "fas fa-chair" : "fas fa-clipboard-check"
+                !booking.table.id ? "fas fa-chair" : "fas fa-clipboard-check"
               }
             ></i>
           </p>
           <p className="selected-table">
-            {selection.table.id
-              ? "Vous reservez une table " + selection.table.name
+            {booking.table.id
+              ? "Vous reservez une table " + booking.table.name
               : null}
           </p>
 
@@ -378,7 +365,7 @@ const Book = (props) => {
         </Col>
       </Row>
 
-      {!selection.table.id ? (
+      {!booking.table.id ? (
         <div id="reservation-stuff">
           <Row noGutters className="text-center align-items-center">
             <Col xs="12" sm="3">
@@ -387,27 +374,21 @@ const Book = (props) => {
                 type="date"
                 required="required"
                 className="booking-dropdown"
-                value={selection.date.toISOString().split("T")[0]}
+                value={date.toISOString().split("T")[0]}
                 onChange={(e) => {
                   if (!isNaN(new Date(new Date(e.target.value)))) {
                     let newSel = {
-                      ...selection,
-                      table: {
-                        ...selection.table,
-                      },
+                      ...booking,
                       date: new Date(e.target.value),
                     };
-                    setSelection(newSel);
+                    setBooking(newSel);
                   } else {
                     console.log("Invalid date");
                     let newSel = {
-                      ...selection,
-                      table: {
-                        ...selection.table,
-                      },
+                      ...booking,
                       date: new Date(),
                     };
-                    setSelection(newSel);
+                    setBooking(newSel);
                   }
                 }}
               ></input>
@@ -415,7 +396,7 @@ const Book = (props) => {
             <Col xs="12" sm="3">
               <UncontrolledDropdown>
                 <DropdownToggle color="none" caret className="booking-dropdown">
-                  {selection.time === null ? "Choisir l'heure" : selection.time}
+                  {booking.hour === null ? "Choisir l'heure" : booking.hour}
                 </DropdownToggle>
                 <DropdownMenu right className="booking-dropdown-menu">
                   {getTimes()}
@@ -425,7 +406,7 @@ const Book = (props) => {
             <Col xs="12" sm="3">
               <UncontrolledDropdown>
                 <DropdownToggle color="none" caret className="booking-dropdown">
-                  {selection.location}
+                  {booking.location}
                 </DropdownToggle>
                 <DropdownMenu right className="booking-dropdown-menu">
                   {getLocations()}
@@ -435,9 +416,9 @@ const Book = (props) => {
             <Col xs="12" sm="3">
               <UncontrolledDropdown>
                 <DropdownToggle color="none" caret className="booking-dropdown">
-                  {selection.size === 0
+                  {booking.nbClients === 0
                     ? "Choisir le nombre de place"
-                    : selection.size.toString()}
+                    : booking.nbClients.toString()}
                 </DropdownToggle>
                 <DropdownMenu right className="booking-dropdown-menu">
                   {getSizes()}
@@ -455,8 +436,7 @@ const Book = (props) => {
                   {getEmptyTables()} Disponible
                 </p>
               ) : null}
-
-              {selection.date && selection.time ? (
+              {booking.date && booking.hour ? (
                 getEmptyTables() > 0 ? (
                   <div>
                     <div className="table-key">
