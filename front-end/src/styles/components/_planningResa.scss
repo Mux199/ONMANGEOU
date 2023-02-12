@@ -1,0 +1,29 @@
+.planningResa {
+   }
+
+   .planningRow {
+    display: flex;
+   }
+
+   .chairsUp, .chairsDown {
+    display: flex;
+    justify-content:center;
+   }
+
+   .chair {
+    width: 20px;
+    height: 10px;
+    background-color: #D4D4D4;
+    border-radius: 20px;
+    margin: 2px 5px;
+   }
+
+   .table {
+    border: 5px solid #fece00;
+   }
+
+    .planningCol {
+        display: flex;
+        flex-direction: column;
+        margin: 2px 5px;
+    }

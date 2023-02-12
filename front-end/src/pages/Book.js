@@ -161,7 +161,9 @@ const Book = (props) => {
   };
 
   const handleResa = async (event) => {
-    event.preventDefault();
+    if (event && event.preventDefault) {
+      event.preventDefault();
+    }
     console.log("booking");
     console.log(booking);
     console.log("date");
@@ -466,14 +468,14 @@ const Book = (props) => {
                     <Row noGutters>{getTables()}</Row>
                   </div>
                 ) : (
-                  <p className="table-display-message">
-                    Aucune table disponible
-                  </p>
+                  <div className="table-display-message">
+                    Veuillez reserver une table
+                  </div>
                 )
               ) : (
-                <p className="table-display-message">
-                  Veuillez choisir la date et l'heurre de votre réservation.
-                </p>
+                <div className="table-display-message">
+                  Veuillez choisir la date et l'heure de votre réservation.
+                </div>
               )}
             </Col>
           </Row>
