@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import axios from "axios";
 import { UidContext } from "../components/AppContext";
+import { formHelperTextClasses } from "@mui/material";
 
 export default function Connexion() {
   const [email, setEmail] = useState("");
@@ -14,22 +15,27 @@ export default function Connexion() {
     e.preventDefault();
     const emailError = document.querySelector(".email.error");
     const passwordError = document.querySelector(".password.error");
-    axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
+    axios.defaults.headers.post["Access-Control-Allow-Origin"] =
+      "http://localhost:3000";
     axios({
       method: "post",
       url: `${process.env.REACT_APP_API_URL}api/user/login`,
-      withCredentials: true,
+      withCredentials: false,
       data: {
         email,
         password,
       },
     })
       .then((res) => {
-        setUid({ _id: res.data._id, role: res.data.role });
+        console.log("res");
+        console.log(res);
+        console.log("res.data.errors)");
+        console.log(res.data.errors);
         if (res.data.errors) {
           emailError.innerHTML = res.data.errors.email;
           passwordError.innerHTML = res.data.errors.password;
         } else {
+          setUid({ _id: res.data._id, role: res.data.role });
           if (res.data._id) {
             switch (res.data.role) {
               case "user":
@@ -51,6 +57,8 @@ export default function Connexion() {
         }
       })
       .catch((err) => {
+        console.log("err");
+
         console.log(err);
       });
   };

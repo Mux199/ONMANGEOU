@@ -81,30 +81,34 @@ module.exports.signUpUser = async (req, res) => {
       telephone,
       role,
     });
-    //create professional if role
-    if (role == "professional") {
-      let img2 = img[randomBetween(0, 30)];
-      let city2 = city.toLowerCase();
-      await RestaurantModel.create({
-        user,
-        name,
-        adresse,
-        siret,
-        city: city2,
-        type,
-        name,
-        waiting,
-        weekdays,
-        priceRange,
-        places,
-        nbplaces,
-        description,
-        postalCode,
-        cols,
-        img: img2,
-        rows,
-        telephone: telephoneRestaurant,
-      });
+    if (user) {
+      //create professional if role
+      if (role == "professional") {
+        let img2 = img[randomBetween(0, 30)];
+        let city2 = city.toLowerCase();
+        await RestaurantModel.create({
+          user,
+          name,
+          adresse,
+          siret,
+          city: city2,
+          type,
+          name,
+          waiting,
+          weekdays,
+          priceRange,
+          places,
+          nbplaces,
+          description,
+          postalCode,
+          cols,
+          img: img2,
+          rows,
+          telephone: telephoneRestaurant,
+        });
+      }
+    } else {
+      res.status(500).json({ errors });
     }
     res.status(201).json({ user: user.email, role: user.role });
   } catch (err) {
@@ -115,7 +119,7 @@ module.exports.signUpUser = async (req, res) => {
 
 module.exports.signIn = async (req, res) => {
   const { email, password } = req.body;
-
+  console.log(req.body);
   try {
     const user = await UserModel.login(email, password);
     if (user.blocked) {
@@ -123,9 +127,12 @@ module.exports.signIn = async (req, res) => {
         .status(401)
         .send({ message: "user is blocked contact info@lafourchette.com" });
     }
+    console.log("user");
+
+    console.log(user);
     const token = createToken(user._id);
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge });
-    res.status(200).json({ _id: user._id, role: user.role });
+    return res.status(200).json({ _id: user._id, role: user.role });
   } catch (err) {
     const errors = signInErrors(err);
     res.status(400).json({ errors });

@@ -11,9 +11,9 @@ const { checkUser, requireAuth } = require("./middleware/auth.middleware");
 const cors = require("cors");
 
 const app = express();
-
 const corsOptions = {
   origin: "http://localhost:3000",
+  //origin: "*",
   credentials: true,
   allowedHeaders: [
     "sessionId",
@@ -28,12 +28,6 @@ const corsOptions = {
   preflightContinue: false,
 };
 app.use(cors(corsOptions));
-app.use((req, res,next) => {
-  res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-})
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
