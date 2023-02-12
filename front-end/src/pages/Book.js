@@ -44,17 +44,14 @@ const Book = (props) => {
       name: null,
       id: null,
     },
-    lastname: userData.lastname,
-    user: userData._id,
+    lastname: userData && userData.users ? userData.users.lastname : "",
+    user: userData && userData.users ? userData.users._id : "",
     hour: null,
     date: date,
     location: "Emplacement",
     nbClients: 0,
     restaurant: state,
   });
-
-  console.log("booking");
-  console.log(booking);
 
   useEffect(() => {
     if (userData && userData.users) {
@@ -64,7 +61,10 @@ const Book = (props) => {
         lastname: userData.users.lastname,
       });
     }
-  }, []);
+  }, [userData]);
+
+  console.log("booking");
+  console.log(booking);
 
   /*
   useEffect(() => {
