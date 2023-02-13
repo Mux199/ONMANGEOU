@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getRestaurantResa } from "../store/reducers/actions/reservation.actions";
 import { getUsers } from "../store/reducers/actions/users.actions";
 import Table_Reservation from "../components/TABLE_RESERVATION";
+import { dateParser } from "../components/Utils";
 
 const styles = {
   display: "flex",
@@ -111,7 +112,11 @@ export default function ProProfil() {
                 <Col>Membre depuis le :</Col>
               </Row>
               <Row>
-                <Col>{userData && userData.createdAt.substr(0, 10)}</Col>
+                <Col>
+                  {userData && userData.createdAt
+                    ? dateParser(userData.createdAt)
+                    : ""}
+                </Col>
               </Row>
             </div>
           )}
