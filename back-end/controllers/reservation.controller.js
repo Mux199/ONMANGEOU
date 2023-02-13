@@ -372,14 +372,34 @@ module.exports.getAllUserReservation = (req, res) => {
 };
 
 module.exports.getAllRestaurantReservation = (req, res) => {
-  ReservationModel.find({ restaurant: req.params.id }, (err, docs) => {
-    if (!err) {
-      console.log(docs);
-      res.status(200).send(docs);
-    } else {
-      return res.status(400).send(err);
-    }
-  });
+  try {
+    ReservationModel.find({ restaurant: req.params.id }, (err, docs) => {
+      if (!err && docs.length > 0) {
+        return res.status(200).send(docs);
+      } else {
+        RestaurantModel.find({ user: req.params.id }, (err, docs) => {
+          if (!err && docs && docs.length > 0) {
+            ReservationModel.find({ restaurant: docs[0]._id }, (err, docs) => {
+              if (!err) {
+                return res.status(200).send(docs);
+              } else {
+                console.log(err);
+                return res
+                  .status(400)
+                  .send({ message: "il n'y a pas de reservation" });
+              }
+            });
+          } else {
+            console.log(err);
+            return res.status(400).send(err);
+          }
+        });
+      }
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send(err);
+  }
 };
 
 module.exports.getAllReservation = (req, res) => {

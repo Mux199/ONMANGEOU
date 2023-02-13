@@ -1,11 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import SideBar from "../components/SideBar";
-import { DatePicker } from "reactstrap-date-picker";
+//import { DatePicker } from "reactstrap-date-picker";
 import { useState } from "react";
 import { UidContext } from "../components/AppContext";
-import { Navigate } from "react-router-dom";
 import { Row, Col } from "reactstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getRestaurantResa } from "../store/reducers/actions/reservation.actions";
+import { getUsers } from "../store/reducers/actions/users.actions";
+import Table_Reservation from "../components/TABLE_RESERVATION";
 
 const styles = {
   display: "flex",
@@ -13,12 +15,21 @@ const styles = {
 };
 
 export default function ProProfil() {
+  const [uid, setUid] = useContext(UidContext);
+  const dispatch = useDispatch();
+  if (uid && uid._id) {
+    dispatch(getRestaurantResa(uid._id));
+  }
+  dispatch(getUsers());
+  const resaData = useSelector((state) => state.rootReducer.resaReducer);
+  const usersData = useSelector((state) => state.rootReducer.usersReducer);
+  const restausData = useSelector((state) => state.rootReducer.restausReducer);
+  const [myResaData, setMyResaData] = useState(resaData);
   const ChooseDate = () => {
     const [startDate, setStartDate] = useState(new Date());
   };
-  const [navigation, setNavigation] = useState("Réservation");
+  const [navigation, setNavigation] = useState("Réservations");
 
-  const [uid, setUid] = useContext(UidContext);
   const userData = useSelector((state) => state.rootReducer.userReducer);
 
   console.log(userData);
@@ -50,11 +61,24 @@ export default function ProProfil() {
 
       <div className="">
         <Col className="">
-          {navigation == "Réservation" && (
-            <div>
-              <h1>Reservation</h1>
-              <Row>Reservation</Row>
-            </div>
+          {navigation == "Réservations" && (
+            <Row className="reservation">
+              <h1>Réservations</h1>
+              <Row className="resa-container">
+                {Array.isArray(myResaData) && myResaData ? (
+                  <Table_Reservation
+                    data={{
+                      data: myResaData,
+                      role: uid.role,
+                      restaus: restausData,
+                      users: usersData,
+                    }}
+                  />
+                ) : (
+                  <Table_Reservation data={[]} />
+                )}
+              </Row>
+            </Row>
           )}
           {navigation == "Informations personnelles" && (
             <div>
@@ -63,31 +87,31 @@ export default function ProProfil() {
                 <Col>Nom</Col>
               </Row>
               <Row>
-                <Col>{userData.lastname}</Col>
+                <Col>{userData && userData.lastname}</Col>
               </Row>
               <Row>
                 <Col>Prénom</Col>
               </Row>
               <Row>
-                <Col>{userData.firstname}</Col>
+                <Col>{userData && userData.firstname}</Col>
               </Row>
               <Row>
                 <Col>Email</Col>
               </Row>
               <Row>
-                <Col>{userData.email}</Col>
+                <Col>{userData && userData.email}</Col>
               </Row>
               <Row>
                 <Col>Téléphone</Col>
               </Row>
               <Row>
-                <Col>{userData.telephone}</Col>
+                <Col>{userData && userData.telephone}</Col>
               </Row>
               <Row>
                 <Col>Membre depuis le :</Col>
               </Row>
               <Row>
-                <Col>{userData.createdAt.substr(0, 10)}</Col>
+                <Col>{userData && userData.createdAt.substr(0, 10)}</Col>
               </Row>
             </div>
           )}

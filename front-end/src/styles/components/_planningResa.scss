@@ -43,3 +43,12 @@
         flex-direction: column;
         margin: 2px 5px;
     }
+
+    .planningInfo {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .planningInfo div {
+        margin-right: 5px;
+    }

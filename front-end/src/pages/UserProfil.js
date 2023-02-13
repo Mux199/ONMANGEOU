@@ -5,7 +5,7 @@ import { Row, Col } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTelephone } from "../store/reducers/actions/user.actions";
 //import { cancelReservation } from "../store/reducers/actions/reservation.actions";
-import { getUserResa } from "../store/reducers/actions/reservation.action";
+import { getUserResa } from "../store/reducers/actions/reservation.actions";
 import Table_Reservation from "../components/TABLE_RESERVATION";
 
 import { dateParser } from "../components/Utils";
@@ -20,20 +20,33 @@ export default function UserProfil() {
   const dispatch = useDispatch();
   console.log("UidContext");
   console.log(UidContext);
+  dispatch(getUserResa(uid._id));
   const userData = useSelector((state) => state.rootReducer.userReducer);
-  const restausData = useSelector((state) => state.rootReducer.restausReducer);
   const resaData = useSelector((state) => state.rootReducer.resaReducer);
-  //dispatch(getUserResa(uid._id));
-  console.log(restausData);
-  console.log(resaData);
+  const restausData = useSelector((state) => state.rootReducer.restausReducer);
+  const [myUserData, setMyUserData] = useState(userData);
   const [myResaData, setMyResaData] = useState(resaData);
+
+  useEffect(() => {
+    setMyUserData(userData.users);
+  }, [userData.users]);
+
+  if (myUserData && myUserData._id) {
+    dispatch(getUserResa(myUserData._id));
+  }
 
   useEffect(() => {
     setMyResaData(resaData);
   }, [resaData]);
 
+  console.log(restausData);
+  console.log(resaData);
+
   console.log("myResaData");
   console.log(myResaData);
+
+  console.log("myUserData");
+  console.log(myUserData);
 
   /*const handleCancel = (id, date, hours) => {
     dispatch(cancelReservation(id, date, hours));
@@ -48,7 +61,7 @@ export default function UserProfil() {
   const ChooseDate = () => {
     const [startDate, setStartDate] = useState(new Date());
   };
-  const [navigation, setNavigation] = useState("Réservation");
+  const [navigation, setNavigation] = useState("Réservations");
   const [telephone, setTelephone] = useState("");
   const [updateForm, setUpdateForm] = useState(false);
 
@@ -71,45 +84,24 @@ export default function UserProfil() {
 
       <div className="">
         <Row className="">
-          {navigation == "Réservation" && (
+          {navigation == "Réservations" && (
             <Row className="reservation">
-              <h1>Reservation</h1>
+              <h1>Réservations</h1>
               <Row className="resa-container">
                 {Array.isArray(myResaData) && myResaData ? (
-                  <Table_Reservation data={myResaData} />
+                  <Table_Reservation
+                    data={{
+                      data: myResaData,
+                      role: uid.role,
+                      restaus: restausData,
+                    }}
+                  />
                 ) : (
                   <Table_Reservation data={[]} />
                 )}
               </Row>
             </Row>
           )}
-          {/*Array.isArray(myResaData) &&
-                  typeof myResaData.map === "function" &&
-                  myResaData.map((item, index) => (
-                    <div key={index} id={item.id}>
-                      {Object.keys(item).map((key) => {
-                        if (key === "id") return null;
-                        return (
-                          <div key={key}>
-                            <span>{key}:</span>
-                            <span>{item[key]}</span>
-                          </div>
-                        );
-                      })}
-                      <span>
-                        <button
-                          onClick={() =>
-                            handleCancel(item.id, item.date, item.hours)
-                          }
-                        >
-                          Cancel
-                        </button>
-                      </span>
-                    </div>
-                  ))}
-              </Row>
-            </Row>
-                        )*/}
           {navigation == "Informations personnelles" && (
             <Row className="info-perso">
               <h1>Informations personnelles</h1>
@@ -117,19 +109,19 @@ export default function UserProfil() {
                 <Col>Nom</Col>
               </Row>
               <Row>
-                <Col>{userData.lastname}</Col>
+                <Col>{myUserData && myUserData.lastname}</Col>
               </Row>
               <Row>
                 <Col>Prénom</Col>
               </Row>
               <Row>
-                <Col>{userData.firstname}</Col>
+                <Col>{myUserData && myUserData.firstname}</Col>
               </Row>
               <Row>
                 <Col>Email</Col>
               </Row>
               <Row>
-                <Col>{userData.email}</Col>
+                <Col>{myUserData && myUserData.email}</Col>
               </Row>
               <Row className="telephone-update">
                 <Col>Téléphone</Col>
@@ -138,7 +130,7 @@ export default function UserProfil() {
                 {updateForm == false && (
                   <>
                     <Col onClick={() => setUpdateForm(!updateForm)}>
-                      {userData.telephone}
+                      {myUserData.telephone}
                     </Col>
                     <Col>
                       <button onClick={() => setUpdateForm(!updateForm)}>
@@ -152,7 +144,7 @@ export default function UserProfil() {
                     <Col>
                       <textarea
                         type="text"
-                        defaultValue={userData.telephone}
+                        defaultValue={myUserData.telephone}
                         onChange={(e) => setTelephone(e.target.value)}
                       ></textarea>
                     </Col>
@@ -168,7 +160,11 @@ export default function UserProfil() {
                 <Col>Membre depuis le :</Col>
               </Row>
               <Row>
-                <Col>{dateParser(userData.createdAt)}</Col>
+                <Col>
+                  {myUserData && myUserData.createdAt
+                    ? dateParser(myUserData.createdAt)
+                    : ""}
+                </Col>
               </Row>
             </Row>
           )}
@@ -178,7 +174,7 @@ export default function UserProfil() {
               <Row>Favoris</Row>
               <Row>
                 Nombre de favoris :{" "}
-                {userData.likes ? userData.likes.length : ""}
+                {myUserData && myUserData.likes ? myUserData.likes.length : ""}
               </Row>
             </Row>
           )}

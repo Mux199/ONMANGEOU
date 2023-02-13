@@ -17,7 +17,7 @@ import { UidContext } from "./components/AppContext";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getUser } from "./store/reducers/actions/user.actions";
-import { getUserResa } from "./store/reducers/actions/reservation.action";
+import { getUserResa } from "./store/reducers/actions/reservation.actions";
 
 export default (_) => {
   const dispatch = useDispatch();

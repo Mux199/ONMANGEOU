@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState, useEffect } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,36 +8,56 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 export default function TABLE_RESERVATION ({ data }) {
-    console.log("data table reservation");
-    console.log(data);
-
+    let userResa= {};
     return (
-        <TableContainer component={Paper}>
+        <TableContainer className="table_resa" component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Numéro de réservation</TableCell>
+                        {data && data.role && data.role=="user" ? (<>
+                        <TableCell>Restaurant</TableCell>
+                        <TableCell>Date de réservation</TableCell>
+                        <TableCell>Heure</TableCell>
+                        <TableCell>Nombre de Personnes</TableCell>
+                        <TableCell>Time</TableCell>
+                        <TableCell>Statut</TableCell>
+                        {/*<TableCell>Annuler</TableCell>*/}
+                        </>):(<>
                         <TableCell>Date de réservation</TableCell>
                         <TableCell>Nom</TableCell>
-                        <TableCell>Nombre de Personnes</TableCell>
+                        <TableCell>Nombre de Client</TableCell>
                         <TableCell>Téléphone</TableCell>
-                        <TableCell>Adresse-mail</TableCell>
+                        <TableCell>Time</TableCell>
+                        <TableCell>Statut</TableCell>
+                        </>)}
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.map((item) => (
+                    {data && data.data && data.data.map((item) => (
                         <TableRow
                             key={item.id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }} >
-                            <TableCell>{item.id}</TableCell>
-                            <TableCell>{item.date}</TableCell>
+                            {data && data.role && data.role=="user" ? (<>
+                            <TableCell>{ data && data.restaus && data.restaus.map((resto)=>{if(resto._id == item.restaurant) {return (<div>{resto.name}</div>)}})}</TableCell>
+                            <TableCell>{item.date.substr(0, 10)}</TableCell>
                             <TableCell component="th" scope="row">
-                                {item.name}
+                                {item.hours}
                             </TableCell>
-                            <TableCell>{item.persons}</TableCell>
-                            <TableCell>{item.phone}</TableCell>
-                            <TableCell>{item.email}</TableCell>
-                            <TableCell><button>Annulez</button></TableCell>
+                            <TableCell>{item.nbClients}</TableCell>
+                            <TableCell>{item.time}</TableCell>
+                            <TableCell>{item.statut}</TableCell>
+                            {/*<TableCell><button>Annulez</button></TableCell>*/}
+                            </>):(<>
+                            { data && data.users && data.users.map((user)=>{console.log(user);if(user._id == item.user) {console.log(user);userResa = user;}})}
+                            <TableCell>{item.date.substr(0, 10)}</TableCell>
+                            <TableCell>{userResa.lastname}</TableCell>
+                            <TableCell>
+                                {item.nbClients}
+                            </TableCell>
+                            <TableCell>{userResa.telephone}</TableCell>
+                            <TableCell>{item.time}</TableCell>
+                            <TableCell>{item.statut}</TableCell>
+                            {/*<TableCell><button>Annulez</button></TableCell>*/}</>)}
                         </TableRow>
                     ))}
                 </TableBody>

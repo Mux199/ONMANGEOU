@@ -27,6 +27,12 @@ import "react-pro-sidebar/dist/css/styles.css";
 import "../styles/components/SideBar.scss";
 
 const Sidebar = (props) => {
+  const navigationItem = [
+    "Réservations",
+    "Informations personnelles",
+    "Historique",
+    "Favoris",
+  ];
   const [menuCollapse, setMenuCollapse] = useState(false);
   const { navigation, setNavigation } = props;
   const util = props.util;
@@ -38,7 +44,9 @@ const Sidebar = (props) => {
   const handleMessage = (event) => {
     console.log(event.target.closest("span").innerHTML);
     const closetSpan = event.target.closest("span").innerHTML;
-    setNavigation(closetSpan);
+    if (navigationItem.includes(closetSpan)) {
+      setNavigation(closetSpan);
+    }
   };
 
   const handleClick = (e) => {
@@ -68,7 +76,7 @@ const Sidebar = (props) => {
               </Link>
               <div>
                 <MenuItem onClick={handleMessage} icon={<FaList />}>
-                  Réservation
+                  Réservations
                 </MenuItem>
               </div>
               <div>

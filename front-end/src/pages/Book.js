@@ -28,6 +28,9 @@ const Book = (props) => {
   const userData = useSelector((state) => state.rootReducer.userReducer);
   const [totalTables] = useState([]);
   const [planning, setPlanning] = useState([]);
+  const [remainingPlaces, setRemainingPlaces] = useState([]);
+  const [totalPlaces, setTotalPlaces] = useState([]);
+
   const [messageResponse, setMessageResponse] = useState([]);
   let date = new Date();
 
@@ -167,6 +170,8 @@ const Book = (props) => {
           //responseDisplay[0].innerHTML = res.data.message;
           setMessageResponse(res.data.message);
           setPlanning(res.data.planning.layout);
+          setRemainingPlaces(res.data.planning.remainingPlaces);
+          setTotalPlaces(res.data.planning.totalPlaces);
         } else {
           responseDisplay[0].innerHTML = res.data.message;
           setMessageResponse(res.data.message);
@@ -193,7 +198,12 @@ const Book = (props) => {
         "table-display-message"
       )[0];
       ReactDOM.createRoot(rootElement).render(
-        <PlanningResa layout={planning} message={messageResponse} />
+        <PlanningResa
+          layout={planning}
+          message={messageResponse}
+          remainingPlaces={remainingPlaces}
+          totalPlaces={totalPlaces}
+        />
       );
     }
   }, [planning]);

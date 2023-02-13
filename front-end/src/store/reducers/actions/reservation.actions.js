@@ -3,7 +3,7 @@ import axios from "axios";
 export const GET_USER_RESA = "GET_USER_RESA";
 //export const CANCEL_RESA = "CANCEL_RESA";
 export const ADD_RESA = "ADD_RESA";
-
+export const GET_RESTAURANT_RESA = "GET_RESTAURANT_RESA";
 export const getUserResa = (uid) => {
   return (dispatch) => {
     return axios
@@ -12,6 +12,19 @@ export const getUserResa = (uid) => {
       )
       .then((res) => {
         dispatch({ type: GET_USER_RESA, payload: res.data });
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
+export const getRestaurantResa = (uid) => {
+  return (dispatch) => {
+    return axios
+      .get(
+        `${process.env.REACT_APP_API_URL}api/reservation/getRestaurantReservation/${uid}`
+      )
+      .then((res) => {
+        dispatch({ type: GET_RESTAURANT_RESA, payload: res.data });
       })
       .catch((err) => console.log(err));
   };
